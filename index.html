@@ -1,10 +1,125 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Site not found</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-      <p>Site not found</p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harys | Portfolio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://i.postimg.cc/vHsJNFgf/harys722.png" alt="Profile Image" title="Harys | Portfolio">
+            <span>Harys | Portfolio</span>
+        </div>
+
+        <div class="content">
+            <section id="about" class="section" style="--section-index: 1;">
+                <h2 class="text-3xl font-bold mb-4 gradient-text text-center">About Me</h2>
+                <p class="text-lg">
+                    I am a young student and passionate developer dedicated to deepening my knowledge of technology and keeping up with the ever-evolving digital landscape.
+                    Enhancing my skills and expanding my horizons through continuous learning.
+                    That's who I am!
+                </p>
+            </section>
+            
+            <section id="works" class="section" style="--section-index: 2;">
+                <h2 class="text-3xl font-bold mb-4 gradient-text text-center">My Works</h2>
+                <p class="text-lg mb-2">Throughout my journey, I've worked on various projects that showcase my skills and creativity:</p>
+                <ul class="list-disc list-inside">
+                    <li><strong>Bot Project:</strong> A full-featured Discord bot that automates server moderation and enhances user engagement.</li>
+                    <li><strong>Discord Manager & Moderator:</strong> Experience in managing and moderating multiple Discord servers, ensuring a safe environment for users.</li>
+                    <li><strong>Learning Python:</strong> Currently expanding my programming proficiency by learning Python for backend development and automation.</li>
+                </ul>
+            </section>
+
+            <section id="discord" class="section" style="--section-index: 3;">
+                <h2 class="text-3xl font-bold mb-4 gradient-text text-center">Discord Servers</h2>
+                <p class="text-lg">I'm currently handling multiple Discord Servers. I'm a moderator in several servers, including:</p>
+                <table>
+                    <tr>
+                        <th width="300">📝 Server Name</th>
+                        <th width="300">🔗 Invitation Link</th>
+                        <th width="300">📌 Position</th>
+                    </tr>
+                    <tr>
+                        <td>The Community</td>
+                        <td><a href="https://discord.gg/CPN5eYPABx" title="The Community" class="hover:underline" target="_blank">CPN5eYPABx ↗</a></td>
+                        <td>Owner</td>
+                    </tr>
+                    <tr>
+                        <td>Fun | Chat & Hangout</td>
+                        <td><a href="https://discord.gg/dz4f9bTcqe" title="Fun | Chat & Hangout" class="hover:underline" target="_blank">dz4f9bTcqe ↗</a></td>
+                        <td>Owner</td>
+                    </tr>
+                    <tr>
+                        <td>Erensko API</td>
+                        <td><a href="https://discord.gg/RxSrYtXVK8" title="Erensko API" class="hover:underline" target="_blank">RxSrYtXVK8 ↗</a></td>
+                        <td>Moderator</td>
+                    </tr>
+                    <tr>
+                        <td>Guess The Number Support</td>
+                        <td><a href="https://discord.gg/bQqbcaupuH" title="Guess The Number Support" class="hover:underline" target="_blank">bQqbcaupuH ↗</a></td>
+                        <td>Moderator</td>
+                    </tr>
+                    <tr>
+                        <td>Cosmos Lounge</td>
+                        <td><a href="https://discord.gg/uP4tue5NkV" title="Cosmos Lounge" class="hover:underline" target="_blank">uP4tue5NkV ↗</a></td>
+                        <td>Moderator</td>
+                    </tr>
+                    <tr>
+                        <td>The Royal Server</td>
+                        <td><a href="https://discord.gg/gdVSTUTznt" title="The Royal Server" class="hover:underline" target="_blank">gdVSTUTznt ↗</a></td>
+                        <td>Senior Moderator</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section id="projects" class="section" style="--section-index: 4;">
+                <h2 class="text-3xl font-bold mb-4 gradient-text text-center">Projects</h2>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold gradient-text">Discord Bot Project</h3>
+                    <p>A Discord bot that automates server moderation and enhances user engagement.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold gradient-text">Personal Website</h3>
+                    <p>This personal website, showcasing my skills, works, and ways to get in touch.</p>
+                </div>
+                <div class="project-card">
+                    <h3 class="text-xl font-semibold gradient-text">Python Learning Journey</h3>
+                    <p>A documented journey of learning Python, including projects and achievements.</p>
+                </div>
+            </section>
+
+            <section id="contact" class="section" style="--section-index: 5;">
+                <h2 class="text-3xl font-bold mb-4 gradient-text text-center">Get in Touch</h2>
+                <div class="project-card" style="width: 100%; max-width: 800px; margin: 15px auto;">
+                    <p class="text-center">Reach out to me via email for collaboration or inquiries.</p>
+                    <p class="text-center"><a href="mailto:contact@harys.is-a.dev" target="_blank" class="hover:underline">contact@harys.is-a.dev</a></p>
+                </div>
+                <button onclick="window.location.href='mailto:contact@harys.is-a.dev'">Send Me a Message</button>
+            </section>
+
+            <footer>
+                <p>© 2025 harys722. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
 </html>
