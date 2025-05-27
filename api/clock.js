@@ -1,5 +1,5 @@
     {
-    "id": "{solve_equation[floor(({solve_equation[(${timezoneInt}*(60*60))+{time_now_unix}]} / 60) % 1440)]}",
+    "id": "{solve_equation[floor(({solve_equation[({timezone}*(60*60))+{time_now_unix}]} / 60) % 1440)]}",
     "clock-arrays": {
         "model1": [
             "```fix\n _____  _____   _____  _____ \n|  _  ||  _  |_|  _  ||  _  |\n| |/' || |/' (_) |/' || |/' |\n|  /| ||  /| | |  /| ||  /| |\n\\ |_/ /\\ |_/ /_\\ |_/ /\\ |_/ /\n \\___/  \\___/(_)\\___/  \\___/\n```",
