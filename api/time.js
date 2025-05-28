@@ -3,32 +3,28 @@ module.exports = async (req, res) => {
   let jsonResponse = {};
 
   if (!offsetStr) {
-    jsonResponse = {
+    return res.status(400).json({
       error: "Missing 'timezone' parameter. Please specify '?timezone=offset' where offset is between -12 and 14 (e.g., 3.5 for Iran).",
-    };
-    return res.status(400).json(jsonResponse);
+    });
   }
 
   if (offsetStr.includes(':') || offsetStr.includes(',')) {
-    jsonResponse = {
+    return res.status(400).json({
       error: "Invalid format. Please use decimal notation like 4.5 or 5.75, not '4:30'. 4.5 for 4:30 and 5.75 for 5:45",
-    };
-    return res.status(400).json(jsonResponse);
+    });
   }
 
   const offsetNum = parseFloat(offsetStr);
   if (isNaN(offsetNum)) {
-    jsonResponse = {
+    return res.status(400).json({
       error: "Invalid 'timezone' parameter. Please provide a numeric value, e.g., 5.5 or -3.",
-    };
-    return res.status(400).json(jsonResponse);
+    });
   }
 
   if (offsetNum < -12 || offsetNum > 14) {
-    jsonResponse = {
+    return res.status(400).json({
       error: "Invalid 'timezone' range. Offset must be between -12 and 14.",
-    };
-    return res.status(400).json(jsonResponse);
+    });
   }
 
   const timezoneRegions = {
@@ -75,17 +71,28 @@ module.exports = async (req, res) => {
 
   const region = timezoneRegions[offsetStr] || "Custom timezone";
 
+  // Function to get date in dd-mm-yyyy format
+  function getFormattedDate(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
+
+  const now = new Date();
+
+  // Compute local time with offset
   function getTimeWithOffset(offsetHours) {
-    const now = new Date();
     const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-    const localTime = new Date(utcTime.getTime() + offsetHours * 3600000);
-    return localTime;
+    return new Date(utcTime.getTime() + offsetHours * 3600000);
   }
 
   const localTime = getTimeWithOffset(offsetNum);
-  const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  const dateStr = localTime.toLocaleDateString(undefined, dateOptions);
 
+  // Format date as dd-mm-yyyy for API
+  const dateStr = getFormattedDate(localTime);
+
+  // Format time for output
   const hours = localTime.getHours();
   const minutes = localTime.getMinutes();
   const seconds = localTime.getSeconds();
@@ -95,10 +102,9 @@ module.exports = async (req, res) => {
 
   const unixTimestampSeconds = Math.floor(localTime.getTime() / 1000);
 
-  // Fetch Hijri date from Aladhan API
+  // Fetch Hijri date from Aladhan API using the formatted date string
   try {
-    const todayTimestamp = Math.floor(localTime.getTime() / 1000);
-    const response = await fetch(`https://api.aladhan.com/v1/gToH/${todayTimestamp}`);
+    const response = await fetch(`https://api.aladhan.com/v1/gToH/${dateStr}`);
     const hijriData = await response.json();
 
     const hijriDate = hijriData.data.hijri;
@@ -117,7 +123,6 @@ module.exports = async (req, res) => {
       },
     };
   } catch (error) {
-    // If API call fails, omit Hijri date
     jsonResponse = {
       timezone: offsetNum,
       region: region,
