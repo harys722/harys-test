@@ -1,3 +1,7 @@
 module.exports = [
-  { "name": "Time API", "url": "https://harys-test.vercel.app/api/time" },
+  {
+    name: "Time API",
+    url: "https://harys-test.vercel.app/api/time",
+    params: {} 
+  },
 ];
