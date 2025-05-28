@@ -130,10 +130,10 @@ module.exports = async (req, res) => {
     const timezoneNamePart = parts.find(p => p.type === 'timeZoneName');
     const timezoneAbbr = timezoneNamePart ? timezoneNamePart.value : "";
 
-    // Human-readable Gregorian date (e.g., "28, May, 2025")
+    // Human-readable Gregorian date (e.g., "28 May, 2025")
     const gregorianFormatter = new Intl.DateTimeFormat('en-US', {
       day: 'numeric',
-      month: 'short',
+      month: 'short'
       year: 'numeric'
     });
     const gregorianParts = gregorianFormatter.formatToParts(localTime);
@@ -168,7 +168,7 @@ module.exports = async (req, res) => {
         year: hijriYear,
       },
       info: {
-        credits: "Made by harys722, available for everyone!",
+        credits: "Made by harys722, available only for cool people!",
         website: "https://harys.is-a.dev/",
       },
     });
