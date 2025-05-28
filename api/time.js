@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Invalid 'timezone' range." });
   }
 
+  // Map timezone to location
   const timezoneToLocation = {
     "-12": { city: "Anywhere on Earth", lat: -27.4698, lon: -109.5336 },
     "-11": { city: "Midway Atoll", lat: 28.2076, lon: -177.3819 },
@@ -54,56 +55,52 @@ module.exports = async (req, res) => {
 
   const location = timezoneToLocation[offsetStr] || timezoneToLocation["0"];
 
+  // Get current server time
   const now = new Date();
 
-  // Calculate local time based on timezone offset
+  // Convert server time to UTC, then to local time based on offset
   const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
   const localTime = new Date(utcTime.getTime() + offsetNum * 3600000);
 
-  // Get the date in YYYY-MM-DD format for matching
-  const localISODate = localTime.toISOString().slice(0, 10);
+  // Extract local date in YYYY-MM-DD format
+  const localDateStr = localTime.toISOString().slice(0, 10); // e.g., "2023-10-21"
 
-  // Prepare display date
+  // For display
   const day = String(localTime.getDate()).padStart(2, '0');
   const month = String(localTime.getMonth() + 1).padStart(2, '0');
   const year = localTime.getFullYear();
   const dateStr = `${day}-${month}-${year}`;
 
-  let hijriStr = "N/A";
+  let hijriDateStr = "N/A";
 
-  // Fetch the Hijri calendar for the current year and month of local time
   try {
+    // Fetch Islamic calendar for the local year and month
     const response = await fetch(
       `https://api.aladhan.com/v1/hijriCalendar/${localTime.getFullYear()}/${localTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
     );
     const data = await response.json();
 
-    // Debug: check the structure
-    console.log('API response:', data);
+    // Debug: log the data
+    // console.log('Hijri Calendar Data:', data);
 
     if (data && data.data && Array.isArray(data.data)) {
-      // Find the entry with the Gregorian date matching localTime
-      const matchingEntry = data.data.find((entry) => {
+      // Find the Gregorian date in the API data that matches the local date
+      const match = data.data.find((entry) => {
         const [gy, gm, gd] = entry.date.gregorian.split('-').map(Number);
-        const dateObj = new Date(gy, gm - 1, gd);
-        const dateISO = dateObj.toISOString().slice(0, 10);
-        return dateISO === localISODate;
+        const gregDate = new Date(gy, gm - 1, gd);
+        const gregISO = gregDate.toISOString().slice(0, 10);
+        return gregISO === localDateStr;
       });
 
-      if (matchingEntry && matchingEntry.hijri) {
-        hijriStr = `${matchingEntry.hijri.day} ${matchingEntry.hijri.month.en} ${matchingEntry.hijri.year}`;
-      } else {
-        console.log('No matching Hijri date found for local date.');
+      if (match && match.hijri) {
+        hijriDateStr = `${match.hijri.day} ${match.hijri.month.en} ${match.hijri.year}`;
       }
-    } else {
-      console.log('Unexpected API data structure:', data);
     }
-  } catch (err) {
-    console.error('Error fetching Hijri date:', err);
-    hijriStr = "N/A (fetch error)";
+  } catch (error) {
+    console.error('Error fetching Hijri calendar:', error);
   }
 
-  // Format local time in 12-hour clock
+  // Format local time in 12-hour format
   const hours = localTime.getHours();
   const minutes = localTime.getMinutes();
   const seconds = localTime.getSeconds();
@@ -111,9 +108,10 @@ module.exports = async (req, res) => {
   const hour12 = hours % 12 || 12;
   const timeStr = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
 
+  // Unix timestamp
   const unixSeconds = Math.floor(localTime.getTime() / 1000);
 
-  // Send response
+  // Return data
   res.setHeader('Content-Type', 'application/json');
   res.status(200).json({
     timezone: offsetNum,
@@ -122,7 +120,7 @@ module.exports = async (req, res) => {
     time: timeStr,
     unix: unixSeconds,
     UTC: new Date().toISOString(),
-    hijri: hijriStr,
+    hijri: hijriDateStr,
     info: {
       credits: "Made by harys722, available for everyone!",
       website: "https://harys.is-a.dev/",
