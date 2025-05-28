@@ -56,70 +56,70 @@ module.exports = async (req, res) => {
 
   const now = new Date();
 
-  // Calculate the region time based on offset
+  // Calculate local time based on timezone offset
   const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-  const regionTime = new Date(utcTime.getTime() + offsetNum * 3600000);
+  const localTime = new Date(utcTime.getTime() + offsetNum * 3600000);
 
-  // Format date for comparison
-  const todayISO = regionTime.toISOString().slice(0, 10); // "YYYY-MM-DD"
+  // Get the date in YYYY-MM-DD format for matching
+  const localISODate = localTime.toISOString().slice(0, 10);
 
-  // Prepare date string
-  const day = String(regionTime.getDate()).padStart(2, '0');
-  const month = String(regionTime.getMonth() + 1).padStart(2, '0');
-  const year = regionTime.getFullYear();
+  // Prepare display date
+  const day = String(localTime.getDate()).padStart(2, '0');
+  const month = String(localTime.getMonth() + 1).padStart(2, '0');
+  const year = localTime.getFullYear();
   const dateStr = `${day}-${month}-${year}`;
 
-  // Initialize hijri date string
   let hijriStr = "N/A";
 
-  // Fetch Hijri calendar data
+  // Fetch the Hijri calendar for the current year and month of local time
   try {
     const response = await fetch(
-      `https://api.aladhan.com/v1/hijriCalendar/${regionTime.getFullYear()}/${regionTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
+      `https://api.aladhan.com/v1/hijriCalendar/${localTime.getFullYear()}/${localTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
     );
     const data = await response.json();
 
-    // Debug: log entire response to understand structure
+    // Debug: check the structure
     console.log('API response:', data);
 
     if (data && data.data && Array.isArray(data.data)) {
-      // Find the entry matching today's Gregorian date
-      const hijriEntry = data.data.find((entry) => {
+      // Find the entry with the Gregorian date matching localTime
+      const matchingEntry = data.data.find((entry) => {
         const [gy, gm, gd] = entry.date.gregorian.split('-').map(Number);
         const dateObj = new Date(gy, gm - 1, gd);
         const dateISO = dateObj.toISOString().slice(0, 10);
-        return dateISO === todayISO;
+        return dateISO === localISODate;
       });
 
-      if (hijriEntry && hijriEntry.hijri) {
-        hijriStr = `${hijriEntry.hijri.day} ${hijriEntry.hijri.month.en} ${hijriEntry.hijri.year}`;
+      if (matchingEntry && matchingEntry.hijri) {
+        hijriStr = `${matchingEntry.hijri.day} ${matchingEntry.hijri.month.en} ${matchingEntry.hijri.year}`;
       } else {
-        console.log('No matching Hijri date found for today.');
+        console.log('No matching Hijri date found for local date.');
       }
     } else {
       console.log('Unexpected API data structure:', data);
     }
-  } catch (error) {
-    console.error('Error fetching Hijri date:', error);
-    hijriStr = 'N/A (Failed to fetch)';
+  } catch (err) {
+    console.error('Error fetching Hijri date:', err);
+    hijriStr = "N/A (fetch error)";
   }
 
-  // Format time (12-hour format)
-  const hours = regionTime.getHours();
-  const minutes = regionTime.getMinutes();
-  const seconds = regionTime.getSeconds();
+  // Format local time in 12-hour clock
+  const hours = localTime.getHours();
+  const minutes = localTime.getMinutes();
+  const seconds = localTime.getSeconds();
   const ampm = hours >= 12 ? 'PM' : 'AM';
-  const hour12 = hours % 12 === 0 ? 12 : hours % 12;
-  const timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
+  const hour12 = hours % 12 || 12;
+  const timeStr = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
 
-  const unixSeconds = Math.floor(regionTime.getTime() / 1000);
+  const unixSeconds = Math.floor(localTime.getTime() / 1000);
 
   // Send response
-  const responseData = {
+  res.setHeader('Content-Type', 'application/json');
+  res.status(200).json({
     timezone: offsetNum,
     region: location.city,
     date: dateStr,
-    time: timeFormatted,
+    time: timeStr,
     unix: unixSeconds,
     UTC: new Date().toISOString(),
     hijri: hijriStr,
@@ -127,8 +127,5 @@ module.exports = async (req, res) => {
       credits: "Made by harys722, available for everyone!",
       website: "https://harys.is-a.dev/",
     },
-  };
-
-  res.setHeader('Content-Type', 'application/json');
-  res.status(200).json(responseData);
+  });
 };
