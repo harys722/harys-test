@@ -1,0 +1,11 @@
+{
+  "name": "timezone-hijri-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "hijri-date": "^1.0.0"  // or another Hijri date library
+  }
+}
