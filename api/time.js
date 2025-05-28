@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Invalid 'timezone' range." });
   }
 
-  // Map timezone to location
   const timezoneToLocation = {
     "-12": { city: "Anywhere on Earth", lat: -27.4698, lon: -109.5336 },
     "-11": { city: "Midway Atoll", lat: 28.2076, lon: -177.3819 },
@@ -73,13 +72,16 @@ module.exports = async (req, res) => {
 
   // Fetch Hijri date
   try {
-    // Use the built-in fetch if available
     const response = await fetch(
       `https://api.aladhan.com/v1/hijriCalendar/${regionTime.getFullYear()}/${regionTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
     );
     const data = await response.json();
 
-    if (data && data.data) {
+    // Debug: Log entire data to see structure
+    // console.log('Hijri API data:', data);
+
+    if (data && data.data && Array.isArray(data.data)) {
+      // Find an entry matching the current Gregorian date
       const hijriEntry = data.data.find((entry) => {
         const [d, m, y] = entry.date.gregorian.split('-').map(Number);
         const dateToCompare = new Date(y, m - 1, d);
@@ -98,17 +100,17 @@ module.exports = async (req, res) => {
     hijriStr = "N/A (Failed to fetch)";
   }
 
-  // Format time in 12-hour format
+  // Format time
   const hours = regionTime.getHours();
   const minutes = regionTime.getMinutes();
   const seconds = regionTime.getSeconds();
   const ampm = hours >= 12 ? 'PM' : 'AM';
-  const hour12 = hours % 12 === 0 ? 12 : hours % 12;
+  const hour12 = hours % 12 || 12;
   timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
 
   const unixSeconds = Math.floor(regionTime.getTime() / 1000);
 
-  // Build response
+  // Final response
   const responseData = {
     timezone: offsetNum,
     region: location.city,
