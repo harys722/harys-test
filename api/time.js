@@ -1,3 +1,5 @@
+const HijriDate = require('hijri-date');
+
 module.exports = (req, res) => {
   const offsetStr = req.query.timezone;
   let jsonResponse = {};
@@ -86,6 +88,7 @@ module.exports = (req, res) => {
   const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
   const dateStr = localTime.toLocaleDateString(undefined, dateOptions);
 
+  // Time formatting
   const hours = localTime.getHours();
   const minutes = localTime.getMinutes();
   const seconds = localTime.getSeconds();
@@ -93,12 +96,20 @@ module.exports = (req, res) => {
   const hour12 = hours % 12 === 0 ? 12 : hours % 12;
   const timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
 
+  // Convert to Hijri date
+  const hijri = new HijriDate(localTime);
+  const hijriDay = hijri.getDate();
+  const hijriMonth = hijri.toLocaleString('en', { month: 'long' });
+  const hijriYear = hijri.getFullYear();
+  const hijriDateStr = `${hijriDay} ${hijriMonth} ${hijriYear}`;
+
   const unixTimestampSeconds = Math.floor(localTime.getTime() / 1000);
 
   jsonResponse = {
     timezone: offsetNum,
     region: region,
     date: dateStr,
+    hijriDate: hijriDateStr,
     time: timeFormatted,
     unix: unixTimestampSeconds,
     UTC: new Date().toISOString(),
