@@ -1,57 +1,48 @@
 export default async function handler(req, res) {
-
-  const endpointsToCheck = [
+  const endpoints = [
     { path: '/api/time', name: 'Time API' },
   ];
 
-  const timezones = Array.from({ length: 29 }, (_, i) => i - 14);
+  const timezones = Array.from({ length: 29 }, (_, i) => i - 14); // -14 to +14
 
-  const results = [];
+  let allHealthy = true;
+  const issues = [];
 
-  await Promise.all(
-    endpointsToCheck.map(async (endpoint) => {
-      const endpointResults = [];
+  // Check all endpoints with all timezones
+  for (const endpoint of endpoints) {
+    for (const tz of timezones) {
+      const url = new URL(`https://harys-test.vercel.app${endpoint.path}`);
+      url.searchParams.append('timezone', tz.toString());
 
-      await Promise.all(
-        timezones.map(async (tzOffset) => {
-          const url = new URL(`https://harys-test.vercel.app${endpoint.path}`);
-          url.searchParams.append('timezone', tzOffset.toString());
+      try {
+        const response = await fetch(url.toString());
+        if (!response.ok) {
+          allHealthy = false;
+          issues.push({
+            endpoint: endpoint.name,
+            timezone: `GMT${tz >= 0 ? '+' : ''}${tz}`,
+            status: response.status,
+          });
+        }
+      } catch (error) {
+        allHealthy = false;
+        issues.push({
+          endpoint: endpoint.name,
+          timezone: `GMT${tz >= 0 ? '+' : ''}${tz}`,
+          error: error.message,
+        });
+      }
+    }
+  }
 
-          try {
-            const response = await fetch(url.toString());
-
-            if (response.ok) {
-              const data = await response.json();
-              endpointResults.push({
-                timezone: `GMT${tzOffset >= 0 ? '+' : ''}${tzOffset}`,
-                status: 'healthy',
-                statusCode: response.status,
-                data, // optional
-              });
-            } else {
-              endpointResults.push({
-                timezone: `GMT${tzOffset >= 0 ? '+' : ''}${tzOffset}`,
-                status: 'unhealthy',
-                statusCode: response.status,
-              });
-            }
-          } catch (error) {
-            endpointResults.push({
-              timezone: `GMT${tzOffset >= 0 ? '+' : ''}${tzOffset}`,
-              status: 'error',
-              error: error.message,
-            });
-          }
-        })
-      );
-
-      results.push({
-        endpoint: endpoint.name,
-        path: endpoint.path,
-        checks: endpointResults,
-      });
-    })
-  );
-
-  res.status(200).json({ status: 'OK', endpoints: results });
+  if (allHealthy) {
+    // All endpoints are healthy
+    res.status(200).json({ message: 'API is running perfectly', status: 200 });
+  } else {
+    // Some endpoints had issues
+    res.status(503).json({
+      message: 'Some endpoints are not responding correctly',
+      issues,
+    });
+  }
 }
