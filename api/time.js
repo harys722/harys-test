@@ -97,11 +97,9 @@ module.exports = async (req, res) => {
 
   // Fetch Hijri date from Aladhan API
   try {
-    const fetch = require('node-fetch'); // Ensure node-fetch is available if running in Node.js
     const todayTimestamp = Math.floor(localTime.getTime() / 1000);
-
-    const hijriResponse = await fetch(`https://api.aladhan.com/v1/gToH/${todayTimestamp}`);
-    const hijriData = await hijriResponse.json();
+    const response = await fetch(`https://api.aladhan.com/v1/gToH/${todayTimestamp}`);
+    const hijriData = await response.json();
 
     const hijriDate = hijriData.data.hijri;
 
@@ -119,7 +117,7 @@ module.exports = async (req, res) => {
       },
     };
   } catch (error) {
-    // If API call fails, just omit Hijri date
+    // If API call fails, omit Hijri date
     jsonResponse = {
       timezone: offsetNum,
       region: region,
