@@ -1,6 +1,5 @@
 module.exports = async (req, res) => {
   const offsetStr = req.query.timezone;
-  let jsonResponse = {};
 
   // Validate input
   if (!offsetStr) {
@@ -9,12 +8,13 @@ module.exports = async (req, res) => {
   if (offsetStr.includes(':') || offsetStr.includes(',')) {
     return res.status(400).json({ error: "Invalid format. Use decimal notation." });
   }
+
   const offsetNum = parseFloat(offsetStr);
   if (isNaN(offsetNum) || offsetNum < -12 || offsetNum > 14) {
     return res.status(400).json({ error: "Invalid 'timezone' range." });
   }
 
-  // Map timezone to city/region
+  // Map timezone to location
   const timezoneToLocation = {
     "-12": { city: "Anywhere on Earth", lat: -27.4698, lon: -109.5336 },
     "-11": { city: "Midway Atoll", lat: 28.2076, lon: -177.3819 },
@@ -53,82 +53,76 @@ module.exports = async (req, res) => {
     "14": { city: "Kiritimati", lat: 1.8700, lon: -157.4291 },
   };
 
-  const location = timezoneToLocation[offsetStr] || timezoneToLocation["0"]; // fallback to UTC
+  const location = timezoneToLocation[offsetStr] || timezoneToLocation["0"];
 
   const now = new Date();
 
-  // Get current date in region
+  // Calculate region time based on offset
   const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
   const regionTime = new Date(utcTime.getTime() + offsetNum * 3600000);
-  const dateStr = (() => {
-    const day = String(regionTime.getDate()).padStart(2, '0');
-    const month = String(regionTime.getMonth() + 1).padStart(2, '0');
-    const year = regionTime.getFullYear();
-    return `${day}-${month}-${year}`;
-  })();
 
-  // Fetch regional Hijri date
+  // Prepare date string
+  const day = String(regionTime.getDate()).padStart(2, '0');
+  const month = String(regionTime.getMonth() + 1).padStart(2, '0');
+  const year = regionTime.getFullYear();
+  const dateStr = `${day}-${month}-${year}`;
+
+  // Initialize hijri date string and time string
+  let hijriStr = "N/A";
+  let timeFormatted = "";
+
+  // Fetch Hijri date
   try {
+    // Use the built-in fetch if available
     const response = await fetch(
       `https://api.aladhan.com/v1/hijriCalendar/${regionTime.getFullYear()}/${regionTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
     );
     const data = await response.json();
 
-    // Find today's Hijri date in the calendar
-    const hijriEntry = data.data.find((entry) => {
-      const [d, m, y] = entry.date.gregorian.split('-').map(Number);
-      const dateToCompare = new Date(y, m - 1, d);
-      return (
-        dateToCompare.getFullYear() === regionTime.getFullYear() &&
-        dateToCompare.getMonth() === regionTime.getMonth() &&
-        dateToCompare.getDate() === regionTime.getDate()
-      );
-    });
-
-    const hijriDateStr = hijriEntry
-      ? `${hijriEntry.hijri.day} ${hijriEntry.hijri.month.en} ${hijriEntry.hijri.year}`
-      : "N/A";
-
-    // Format output
-    const hours = regionTime.getHours();
-    const minutes = regionTime.getMinutes();
-    const seconds = regionTime.getSeconds();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const hour12 = hours % 12 === 0 ? 12 : hours % 12;
-    const timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
-
-    const unixTimestampSeconds = Math.floor(regionTime.getTime() / 1000);
-
-    // Build response
-    jsonResponse = {
-      timezone: offsetNum,
-      region: location.city,
-      date: dateStr,
-      time: timeFormatted,
-      unix: unixTimestampSeconds,
-      UTC: new Date().toISOString(),
-      hijri: hijriDateStr,
-      info: {
-        credits: "Made by harys722, available for everyone!",
-        website: "https://harys.is-a.dev/",
-      },
-    };
+    if (data && data.data) {
+      const hijriEntry = data.data.find((entry) => {
+        const [d, m, y] = entry.date.gregorian.split('-').map(Number);
+        const dateToCompare = new Date(y, m - 1, d);
+        return (
+          dateToCompare.getFullYear() === regionTime.getFullYear() &&
+          dateToCompare.getMonth() === regionTime.getMonth() &&
+          dateToCompare.getDate() === regionTime.getDate()
+        );
+      });
+      if (hijriEntry && hijriEntry.hijri) {
+        hijriStr = `${hijriEntry.hijri.day} ${hijriEntry.hijri.month.en} ${hijriEntry.hijri.year}`;
+      }
+    }
   } catch (error) {
-    jsonResponse = {
-      timezone: offsetNum,
-      region: location.city,
-      date: dateStr,
-      time: timeFormatted,
-      unix: Math.floor(regionTime.getTime() / 1000),
-      UTC: new Date().toISOString(),
-      hijri: "N/A (Failed to fetch)",
-      info: {
-        credits: "Made by harys722, available for everyone!",
-        website: "https://harys.is-a.dev/",
-      },
-    };
+    console.error("Error fetching Hijri date:", error);
+    hijriStr = "N/A (Failed to fetch)";
   }
 
+  // Format time in 12-hour format
+  const hours = regionTime.getHours();
+  const minutes = regionTime.getMinutes();
+  const seconds = regionTime.getSeconds();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const hour12 = hours % 12 === 0 ? 12 : hours % 12;
+  timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
+
+  const unixSeconds = Math.floor(regionTime.getTime() / 1000);
+
+  // Build response
+  const responseData = {
+    timezone: offsetNum,
+    region: location.city,
+    date: dateStr,
+    time: timeFormatted,
+    unix: unixSeconds,
+    UTC: new Date().toISOString(),
+    hijri: hijriStr,
+    info: {
+      credits: "Made by harys722, available for everyone!",
+      website: "https://harys.is-a.dev/",
+    },
+  };
+
   res.setHeader('Content-Type', 'application/json');
-  res.status(200).json(jsonResponse);
+  res.status(200).json(responseData);
 };
