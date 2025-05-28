@@ -6,6 +6,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "hijri-date": "^1.0.0"  // or another Hijri date library
+    "hijri-date": "^1.0.0"
   }
 }
