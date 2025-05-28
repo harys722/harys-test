@@ -2,121 +2,112 @@ module.exports = async (req, res) => {
   const offsetStr = req.query.timezone;
   let jsonResponse = {};
 
+  // Validate input
   if (!offsetStr) {
-    return res.status(400).json({
-      error: "Missing 'timezone' parameter. Please specify '?timezone=offset' where offset is between -12 and 14 (e.g., 3.5 for Iran).",
-    });
+    return res.status(400).json({ error: "Missing 'timezone' parameter." });
   }
-
   if (offsetStr.includes(':') || offsetStr.includes(',')) {
-    return res.status(400).json({
-      error: "Invalid format. Please use decimal notation like 4.5 or 5.75, not '4:30'. 4.5 for 4:30 and 5.75 for 5:45",
-    });
+    return res.status(400).json({ error: "Invalid format. Use decimal notation." });
   }
-
   const offsetNum = parseFloat(offsetStr);
-  if (isNaN(offsetNum)) {
-    return res.status(400).json({
-      error: "Invalid 'timezone' parameter. Please provide a numeric value, e.g., 5.5 or -3.",
-    });
+  if (isNaN(offsetNum) || offsetNum < -12 || offsetNum > 14) {
+    return res.status(400).json({ error: "Invalid 'timezone' range." });
   }
 
-  if (offsetNum < -12 || offsetNum > 14) {
-    return res.status(400).json({
-      error: "Invalid 'timezone' range. Offset must be between -12 and 14.",
-    });
-  }
-
-  const timezoneRegions = {
-    "-12": "Anywhere on Earth (AoE)",
-    "-11": "Niue, Midway Atoll",
-    "-10": "Hawaii-Aleutian Time (HST)",
-    "-9.5": "Marquesas Islands",
-    "-9": "Alaska Standard Time (AKST)",
-    "-8": "Pacific Standard Time (PST)",
-    "-7": "Mountain Standard Time (MST)",
-    "-6": "Central Standard Time (CST)",
-    "-5": "Eastern Standard Time (EST)",
-    "-4": "Atlantic Standard Time (AST)",
-    "-3.5": "Newfoundland Standard Time (NST)",
-    "-3": "Argentina, Brazil (BRT)",
-    "-2": "South Georgia & South Sandwich Islands",
-    "-1": "Azores, Cape Verde",
-    "0": "Coordinated Universal Time (UTC)",
-    "1": "Central European Time (CET), West Africa Time",
-    "2": "Central Africa Time (CAT), South Africa Standard Time",
-    "3": "East Africa Time, Moscow Standard Time",
-    "3.5": "Iran Standard Time",
-    "4": "Gulf Standard Time, Azerbaijan Standard Time",
-    "4.5": "Afghanistan Time",
-    "5": "Pakistan Standard Time, Yekaterinburg Time",
-    "5.5": "India Standard Time, Sri Lanka",
-    "5.75": "Nepal Time",
-    "6": "Bangladesh, Bhutan, Omsk Time",
-    "6.5": "Cocos Islands, Myanmar",
-    "7": "Indochina Time, Krasnoyarsk Time",
-    "8": "China, Singapore, Hong Kong, Taiwan",
-    "8.75": "Australia Central Western Standard Time (Kimberley)",
-    "9": "Japan, Korea, Yakutsk Time",
-    "9.5": "Australian Central Standard Time (ACST)",
-    "10": "Australian Eastern Standard Time (AEST), Vladivostok",
-    "10.5": "Lord Howe Island",
-    "11": "Solomon Islands, Magadan Time",
-    "11.5": "Norfolk Island",
-    "12": "New Zealand, Fiji, Kamchatka",
-    "12.75": "Chatham Islands",
-    "13": "Tonga, Phoenix Islands",
-    "14": "Line Islands (Kiribati)",
+  // Map timezone to city/region
+  const timezoneToLocation = {
+    "-12": { city: "Anywhere on Earth", lat: -27.4698, lon: -109.5336 },
+    "-11": { city: "Midway Atoll", lat: 28.2076, lon: -177.3819 },
+    "-10": { city: "Honolulu", lat: 21.3069, lon: -157.8583 },
+    "-9": { city: "Anchorage", lat: 61.2181, lon: -149.9003 },
+    "-8": { city: "Los Angeles", lat: 34.0522, lon: -118.2437 },
+    "-7": { city: "Denver", lat: 39.7392, lon: -104.9903 },
+    "-6": { city: "Mexico City", lat: 19.4326, lon: -99.1332 },
+    "-5": { city: "New York", lat: 40.7128, lon: -74.0060 },
+    "-4": { city: "Santiago", lat: -33.4489, lon: -70.6693 },
+    "-3": { city: "Buenos Aires", lat: -34.6037, lon: -58.3816 },
+    "-2": { city: "South Georgia", lat: -54.4286, lon: -36.5879 },
+    "-1": { city: "Azores", lat: 38.7169, lon: -27.2116 },
+    "0": { city: "London", lat: 51.5074, lon: -0.1278 },
+    "1": { city: "Berlin", lat: 52.52, lon: 13.405 },
+    "2": { city: "Johannesburg", lat: -26.2041, lon: 28.0473 },
+    "3": { city: "Moscow", lat: 55.7558, lon: 37.6173 },
+    "3.5": { city: "Tehran", lat: 35.6892, lon: 51.3890 },
+    "4": { city: "Dubai", lat: 25.276987, lon: 55.296249 },
+    "5": { city: "Karachi", lat: 24.8607, lon: 67.0011 },
+    "5.5": { city: "New Delhi", lat: 28.6139, lon: 77.2090 },
+    "6": { city: "Dhaka", lat: 23.8103, lon: 90.4125 },
+    "6.5": { city: "Yangon", lat: 16.8409, lon: 96.1735 },
+    "7": { city: "Bangkok", lat: 13.7563, lon: 100.5018 },
+    "8": { city: "Singapore", lat: 1.3521, lon: 103.8198 },
+    "8.75": { city: "Kimberley", lat: -17.927, lon: 122.215 },
+    "9": { city: "Seoul", lat: 37.5665, lon: 126.9780 },
+    "9.5": { city: "Adelaide", lat: -34.9285, lon: 138.6007 },
+    "10": { city: "Sydney", lat: -33.8688, lon: 151.2093 },
+    "10.5": { city: "Lord Howe Island", lat: -31.556, lon: 159.077 },
+    "11": { city: "Solomon Islands", lat: -9.6458, lon: 160.1562 },
+    "11.5": { city: "Norfolk Island", lat: -29.0408, lon: 167.9547 },
+    "12": { city: "Wellington", lat: -41.2867, lon: 174.7762 },
+    "12.75": { city: "Chatham Islands", lat: -43.9566, lon: -176.5402 },
+    "13": { city: "Nuku'alofa", lat: -21.1394, lon: -175.2048 },
+    "14": { city: "Kiritimati", lat: 1.8700, lon: -157.4291 },
   };
 
-  const region = timezoneRegions[offsetStr] || "Custom timezone";
-
-  // Function to get date in dd-mm-yyyy format
-  function getFormattedDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-  }
+  const location = timezoneToLocation[offsetStr] || timezoneToLocation["0"]; // fallback to UTC
 
   const now = new Date();
 
-  // Compute local time with offset
-  function getTimeWithOffset(offsetHours) {
-    const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-    return new Date(utcTime.getTime() + offsetHours * 3600000);
-  }
+  // Get current date in region
+  const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+  const regionTime = new Date(utcTime.getTime() + offsetNum * 3600000);
+  const dateStr = (() => {
+    const day = String(regionTime.getDate()).padStart(2, '0');
+    const month = String(regionTime.getMonth() + 1).padStart(2, '0');
+    const year = regionTime.getFullYear();
+    return `${day}-${month}-${year}`;
+  })();
 
-  const localTime = getTimeWithOffset(offsetNum);
-
-  // Format date as dd-mm-yyyy for API
-  const dateStr = getFormattedDate(localTime);
-
-  // Format time for output
-  const hours = localTime.getHours();
-  const minutes = localTime.getMinutes();
-  const seconds = localTime.getSeconds();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const hour12 = hours % 12 === 0 ? 12 : hours % 12;
-  const timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
-
-  const unixTimestampSeconds = Math.floor(localTime.getTime() / 1000);
-
-  // Fetch Hijri date from Aladhan API using the formatted date string
+  // Fetch regional Hijri date
   try {
-    const response = await fetch(`https://api.aladhan.com/v1/gToH/${dateStr}`);
-    const hijriData = await response.json();
+    const response = await fetch(
+      `https://api.aladhan.com/v1/hijriCalendar/${regionTime.getFullYear()}/${regionTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
+    );
+    const data = await response.json();
 
-    const hijriDate = hijriData.data.hijri;
+    // Find today's Hijri date in the calendar
+    const hijriEntry = data.data.find((entry) => {
+      const [d, m, y] = entry.date.gregorian.split('-').map(Number);
+      const dateToCompare = new Date(y, m - 1, d);
+      return (
+        dateToCompare.getFullYear() === regionTime.getFullYear() &&
+        dateToCompare.getMonth() === regionTime.getMonth() &&
+        dateToCompare.getDate() === regionTime.getDate()
+      );
+    });
 
+    const hijriDateStr = hijriEntry
+      ? `${hijriEntry.hijri.day} ${hijriEntry.hijri.month.en} ${hijriEntry.hijri.year}`
+      : "N/A";
+
+    // Format output
+    const hours = regionTime.getHours();
+    const minutes = regionTime.getMinutes();
+    const seconds = regionTime.getSeconds();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const hour12 = hours % 12 === 0 ? 12 : hours % 12;
+    const timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
+
+    const unixTimestampSeconds = Math.floor(regionTime.getTime() / 1000);
+
+    // Build response
     jsonResponse = {
       timezone: offsetNum,
-      region: region,
+      region: location.city,
       date: dateStr,
       time: timeFormatted,
       unix: unixTimestampSeconds,
       UTC: new Date().toISOString(),
-      hijri: `${hijriDate.day} ${hijriDate.month.en} ${hijriDate.year}`,
+      hijri: hijriDateStr,
       info: {
         credits: "Made by harys722, available for everyone!",
         website: "https://harys.is-a.dev/",
@@ -125,10 +116,10 @@ module.exports = async (req, res) => {
   } catch (error) {
     jsonResponse = {
       timezone: offsetNum,
-      region: region,
+      region: location.city,
       date: dateStr,
       time: timeFormatted,
-      unix: unixTimestampSeconds,
+      unix: Math.floor(regionTime.getTime() / 1000),
       UTC: new Date().toISOString(),
       hijri: "N/A (Failed to fetch)",
       info: {
