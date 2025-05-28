@@ -56,9 +56,12 @@ module.exports = async (req, res) => {
 
   const now = new Date();
 
-  // Calculate region time based on offset
+  // Calculate the region time based on offset
   const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
   const regionTime = new Date(utcTime.getTime() + offsetNum * 3600000);
+
+  // Format date for comparison
+  const todayISO = regionTime.toISOString().slice(0, 10); // "YYYY-MM-DD"
 
   // Prepare date string
   const day = String(regionTime.getDate()).padStart(2, '0');
@@ -66,51 +69,52 @@ module.exports = async (req, res) => {
   const year = regionTime.getFullYear();
   const dateStr = `${day}-${month}-${year}`;
 
-  // Initialize hijri date string and time string
+  // Initialize hijri date string
   let hijriStr = "N/A";
-  let timeFormatted = "";
 
-  // Fetch Hijri date
+  // Fetch Hijri calendar data
   try {
     const response = await fetch(
       `https://api.aladhan.com/v1/hijriCalendar/${regionTime.getFullYear()}/${regionTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
     );
     const data = await response.json();
 
-    // Debug: Log entire data to see structure
-    // console.log('Hijri API data:', data);
+    // Debug: log entire response to understand structure
+    console.log('API response:', data);
 
     if (data && data.data && Array.isArray(data.data)) {
-      // Find an entry matching the current Gregorian date
+      // Find the entry matching today's Gregorian date
       const hijriEntry = data.data.find((entry) => {
-        const [d, m, y] = entry.date.gregorian.split('-').map(Number);
-        const dateToCompare = new Date(y, m - 1, d);
-        return (
-          dateToCompare.getFullYear() === regionTime.getFullYear() &&
-          dateToCompare.getMonth() === regionTime.getMonth() &&
-          dateToCompare.getDate() === regionTime.getDate()
-        );
+        const [gy, gm, gd] = entry.date.gregorian.split('-').map(Number);
+        const dateObj = new Date(gy, gm - 1, gd);
+        const dateISO = dateObj.toISOString().slice(0, 10);
+        return dateISO === todayISO;
       });
+
       if (hijriEntry && hijriEntry.hijri) {
         hijriStr = `${hijriEntry.hijri.day} ${hijriEntry.hijri.month.en} ${hijriEntry.hijri.year}`;
+      } else {
+        console.log('No matching Hijri date found for today.');
       }
+    } else {
+      console.log('Unexpected API data structure:', data);
     }
   } catch (error) {
-    console.error("Error fetching Hijri date:", error);
-    hijriStr = "N/A (Failed to fetch)";
+    console.error('Error fetching Hijri date:', error);
+    hijriStr = 'N/A (Failed to fetch)';
   }
 
-  // Format time
+  // Format time (12-hour format)
   const hours = regionTime.getHours();
   const minutes = regionTime.getMinutes();
   const seconds = regionTime.getSeconds();
   const ampm = hours >= 12 ? 'PM' : 'AM';
-  const hour12 = hours % 12 || 12;
-  timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
+  const hour12 = hours % 12 === 0 ? 12 : hours % 12;
+  const timeFormatted = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
 
   const unixSeconds = Math.floor(regionTime.getTime() / 1000);
 
-  // Final response
+  // Send response
   const responseData = {
     timezone: offsetNum,
     region: location.city,
