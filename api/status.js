@@ -7,8 +7,8 @@ const endpointsPath = path.join(__dirname, 'endpoints.json');
 
 let endpoints;
 try {
-  const endpointsData = fs.readFileSync(endpointsPath, 'utf-8');
-  endpoints = JSON.parse(endpointsData);
+  const data = fs.readFileSync(endpointsPath, 'utf-8');
+  endpoints = JSON.parse(data);
 } catch (err) {
   console.error('Failed to read or parse endpoints.json:', err);
   process.exit(1);
@@ -20,16 +20,11 @@ const runtimeParamsMap = {
 async function checkEndpoint(endpoint, runtimeParams = {}) {
   try {
     const urlObj = new URL(endpoint.url);
-
     const mergedParams = { ...(endpoint.params || {}), ...runtimeParams };
-
     for (const [key, value] of Object.entries(mergedParams)) {
       urlObj.searchParams.append(key, value);
     }
-
-    const protocol = urlObj.protocol;
-    const lib = protocol === 'https:' ? https : http;
-
+    const lib = urlObj.protocol === 'https:' ? https : http;
     const options = {
       method: 'GET',
       hostname: urlObj.hostname,
@@ -40,7 +35,7 @@ async function checkEndpoint(endpoint, runtimeParams = {}) {
     return await new Promise((resolve) => {
       const req = lib.request(options, (res) => {
         const { statusCode } = res;
-        res.on('data', () => {}); // Consume data
+        res.on('data', () => {});
         res.on('end', () => {
           if (statusCode >= 200 && statusCode < 300) {
             resolve({ status: 'healthy', statusCode });
@@ -58,7 +53,6 @@ async function checkEndpoint(endpoint, runtimeParams = {}) {
         req.destroy();
         resolve({ status: 'unhealthy', reason: 'Timeout' });
       });
-
       req.end();
     });
   } catch (err) {
@@ -66,7 +60,7 @@ async function checkEndpoint(endpoint, runtimeParams = {}) {
   }
 }
 
-async function performHealthChecks() {
+async function performChecks() {
   const results = [];
   for (const endpoint of endpoints) {
     const runtimeParams = runtimeParamsMap[endpoint.name] || {};
@@ -77,11 +71,6 @@ async function performHealthChecks() {
 }
 
 (async () => {
-  try {
-    const results = await performHealthChecks();
-    console.log('Health Check Results:');
-    console.log(JSON.stringify(results, null, 2));
-  } catch (err) {
-    console.error('Error during health checks:', err);
-  }
+  const results = await performChecks();
+  console.log('Results:', JSON.stringify(results, null, 2));
 })();
