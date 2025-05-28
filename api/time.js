@@ -69,14 +69,12 @@ module.exports = async (req, res) => {
   const month = String(localTime.getMonth() + 1).padStart(2, '0');
   const day = String(localTime.getDate()).padStart(2, '0');
 
-  // Format date as DD-MM-YYYY for URL path
-  const datePath = `${day}-${month}-${year}`;
-
-  // Also prepare query param in same format
+  // Format date as DD-MM-YYYY
+  const dateStr = `${day}-${month}-${year}`;
   const dateParam = `${day}-${month}-${year}`;
 
-  // Construct the API URL
-  const apiUrl = `https://api.aladhan.com/v1/gToH/${datePath}?date=${dateParam}&latitude=${location.lat}&longitude=${location.lon}`;
+  // Construct the API URL for Hijri date
+  const apiUrl = `https://api.aladhan.com/v1/gToH/${dateStr}?date=${dateParam}&latitude=${location.lat}&longitude=${location.lon}`;
 
   let hijriDateStr = "N/A couldn't fetch";
 
@@ -84,7 +82,6 @@ module.exports = async (req, res) => {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    // Check if data is valid
     if (
       data &&
       data.data &&
@@ -109,19 +106,49 @@ module.exports = async (req, res) => {
 
   const unixSeconds = Math.floor(localTime.getTime() / 1000);
 
-  // Return response
-  res.setHeader("Content-Type", "application/json");
-  res.status(200).json({
-    timezone: offsetNum,
-    region: location.city,
-    date: `${day}-${month}-${year}`,
-    time: timeStr,
+  // Additional info: Day of Year and Week Number
+  const startOfYear = new Date(localTime.getFullYear(), 0, 0);
+  const diff = localTime - startOfYear;
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+
+  // Week number (ISO 8601)
+  function getWeekNumber(d) {
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+  }
+  const weekNumber = getWeekNumber(localTime);
+
+  // Full timezone name and abbreviation
+  const dtf = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', timeZoneName: 'short' });
+  const parts = dtf.formatToParts(localTime);
+  const timezoneNamePart = parts.find(p => p.type === 'timeZoneName');
+  const timezoneAbbr = timezoneNamePart ? timezoneNamePart.value : '';
+
+  // Construct response with structured data
+res.setHeader("Content-Type", "application/json");
+res.status(200).json({
+  time: {
+    formatted: timeStr,
     unix: unixSeconds,
     UTC: new Date().toISOString(),
-    hijri: hijriDateStr,
-    info: {
-      credits: "Made by harys722, available for everyone!",
-      website: "https://harys.is-a.dev/",
+    timezone: {
+      offset: offsetNum,
+      name: timezoneAbbr,
     },
-  });
-};
+  },
+  gregorian: {
+    date: dateStr,
+    dayOfYear: dayOfYear,
+    weekNumber: weekNumber,
+  },
+  hijri: {
+    date: hijriDateStr,
+  },
+  info: {
+    credits: "Made by harys722, available for everyone!",
+    website: "https://harys.is-a.dev/",
+  },
+});
