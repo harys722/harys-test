@@ -58,65 +58,58 @@ module.exports = async (req, res) => {
   // Get current server time
   const now = new Date();
 
-  // Convert server time to UTC, then to local time based on offset
+  // Convert server time to UTC
   const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+
+  // Convert UTC to local time based on offset
   const localTime = new Date(utcTime.getTime() + offsetNum * 3600000);
 
-  // Extract local date in YYYY-MM-DD format
-  const localDateStr = localTime.toISOString().slice(0, 10); // e.g., "2023-10-21"
-
-  // For display
-  const day = String(localTime.getDate()).padStart(2, '0');
-  const month = String(localTime.getMonth() + 1).padStart(2, '0');
+  // Extract local date in YYYY-MM-DD
   const year = localTime.getFullYear();
-  const dateStr = `${day}-${month}-${year}`;
+  const month = String(localTime.getMonth() + 1).padStart(2, '0');
+  const day = String(localTime.getDate()).padStart(2, '0');
+  const localDateISO = `${year}-${month}-${day}`;
+
+  // Fetch Hijri date directly for this Gregorian date
+  const apiUrl = `https://api.aladhan.com/v1/gToH?date=${localDateISO}&latitude=${location.lat}&longitude=${location.lon}`;
 
   let hijriDateStr = "N/A";
 
   try {
-    // Fetch Islamic calendar for the local year and month
-    const response = await fetch(
-      `https://api.aladhan.com/v1/hijriCalendar/${localTime.getFullYear()}/${localTime.getMonth() + 1}?latitude=${location.lat}&longitude=${location.lon}`
-    );
+    const response = await fetch(apiUrl);
     const data = await response.json();
 
-    // Debug: log the data
-    // console.log('Hijri Calendar Data:', data);
-
-    if (data && data.data && Array.isArray(data.data)) {
-      // Find the Gregorian date in the API data that matches the local date
-      const match = data.data.find((entry) => {
-        const [gy, gm, gd] = entry.date.gregorian.split('-').map(Number);
-        const gregDate = new Date(gy, gm - 1, gd);
-        const gregISO = gregDate.toISOString().slice(0, 10);
-        return gregISO === localDateStr;
-      });
-
-      if (match && match.hijri) {
-        hijriDateStr = `${match.hijri.day} ${match.hijri.month.en} ${match.hijri.year}`;
-      }
+    // Check if data is valid
+    if (
+      data &&
+      data.data &&
+      data.data.hijri &&
+      data.data.hijri.day &&
+      data.data.hijri.month &&
+      data.data.hijri.year
+    ) {
+      hijriDateStr = `${data.data.hijri.day} ${data.data.hijri.month.en} ${data.data.hijri.year}`;
     }
   } catch (error) {
-    console.error('Error fetching Hijri calendar:', error);
+    console.error("Error fetching Hijri date:", error);
   }
 
   // Format local time in 12-hour format
-  const hours = localTime.getHours();
+  const hours24 = localTime.getHours();
   const minutes = localTime.getMinutes();
   const seconds = localTime.getSeconds();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const hour12 = hours % 12 || 12;
-  const timeStr = `${String(hour12).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${ampm}`;
+  const ampm = hours24 >= 12 ? "PM" : "AM";
+  const hours12 = hours24 % 12 || 12;
+  const timeStr = `${String(hours12).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")} ${ampm}`;
 
-  // Unix timestamp
   const unixSeconds = Math.floor(localTime.getTime() / 1000);
 
-  // Return data
-  res.setHeader('Content-Type', 'application/json');
+  // Return response
+  res.setHeader("Content-Type", "application/json");
   res.status(200).json({
     timezone: offsetNum,
     region: location.city,
-    date: dateStr,
+    date: `${day}-${month}-${year}`,
     time: timeStr,
     unix: unixSeconds,
     UTC: new Date().toISOString(),
