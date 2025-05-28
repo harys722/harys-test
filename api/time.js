@@ -74,29 +74,29 @@ module.exports = async (req, res) => {
     const dateStr = `${String(day).padStart(2, '0')}-${String(monthNum).padStart(2, '0')}-${year}`;
     const dateParam = dateStr;
 
-    // Fetch Hijri date
-    const apiUrl = `https://api.aladhan.com/v1/gToH/${dateStr}?date=${dateParam}&latitude=${location.lat}&longitude=${location.lon}`;
-
-    let hijriDateStr = "N/A couldn't fetch";
-
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-
+    // Fetch Hijri date safely
     let hijriDay, hijriMonthEn, hijriYear;
+    let hijriDateStr = "N/A couldn't fetch"; // fallback
+    try {
+      const apiUrl = `https://api.aladhan.com/v1/gToH/${dateStr}?date=${dateParam}&latitude=${location.lat}&longitude=${location.lon}`;
+      const response = await fetch(apiUrl);
+      const data = await response.json();
 
-    if (
-      data &&
-      data.data &&
-      data.data.hijri &&
-      data.data.hijri.day &&
-      data.data.hijri.month &&
-      data.data.hijri.year
-    ) {
-      hijriDay = data.data.hijri.day;
-      hijriMonthEn = data.data.hijri.month.en;
-      hijriYear = data.data.hijri.year;
-      // Full Hijri date string
-      hijriDateStr = `${hijriDay} ${hijriMonthEn} ${hijriYear}`;
+      if (
+        data &&
+        data.data &&
+        data.data.hijri &&
+        data.data.hijri.day &&
+        data.data.hijri.month &&
+        data.data.hijri.year
+      ) {
+        hijriDay = data.data.hijri.day;
+        hijriMonthEn = data.data.hijri.month.en;
+        hijriYear = data.data.hijri.year;
+        hijriDateStr = `${hijriDay} ${hijriMonthEn} ${hijriYear}`;
+      }
+    } catch (err) {
+      console.error("Hijri API fetch error:", err);
     }
 
     // Format local time
@@ -124,25 +124,25 @@ module.exports = async (req, res) => {
     }
     const weekNumber = getWeekNumber(localTime);
 
-    // Timezone name/abbreviation
+    // Timezone abbreviation
     const dtf = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', timeZoneName: 'short' });
     const parts = dtf.formatToParts(localTime);
     const timezoneNamePart = parts.find(p => p.type === 'timeZoneName');
     const timezoneAbbr = timezoneNamePart ? timezoneNamePart.value : "";
 
-    // Human-readable Gregorian date (e.g., "28 May, 2025")
+    // Human-readable Gregorian date in format "28 May, 2025"
     const gregorianFormatter = new Intl.DateTimeFormat('en-US', {
       day: 'numeric',
-      month: 'short'
+      month: 'short',
       year: 'numeric'
     });
     const gregorianParts = gregorianFormatter.formatToParts(localTime);
     const dayPart = gregorianParts.find(p => p.type === 'day')?.value;
     const monthPart = gregorianParts.find(p => p.type === 'month')?.value;
     const yearPart = gregorianParts.find(p => p.type === 'year')?.value;
-    const friendlyGregorianDate = `${dayPart}, ${monthPart}, ${yearPart}`;
+    const friendlyGregorianDate = `${dayPart} ${monthPart}, ${yearPart}`; // no comma in month
 
-    // Send response
+    // Respond
     res.setHeader("Content-Type", "application/json");
     res.status(200).json({
       time: {
@@ -167,13 +167,11 @@ module.exports = async (req, res) => {
         month: hijriMonthEn,
         year: hijriYear,
       },
-      info: {
-        credits: "Made by harys722, available only for cool people!",
-        website: "https://harys.is-a.dev/",
-      },
+      credits: "Made by harys722, available only for cool people!",
+      website: "https://harys.is-a.dev/"
     });
   } catch (err) {
-    console.error("Error processing request:", err);
+    console.error("Server error:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
