@@ -67,12 +67,12 @@ module.exports = async (req, res) => {
 
     // Extract local date components
     const year = localTime.getFullYear();
-    const month = String(localTime.getMonth() + 1).padStart(2, '0');
-    const day = String(localTime.getDate()).padStart(2, '0');
+    const monthNum = localTime.getMonth() + 1;
+    const day = localTime.getDate();
 
     // Format date as DD-MM-YYYY
-    const dateStr = `${day}-${month}-${year}`;
-    const dateParam = `${day}-${month}-${year}`;
+    const dateStr = `${String(day).padStart(2, '0')}-${String(monthNum).padStart(2, '0')}-${year}`;
+    const dateParam = dateStr;
 
     // Fetch Hijri date
     const apiUrl = `https://api.aladhan.com/v1/gToH/${dateStr}?date=${dateParam}&latitude=${location.lat}&longitude=${location.lon}`;
@@ -82,6 +82,8 @@ module.exports = async (req, res) => {
     const response = await fetch(apiUrl);
     const data = await response.json();
 
+    let hijriDay, hijriMonthEn, hijriYear;
+
     if (
       data &&
       data.data &&
@@ -90,7 +92,11 @@ module.exports = async (req, res) => {
       data.data.hijri.month &&
       data.data.hijri.year
     ) {
-      hijriDateStr = `${data.data.hijri.day} ${data.data.hijri.month.en} ${data.data.hijri.year}`;
+      hijriDay = data.data.hijri.day;
+      hijriMonthEn = data.data.hijri.month.en;
+      hijriYear = data.data.hijri.year;
+      // Full Hijri date string
+      hijriDateStr = `${hijriDay} ${hijriMonthEn} ${hijriYear}`;
     }
 
     // Format local time
@@ -122,7 +128,19 @@ module.exports = async (req, res) => {
     const dtf = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', timeZoneName: 'short' });
     const parts = dtf.formatToParts(localTime);
     const timezoneNamePart = parts.find(p => p.type === 'timeZoneName');
-    const timezoneAbbr = timezoneNamePart ? timezoneNamePart.value : '';
+    const timezoneAbbr = timezoneNamePart ? timezoneNamePart.value : "";
+
+    // Human-readable Gregorian date (e.g., "28, May, 2025")
+    const gregorianFormatter = new Intl.DateTimeFormat('en-US', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    });
+    const gregorianParts = gregorianFormatter.formatToParts(localTime);
+    const dayPart = gregorianParts.find(p => p.type === 'day')?.value;
+    const monthPart = gregorianParts.find(p => p.type === 'month')?.value;
+    const yearPart = gregorianParts.find(p => p.type === 'year')?.value;
+    const friendlyGregorianDate = `${dayPart}, ${monthPart}, ${yearPart}`;
 
     // Send response
     res.setHeader("Content-Type", "application/json");
@@ -134,15 +152,20 @@ module.exports = async (req, res) => {
         timezone: {
           offset: offsetNum,
           name: timezoneAbbr,
+          region: location.city || "Unknown",
         },
       },
       gregorian: {
         date: dateStr,
         dayOfYear: dayOfYear,
         weekNumber: weekNumber,
+        humanReadable: friendlyGregorianDate,
       },
       hijri: {
         date: hijriDateStr,
+        day: hijriDay,
+        month: hijriMonthEn,
+        year: hijriYear,
       },
       info: {
         credits: "Made by harys722, available for everyone!",
