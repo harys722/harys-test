@@ -1,11 +1,13 @@
 {
-  "name": "timezone-hijri-api",
+  "name": "timezone-api",
   "version": "1.0.0",
+  "description": "API for timezone info with Hijri date",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "hijri-date": "^1.0.0"
-  }
+    "node-fetch": "^3.2.0"
+  },
+  "author": "harys722",
 }
