@@ -64,16 +64,21 @@ module.exports = async (req, res) => {
   // Convert UTC to local time based on offset
   const localTime = new Date(utcTime.getTime() + offsetNum * 3600000);
 
-  // Extract local date in YYYY-MM-DD
+  // Extract local date components
   const year = localTime.getFullYear();
   const month = String(localTime.getMonth() + 1).padStart(2, '0');
   const day = String(localTime.getDate()).padStart(2, '0');
-  const localDateISO = `${year}-${month}-${day}`;
 
-  // Fetch Hijri date directly for this Gregorian date
-  const apiUrl = `https://api.aladhan.com/v1/gToH?date=${localDateISO}&latitude=${location.lat}&longitude=${location.lon}`;
+  // Format date as DD-MM-YYYY for URL path
+  const datePath = `${day}-${month}-${year}`;
 
-  let hijriDateStr = "N/A";
+  // Also prepare query param in same format
+  const dateParam = `${day}-${month}-${year}`;
+
+  // Construct the API URL
+  const apiUrl = `https://api.aladhan.com/v1/gToH/${datePath}?date=${dateParam}&latitude=${location.lat}&longitude=${location.lon}`;
+
+  let hijriDateStr = "N/A couldn't fetch";
 
   try {
     const response = await fetch(apiUrl);
