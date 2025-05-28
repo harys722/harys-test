@@ -1,33 +1,26 @@
-const http = require('http');
-const { URL } = require('url');
+const endpoints = require('./endpoints');
 
-// Import your endpoints from 'api/endpoints.js'
-const endpoints = require('./api/endpoints');
+async function checkEndpoint(endpointUrl) {
+  const { hostname, pathname, search, protocol } = new URL(endpointUrl);
+  const isHttps = protocol === 'https:';
 
-// Function to perform HTTP GET request using built-in modules
-function checkEndpoint(endpointUrl) {
+  const options = {
+    method: 'GET',
+    hostname,
+    path: pathname + search,
+    timeout: 5000,
+  };
+
+  const lib = isHttps ? require('https') : require('http');
+
   return new Promise((resolve) => {
-    const urlObj = new URL(endpointUrl);
-
-    const options = {
-      method: 'GET',
-      hostname: urlObj.hostname,
-      port: urlObj.port || (urlObj.protocol === 'https:' ? 443 : 80),
-      path: urlObj.pathname + urlObj.search,
-      timeout: 5000, // 5 seconds timeout
-    };
-
-    // Decide whether to use http or https
-    const protocol = urlObj.protocol === 'https:' ? require('https') : require('http');
-
-    const req = protocol.request(options, (res) => {
-      // Success if status code is 200-299
+    const req = lib.request({ ...options, port: isHttps ? 443 : 80 }, (res) => {
       if (res.statusCode >= 200 && res.statusCode < 300) {
         resolve({ status: 'healthy' });
       } else {
         resolve({ status: 'unhealthy', reason: `Status code: ${res.statusCode}` });
       }
-      res.resume(); // Consume response data to free up memory
+      res.resume();
     });
 
     req.on('error', (err) => {
@@ -43,8 +36,7 @@ function checkEndpoint(endpointUrl) {
   });
 }
 
-// Function to check all endpoints
-async function checkEndpoints() {
+export default async function handler(req, res) {
   const results = [];
 
   for (const endpoint of endpoints) {
@@ -52,32 +44,10 @@ async function checkEndpoints() {
     results.push({ name: endpoint.name, ...result });
   }
 
-  // Determine overall health
   const isHealthy = results.every(r => r.status === 'healthy');
 
-  return {
-    statusCode: isHealthy ? 200 : 500,
-    body: JSON.stringify({
-      status: isHealthy ? 'ok' : 'error',
-      results: results,
-    }),
-  };
+  res.status(isHealthy ? 200 : 500).json({
+    status: isHealthy ? 'ok' : 'error',
+    results,
+  });
 }
-
-// Create HTTP server
-const server = http.createServer(async (req, res) => {
-  if (req.url === '/api/status') {
-    const result = await checkEndpoints();
-    res.writeHead(result.statusCode, { 'Content-Type': 'application/json' });
-    res.end(result.body);
-  } else {
-    res.writeHead(404, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ error: 'Not Found' }));
-  }
-});
-
-// Start server
-const PORT = 4000;
-server.listen(PORT, () => {
-  console.log(`Status server is running at https://harys-test.vercel.app/api/status`);
-});
