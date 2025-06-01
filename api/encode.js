@@ -1,17 +1,21 @@
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const { html } = req.body;
-    if (!html) {
-      return res.status(400).json({ error: 'No HTML content provided' });
-    }
-    try {
-      const buffer = Buffer.from(html, 'utf-8');
-      const base64 = buffer.toString('base64');
-      res.status(200).json({ encoded: base64 });
-    } catch (error) {
-      res.status(500).json({ error: 'Encoding failed', details: error.message });
-    }
-  } else {
-    res.status(405).json({ error: 'Method Not Allowed' });
+const express = require('express');
+const app = express();
+const port = 3000; 
+
+app.get('/encode', (req, res) => {
+  const htmlToEncode = req.query.html;
+  if (!htmlToEncode) {
+    return res.status(400).send('Missing html parameter');
   }
-}
+
+  try {
+    const encodedHtml = Buffer.from(htmlToEncode).toString('base64');
+    res.send(encodedHtml);
+  } catch (error) {
+    res.status(500).send('Error encoding HTML');
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
