@@ -1,15 +1,22 @@
-export default function handler(req, res) {
-  const html = req.query.html;
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: 'Method Not Allowed' });
+    return;
+  }
+
+  const { html } = req.body;
+
   if (!html) {
-    res.status(400).json({ error: 'Missing html parameter' });
+    res.status(400).json({ error: 'Missing html in request body' });
     return;
   }
 
   try {
-    const decodedHtml = decodeURIComponent(html);
-    const base64 = Buffer.from(decodedHtml, 'utf-8').toString('base64');
+    const buffer = Buffer.from(html, 'utf-8');
+    const base64 = buffer.toString('base64');
+
     res.status(200).json({ encoded: base64 });
-  } catch (e) {
-    res.status(500).json({ error: 'Encoding failed' });
+  } catch (error) {
+    res.status(500).json({ error: 'Encoding failed', details: error.message });
   }
 }
