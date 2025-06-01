@@ -1,14 +1,19 @@
-export default function handler(request, response) {
-  const htmlToEncode = request.query.html;
-  if (!htmlToEncode) {
-    response.status(400).send('Missing html parameter');
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.status(405).send('Method Not Allowed');
+    return;
+  }
+
+  const { html } = req.body;
+  if (!html) {
+    res.status(400).send('Missing html in request body');
     return;
   }
 
   try {
-    const encodedHtml = Buffer.from(htmlToEncode).toString('base64');
-    response.send(encodedHtml);
+    const encodedHtml = Buffer.from(html).toString('base64');
+    res.send(encodedHtml);
   } catch (error) {
-    response.status(500).send('Error encoding HTML');
+    res.status(500).send('Error encoding HTML');
   }
 }
