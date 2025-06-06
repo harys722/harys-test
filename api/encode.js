@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   const { content } = req.body;
   if (!content) {
-    res.status(400).send('Missing 'content' in request body');
+    res.status(400).send("Missing 'content' in request body");
     return;
   }
 
