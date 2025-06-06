@@ -152,7 +152,6 @@
     color: "Yellow",
     mood: "Affectionate"
   },
-  // More smileys
   {
     emoji: "❤️",
     name: "Red Heart",
@@ -225,8 +224,6 @@
     color: "White",
     mood: "Pure"
   },
-
-  // Animals
   {
     emoji: "🐶",
     name: "Dog Face",
@@ -290,8 +287,6 @@
     color: "White, Rainbow",
     mood: "Whimsical"
   },
-
-  // Food
   {
     emoji: "🍎",
     name: "Red Apple",
@@ -337,8 +332,6 @@
     color: "Brown",
     mood: "Delicious"
   },
-
-  // Travel & Places
   {
     emoji: "🚗",
     name: "Automobile",
@@ -384,8 +377,6 @@
     color: "Green",
     mood: "Iconic"
   },
-
-  // Activities & sports
   {
     emoji: "⚽",
     name: "Soccer Ball",
@@ -422,9 +413,7 @@
     color: "Various",
     mood: "Fun"
   },
-
-  // Objects
-  {
+ {
     emoji: "💡",
     name: "Light Bulb",
     category: "Objects",
@@ -451,8 +440,6 @@
     color: "Gray",
     mood: "Productive"
   },
-
-  // Flags
   {
     emoji: "🇺🇸",
     name: "Flag: United States",
