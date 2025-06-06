@@ -6,13 +6,18 @@ export default async function handler(req, res) {
 
   const { content } = req.body;
   if (!content) {
-    res.status(400).send('Missing "content" in request body');
+    res.status(400).send('Missing 'content' in request body');
     return;
   }
 
   try {
     const encodedContent = Buffer.from(content).toString('base64');
-    res.send({ encodedContent: encodedContent });
+    
+    res.json({
+      encoded: encodedContent,
+      credits: 'Made by harys722, available only for cool people.',
+      website: 'https://harys.is-a.dev/'
+    });
   } catch (error) {
     res.status(500).send('Error encoding content');
   }
