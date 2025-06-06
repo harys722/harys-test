@@ -4,16 +4,16 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { html } = req.body;
-  if (!html) {
-    res.status(400).send('Missing html in request body');
+  const { content } = req.body;
+  if (!content) {
+    res.status(400).send('Missing "content" in request body');
     return;
   }
 
   try {
-    const encodedHtml = Buffer.from(html).toString('base64');
-    res.send(encodedHtml);
+    const encodedHtml = Buffer.from(content).toString('base64');
+    res.send(encoded);
   } catch (error) {
-    res.status(500).send('Error encoding HTML');
+    res.status(500).send('Error encoding content');
   }
 }
