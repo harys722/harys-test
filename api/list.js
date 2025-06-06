@@ -7,6 +7,18 @@ export default function handler(req, res) {
     {
       path: "/api/encode",
       description: "Encodes provided content into Base64."
+    },
+    {
+      path: "/api/color",
+      description: "Get any color information, custom hex color code can be input."
+    },
+    {
+      path: "/api/emoji",
+      description: "Get specified or random emoji info."
+    },
+    {
+      path: "/api/list",
+      description: "Retrieves a list of all available endpoints."
     }
   ];
 
