@@ -1,6 +1,6 @@
 import allEmojis from '../../database/allemojis.json';
 
-// const allEmojis = require('../../database/allemojis.json');
+const allEmojis = require('../../database/allemojis.json');
 
 export default function handler(req, res) {
   const { emoji } = req.query;
