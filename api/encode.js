@@ -11,8 +11,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const encodedHtml = Buffer.from(content).toString('base64');
-    res.send(encoded);
+    const encodedContent = Buffer.from(content).toString('base64');
+    res.send({ encodedContent: encodedContent });
   } catch (error) {
     res.status(500).send('Error encoding content');
   }
