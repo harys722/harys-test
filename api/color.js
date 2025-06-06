@@ -47,6 +47,10 @@ export default function handler(req, res) {
     intCode: colorInfo.intCode,
     rgb: colorInfo.rgb,
     brightness: colorInfo.brightness,
-    textColor: colorInfo.textColor
+    textColor: colorInfo.textColor,
+    info: {
+      credits: "Made by harys722, available only for cool people.",
+      website: "https://harys.is-a.dev"
+    }
   });
 }
