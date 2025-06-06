@@ -1,4 +1,4 @@
-import allemojis from 'database/allemojis.js';
+import allEmojis from '../../database/allemojis';
 
 export default function handler(req, res) {
   const { emoji } = req.query;
