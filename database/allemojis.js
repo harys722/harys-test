@@ -1,4 +1,4 @@
-const allEmojis = [
+const allemojis = [
   {
     emoji: "😀",
     name: "Grinning Face",
@@ -480,7 +480,6 @@ const allEmojis = [
     color: "Black, Red, Gold",
     mood: "National pride"
   },
-
   // More emojis can be added here...
 ];
 
