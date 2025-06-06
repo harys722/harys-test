@@ -1,4 +1,4 @@
-const allemojis = [
+const allEmojis = [
   {
     emoji: "😀",
     name: "Grinning Face",
@@ -483,4 +483,4 @@ const allemojis = [
   // More emojis can be added here...
 ];
 
-export default allemojis;
+export default allEmojis;
