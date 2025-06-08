@@ -10,6 +10,10 @@ module.exports = {
         destination: "/api.html"
       },
       {
+        source: "/page",
+        destination: "/page.html"
+      },
+      {
         source: "/(.*)",
         destination: "/404.html"
       },
