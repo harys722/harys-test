@@ -1,0 +1,115 @@
+export default function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: 'Method Not Allowed' });
+    return;
+  }
+
+  const { text } = req.body;
+
+  if (typeof text !== 'string') {
+    res.status(400).json({ error: 'Invalid input' });
+    return;
+  }
+
+  const numberMap = {
+    'zero': 0,
+    'one': 1,
+    'two': 2,
+    'three': 3,
+    'four': 4,
+    'five': 5,
+    'six': 6,
+    'seven': 7,
+    'eight': 8,
+    'nine': 9,
+    'ten': 10,
+    'eleven': 11,
+    'twelve': 12,
+    'thirteen': 13,
+    'fourteen': 14,
+    'fifteen': 15,
+    'sixteen': 16,
+    'seventeen': 17,
+    'eighteen': 18,
+    'nineteen': 19,
+    'twenty': 20,
+    'thirty': 30,
+    'forty': 40,
+    'fifty': 50,
+    'sixty': 60,
+    'seventy': 70,
+    'eighty': 80,
+    'ninety': 90,
+    'hundred': 100,
+    'thousand': 1000,
+    'million': 1000000,
+    'billion': 1000000000
+  };
+
+  function wordsToNumber(wordsArray) {
+    let total = 0;
+    let current = 0;
+    for (let word of wordsArray) {
+      if (numberMap.hasOwnProperty(word)) {
+        const value = numberMap[word];
+        if (value >= 100) {
+          current *= value;
+        } else {
+          current += value;
+        }
+      } else if (word === 'and') {
+        // ignore 'and'
+        continue;
+      } else {
+        // unknown word
+        return null;
+      }
+    }
+    total += current;
+    return total;
+  }
+
+  // Tokenize text, include words, punctuation, etc.
+  const tokens = text.split(/\b/);
+
+  const resultTokens = [];
+  let sequence = [];
+  let inSequence = false;
+
+  for (let token of tokens) {
+    const lowerToken = token.toLowerCase().trim();
+
+    if (numberMap.hasOwnProperty(lowerToken)) {
+      // part of number sequence
+      sequence.push(lowerToken);
+      inSequence = true;
+    } else {
+      // end of sequence
+      if (inSequence) {
+        const numberValue = wordsToNumber(sequence);
+        if (numberValue !== null) {
+          resultTokens.push(numberValue.toString());
+        } else {
+          // fallback: join the sequence as text
+          resultTokens.push(sequence.join(' '));
+        }
+        sequence = [];
+        inSequence = false;
+      }
+      resultTokens.push(token);
+    }
+  }
+
+  // If sequence ends at the end
+  if (inSequence) {
+    const numberValue = wordsToNumber(sequence);
+    if (numberValue !== null) {
+      resultTokens.push(numberValue.toString());
+    } else {
+      resultTokens.push(sequence.join(' '));
+    }
+  }
+
+  const convertedText = resultTokens.join('');
+  res.status(200).json({ result: convertedText });
+}
