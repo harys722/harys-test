@@ -46,6 +46,7 @@ export default function handler(req, res) {
     'billion': 1000000000
   };
 
+  // Function to convert a sequence of words to a number
   function wordsToNumber(words) {
     let total = 0;
     let current = 0;
@@ -57,25 +58,24 @@ export default function handler(req, res) {
         continue; // skip "and"
       }
 
-      if (!numberMap.hasOwnProperty(lowerWord)) {
+      const val = numberMap[lowerWord];
+
+      if (val === undefined) {
         // unrecognized word
         return null;
       }
 
-      const val = numberMap[lowerWord];
-
-      if (val >= 100) {
-        if (current === 0) current = 1; // e.g., "hundred" alone means 100
+      if (val === 100) {
+        // multiply current by 100
+        if (current === 0) current = 1; // e.g., "hundred" without a number before
         current *= val;
-        if (lowerWord === 'hundred') {
-          // do nothing, just multiply
-        } else {
-          // scale words like thousand/million, add to total
-          total += current;
-          current = 0;
-        }
+      } else if (val >= 1000) {
+        // scale words like thousand, million
+        if (current === 0) current = 1;
+        total += current * val;
+        current = 0;
       } else {
-        // small number, add to current
+        // small number
         current += val;
       }
     }
@@ -83,7 +83,7 @@ export default function handler(req, res) {
     return total;
   }
 
-  // Tokenize input text into words, punctuation, etc.
+  // Tokenize input text (split by non-word characters)
   const tokens = text.split(/\b/);
 
   const resultTokens = [];
@@ -112,7 +112,7 @@ export default function handler(req, res) {
     }
   }
 
-  // handle if sequence ends at the end
+  // handle last sequence
   if (inSequence) {
     const numberValue = wordsToNumber(sequence);
     if (numberValue !== null) {
