@@ -45,12 +45,14 @@ export default function handler(req, res) {
     'million': 1000000,
   };
 
+  // Function to convert a sequence of number words into a number
   function wordsToNumber(words) {
     let total = 0;
     let current = 0;
     for (const word of words) {
       const key = word.toLowerCase();
-      if (key === 'and') continue;
+
+      if (key === 'and') continue; // skip "and"
 
       const val = numberMap[key];
       if (val === undefined) return null; // unrecognized word
@@ -69,7 +71,7 @@ export default function handler(req, res) {
     return total + current;
   }
 
-  // Split text into tokens, keeping hyphenated words together
+  // Split the text into tokens: words, hyphenated words, punctuation, spaces
   const tokens = text.match(/\b[\w-]+\b|\W+/g);
 
   let inNumberSequence = false;
@@ -77,31 +79,28 @@ export default function handler(req, res) {
   const outputTokens = [];
 
   for (const token of tokens) {
-    const cleanToken = token.trim();
-
-    // Check if token is a number word or hyphenated number
+    // Check if token is a number word or hyphenated number word
     const isNumberWord = (() => {
-      if (/\w+/.test(cleanToken)) {
-        // handle hyphenated words
-        const parts = cleanToken.split('-');
-        return parts.every(part => numberMap.hasOwnProperty(part.toLowerCase()));
-      }
-      return false;
+      const cleanToken = token.replace(/[^A-Za-z-]/g, ''); // remove punctuation
+      if (cleanToken === '') return false;
+
+      // Check if all parts are number words
+      const parts = cleanToken.split('-');
+      return parts.every(part => numberMap.hasOwnProperty(part.toLowerCase()));
     })();
 
     if (isNumberWord) {
-      currentSequence.push(cleanToken);
+      currentSequence.push(token);
       inNumberSequence = true;
     } else {
       // If sequence was ongoing, convert it
       if (inNumberSequence) {
-        // Normalize sequence: split hyphenated words into parts
+        // flatten sequence: split hyphenated words
         const allParts = currentSequence.flatMap(w => w.split('-'));
         const numberValue = wordsToNumber(allParts);
         if (numberValue !== null) {
           outputTokens.push(numberValue.toString());
         } else {
-          // fallback: output original sequence
           outputTokens.push(currentSequence.join(''));
         }
         currentSequence = [];
