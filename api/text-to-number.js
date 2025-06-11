@@ -12,37 +12,37 @@ export default function handler(req, res) {
   }
 
   const numberMap = {
-    'zero': 0,
-    'one': 1,
-    'two': 2,
-    'three': 3,
-    'four': 4,
-    'five': 5,
-    'six': 6,
-    'seven': 7,
-    'eight': 8,
-    'nine': 9,
-    'ten': 10,
-    'eleven': 11,
-    'twelve': 12,
-    'thirteen': 13,
-    'fourteen': 14,
-    'fifteen': 15,
-    'sixteen': 16,
-    'seventeen': 17,
-    'eighteen': 18,
-    'nineteen': 19,
-    'twenty': 20,
-    'thirty': 30,
-    'forty': 40,
-    'fifty': 50,
-    'sixty': 60,
-    'seventy': 70,
-    'eighty': 80,
-    'ninety': 90,
-    'hundred': 100,
-    'thousand': 1000,
-    'million': 1000000,
+    zero: 0,
+    one: 1,
+    two: 2,
+    three: 3,
+    four: 4,
+    five: 5,
+    six: 6,
+    seven: 7,
+    eight: 8,
+    nine: 9,
+    ten: 10,
+    eleven: 11,
+    twelve: 12,
+    thirteen: 13,
+    fourteen: 14,
+    fifteen: 15,
+    sixteen: 16,
+    seventeen: 17,
+    eighteen: 18,
+    nineteen: 19,
+    twenty: 20,
+    thirty: 30,
+    forty: 40,
+    fifty: 50,
+    sixty: 60,
+    seventy: 70,
+    eighty: 80,
+    ninety: 90,
+    hundred: 100,
+    thousand: 1000,
+    million: 1000000,
   };
 
   // Function to convert a sequence of number words into a number
@@ -52,7 +52,7 @@ export default function handler(req, res) {
     for (const word of words) {
       const key = word.toLowerCase();
 
-      if (key === 'and') continue; // skip "and"
+      if (key === 'and') continue; // ignore "and"
 
       const val = numberMap[key];
       if (val === undefined) return null; // unrecognized word
@@ -71,31 +71,34 @@ export default function handler(req, res) {
     return total + current;
   }
 
-  // Split the text into tokens: words, hyphenated words, punctuation, spaces
+  // Split the text into tokens (words, punctuation, spaces)
+  // We'll match words (including hyphenated), and other tokens separately
   const tokens = text.match(/\b[\w-]+\b|\W+/g);
 
   let inNumberSequence = false;
   let currentSequence = [];
   const outputTokens = [];
 
-  for (const token of tokens) {
+  for (let token of tokens) {
     // Check if token is a number word or hyphenated number word
+    const cleanToken = token.replace(/[^A-Za-z-]/g, ''); // remove punctuation
     const isNumberWord = (() => {
-      const cleanToken = token.replace(/[^A-Za-z-]/g, ''); // remove punctuation
-      if (cleanToken === '') return false;
-
-      // Check if all parts are number words
+      if (!cleanToken) return false;
+      // For hyphenated words, also split and check
       const parts = cleanToken.split('-');
       return parts.every(part => numberMap.hasOwnProperty(part.toLowerCase()));
     })();
 
-    if (isNumberWord) {
+    // Also handle words like "two", "hundred", "fifty" etc.
+    const lowerToken = token.toLowerCase();
+
+    if (isNumberWord || (lowerToken === 'and')) {
       currentSequence.push(token);
       inNumberSequence = true;
     } else {
-      // If sequence was ongoing, convert it
+      // End of a sequence
       if (inNumberSequence) {
-        // flatten sequence: split hyphenated words
+        // flatten sequence, split hyphenated words
         const allParts = currentSequence.flatMap(w => w.split('-'));
         const numberValue = wordsToNumber(allParts);
         if (numberValue !== null) {
@@ -111,7 +114,7 @@ export default function handler(req, res) {
     }
   }
 
-  // If sequence ends at the end of text
+  // Handle if sequence ends at the end
   if (inNumberSequence) {
     const allParts = currentSequence.flatMap(w => w.split('-'));
     const numberValue = wordsToNumber(allParts);
@@ -122,6 +125,6 @@ export default function handler(req, res) {
     }
   }
 
-  const outputText = outputTokens.join('');
-  res.status(200).json({ result: outputText });
+  const resultText = outputTokens.join('');
+  res.status(200).json({ result: resultText });
 }
