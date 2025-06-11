@@ -46,22 +46,24 @@ export default function handler(req, res) {
     'billion': 1000000000
   };
 
-  function wordsToNumber(wordsArray) {
+  function wordsToNumber(words) {
     let total = 0;
     let current = 0;
-    for (let word of wordsArray) {
-      if (numberMap.hasOwnProperty(word)) {
-        const value = numberMap[word];
-        if (value >= 100) {
-          current *= value;
+    for (let word of words) {
+      const lowerWord = word.toLowerCase();
+      if (lowerWord === 'and') {
+        continue; // skip "and"
+      }
+      if (numberMap.hasOwnProperty(lowerWord)) {
+        const val = numberMap[lowerWord];
+        if (val >= 100) {
+          if (current === 0) current = 1; // e.g., "hundred" alone means 100
+          current *= val;
         } else {
-          current += value;
+          current += val;
         }
-      } else if (word === 'and') {
-        // ignore 'and'
-        continue;
       } else {
-        // unknown word
+        // unrecognized word
         return null;
       }
     }
@@ -69,7 +71,7 @@ export default function handler(req, res) {
     return total;
   }
 
-  // Tokenize text, include words, punctuation, etc.
+  // Tokenize input text into words and punctuation
   const tokens = text.split(/\b/);
 
   const resultTokens = [];
@@ -90,8 +92,7 @@ export default function handler(req, res) {
         if (numberValue !== null) {
           resultTokens.push(numberValue.toString());
         } else {
-          // fallback: join the sequence as text
-          resultTokens.push(sequence.join(' '));
+          resultTokens.push(sequence.join(''));
         }
         sequence = [];
         inSequence = false;
@@ -106,7 +107,7 @@ export default function handler(req, res) {
     if (numberValue !== null) {
       resultTokens.push(numberValue.toString());
     } else {
-      resultTokens.push(sequence.join(' '));
+      resultTokens.push(sequence.join(''));
     }
   }
 
