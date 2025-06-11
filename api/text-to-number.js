@@ -45,22 +45,15 @@ export default function handler(req, res) {
     'million': 1000000,
   };
 
-  // Function to convert a sequence of number words into a number
   function wordsToNumber(words) {
     let total = 0;
     let current = 0;
-
     for (const word of words) {
       const key = word.toLowerCase();
-
-      if (key === 'and') {
-        continue; // ignore "and"
-      }
+      if (key === 'and') continue;
 
       const val = numberMap[key];
-      if (val === undefined) {
-        return null; // unrecognized word
-      }
+      if (val === undefined) return null; // unrecognized word
 
       if (val === 100) {
         if (current === 0) current = 1;
@@ -76,47 +69,60 @@ export default function handler(req, res) {
     return total + current;
   }
 
-  // Split text into tokens: words, punctuation, spaces, etc.
-  const tokens = text.split(/\b/); // split by word boundaries
+  // Split text into tokens, keeping hyphenated words together
+  const tokens = text.match(/\b[\w-]+\b|\W+/g);
 
-  const resultTokens = [];
-  let sequence = [];
-  let inSequence = false;
+  let inNumberSequence = false;
+  let currentSequence = [];
+  const outputTokens = [];
 
   for (const token of tokens) {
-    const trimmedToken = token.trim();
+    const cleanToken = token.trim();
 
-    // Check if token is a number word
-    if (numberMap.hasOwnProperty(trimmedToken.toLowerCase())) {
-      sequence.push(trimmedToken);
-      inSequence = true;
-    } else {
-      // If sequence exists, convert and replace
-      if (inSequence) {
-        const numberValue = wordsToNumber(sequence);
-        if (numberValue !== null) {
-          resultTokens.push(numberValue.toString());
-        } else {
-          resultTokens.push(sequence.join(''));
-        }
-        sequence = [];
-        inSequence = false;
+    // Check if token is a number word or hyphenated number
+    const isNumberWord = (() => {
+      if (/\w+/.test(cleanToken)) {
+        // handle hyphenated words
+        const parts = cleanToken.split('-');
+        return parts.every(part => numberMap.hasOwnProperty(part.toLowerCase()));
       }
-      // Push the current token as-is
-      resultTokens.push(token);
-    }
-  }
+      return false;
+    })();
 
-  // Handle trailing sequence
-  if (inSequence) {
-    const numberValue = wordsToNumber(sequence);
-    if (numberValue !== null) {
-      resultTokens.push(numberValue.toString());
+    if (isNumberWord) {
+      currentSequence.push(cleanToken);
+      inNumberSequence = true;
     } else {
-      resultTokens.push(sequence.join(''));
+      // If sequence was ongoing, convert it
+      if (inNumberSequence) {
+        // Normalize sequence: split hyphenated words into parts
+        const allParts = currentSequence.flatMap(w => w.split('-'));
+        const numberValue = wordsToNumber(allParts);
+        if (numberValue !== null) {
+          outputTokens.push(numberValue.toString());
+        } else {
+          // fallback: output original sequence
+          outputTokens.push(currentSequence.join(''));
+        }
+        currentSequence = [];
+        inNumberSequence = false;
+      }
+      // Add the current token as is
+      outputTokens.push(token);
     }
   }
 
-  const outputText = resultTokens.join('');
+  // If sequence ends at the end of text
+  if (inNumberSequence) {
+    const allParts = currentSequence.flatMap(w => w.split('-'));
+    const numberValue = wordsToNumber(allParts);
+    if (numberValue !== null) {
+      outputTokens.push(numberValue.toString());
+    } else {
+      outputTokens.push(currentSequence.join(''));
+    }
+  }
+
+  const outputText = outputTokens.join('');
   res.status(200).json({ result: outputText });
 }
