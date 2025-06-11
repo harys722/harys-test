@@ -43,22 +43,21 @@ export default function handler(req, res) {
     'hundred': 100,
     'thousand': 1000,
     'million': 1000000,
-    'billion': 1000000000
   };
 
-  // Function to convert a sequence of words to a number
+  // Function to convert number words to a number
   function wordsToNumber(words) {
     let total = 0;
     let current = 0;
 
-    for (let word of words) {
-      const lowerWord = word.toLowerCase();
+    for (const word of words) {
+      const key = word.toLowerCase();
 
-      if (lowerWord === 'and') {
-        continue; // skip "and"
+      if (key === 'and') {
+        continue; // ignore "and"
       }
 
-      const val = numberMap[lowerWord];
+      const val = numberMap[key];
 
       if (val === undefined) {
         // unrecognized word
@@ -66,11 +65,11 @@ export default function handler(req, res) {
       }
 
       if (val === 100) {
-        // multiply current by 100
-        if (current === 0) current = 1; // e.g., "hundred" without a number before
+        // e.g., "two hundred"
+        if (current === 0) current = 1; // e.g., "hundred" alone
         current *= val;
       } else if (val >= 1000) {
-        // scale words like thousand, million
+        // "thousand", "million"
         if (current === 0) current = 1;
         total += current * val;
         current = 0;
@@ -79,25 +78,24 @@ export default function handler(req, res) {
         current += val;
       }
     }
-    total += current;
-    return total;
+    return total + current;
   }
 
-  // Tokenize input text (split by non-word characters)
+  // Tokenize the input text into words and non-word characters
   const tokens = text.split(/\b/);
 
   const resultTokens = [];
   let sequence = [];
   let inSequence = false;
 
-  for (let token of tokens) {
+  for (const token of tokens) {
     const lowerToken = token.toLowerCase().trim();
 
     if (numberMap.hasOwnProperty(lowerToken)) {
       sequence.push(lowerToken);
       inSequence = true;
     } else {
-      // process sequence if ended
+      // If sequence ends, convert it
       if (inSequence) {
         const numberValue = wordsToNumber(sequence);
         if (numberValue !== null) {
@@ -112,7 +110,7 @@ export default function handler(req, res) {
     }
   }
 
-  // handle last sequence
+  // Handle trailing sequence
   if (inSequence) {
     const numberValue = wordsToNumber(sequence);
     if (numberValue !== null) {
@@ -122,6 +120,6 @@ export default function handler(req, res) {
     }
   }
 
-  const convertedText = resultTokens.join('');
-  res.status(200).json({ result: convertedText });
+  const outputText = resultTokens.join('');
+  res.status(200).json({ result: outputText });
 }
