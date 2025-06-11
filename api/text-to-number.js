@@ -45,7 +45,7 @@ export default function handler(req, res) {
     'million': 1000000,
   };
 
-  // Function to convert number words to a number
+  // Function to convert a sequence of number words into a number
   function wordsToNumber(words) {
     let total = 0;
     let current = 0;
@@ -58,44 +58,40 @@ export default function handler(req, res) {
       }
 
       const val = numberMap[key];
-
       if (val === undefined) {
-        // unrecognized word
-        return null;
+        return null; // unrecognized word
       }
 
       if (val === 100) {
-        // e.g., "two hundred"
-        if (current === 0) current = 1; // e.g., "hundred" alone
+        if (current === 0) current = 1;
         current *= val;
       } else if (val >= 1000) {
-        // "thousand", "million"
         if (current === 0) current = 1;
         total += current * val;
         current = 0;
       } else {
-        // small number
         current += val;
       }
     }
     return total + current;
   }
 
-  // Tokenize the input text into words and non-word characters
-  const tokens = text.split(/\b/);
+  // Split text into tokens: words, punctuation, spaces, etc.
+  const tokens = text.split(/\b/); // split by word boundaries
 
   const resultTokens = [];
   let sequence = [];
   let inSequence = false;
 
   for (const token of tokens) {
-    const lowerToken = token.toLowerCase().trim();
+    const trimmedToken = token.trim();
 
-    if (numberMap.hasOwnProperty(lowerToken)) {
-      sequence.push(lowerToken);
+    // Check if token is a number word
+    if (numberMap.hasOwnProperty(trimmedToken.toLowerCase())) {
+      sequence.push(trimmedToken);
       inSequence = true;
     } else {
-      // If sequence ends, convert it
+      // If sequence exists, convert and replace
       if (inSequence) {
         const numberValue = wordsToNumber(sequence);
         if (numberValue !== null) {
@@ -106,6 +102,7 @@ export default function handler(req, res) {
         sequence = [];
         inSequence = false;
       }
+      // Push the current token as-is
       resultTokens.push(token);
     }
   }
