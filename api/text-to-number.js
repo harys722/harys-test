@@ -49,29 +49,41 @@ export default function handler(req, res) {
   function wordsToNumber(words) {
     let total = 0;
     let current = 0;
+
     for (let word of words) {
       const lowerWord = word.toLowerCase();
+
       if (lowerWord === 'and') {
         continue; // skip "and"
       }
-      if (numberMap.hasOwnProperty(lowerWord)) {
-        const val = numberMap[lowerWord];
-        if (val >= 100) {
-          if (current === 0) current = 1; // e.g., "hundred" alone means 100
-          current *= val;
-        } else {
-          current += val;
-        }
-      } else {
+
+      if (!numberMap.hasOwnProperty(lowerWord)) {
         // unrecognized word
         return null;
+      }
+
+      const val = numberMap[lowerWord];
+
+      if (val >= 100) {
+        if (current === 0) current = 1; // e.g., "hundred" alone means 100
+        current *= val;
+        if (lowerWord === 'hundred') {
+          // do nothing, just multiply
+        } else {
+          // scale words like thousand/million, add to total
+          total += current;
+          current = 0;
+        }
+      } else {
+        // small number, add to current
+        current += val;
       }
     }
     total += current;
     return total;
   }
 
-  // Tokenize input text into words and punctuation
+  // Tokenize input text into words, punctuation, etc.
   const tokens = text.split(/\b/);
 
   const resultTokens = [];
@@ -82,11 +94,10 @@ export default function handler(req, res) {
     const lowerToken = token.toLowerCase().trim();
 
     if (numberMap.hasOwnProperty(lowerToken)) {
-      // part of number sequence
       sequence.push(lowerToken);
       inSequence = true;
     } else {
-      // end of sequence
+      // process sequence if ended
       if (inSequence) {
         const numberValue = wordsToNumber(sequence);
         if (numberValue !== null) {
@@ -101,7 +112,7 @@ export default function handler(req, res) {
     }
   }
 
-  // If sequence ends at the end
+  // handle if sequence ends at the end
   if (inSequence) {
     const numberValue = wordsToNumber(sequence);
     if (numberValue !== null) {
