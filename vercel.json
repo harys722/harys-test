@@ -7,5 +7,10 @@
     { "source": "/reddit", "destination": "https://www.reddit.com/u/harys722", "permanent": true },
     { "source": "/fun-guild/invite", "destination": "https://discord.gg/dz4f9bTcqe", "permanent": true },
     { "source": "/the-community/invite", "destination": "https://discord.gg/CPN5eYPABx", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/[...handler]" },
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/404.html" }
   ]
 }
