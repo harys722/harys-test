@@ -12,6 +12,7 @@
     { "source": "/api/(.*)", "destination": "/api/[...handler]" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/404.html" },
+    { "source": "(.*)", "destination": "/404.html" },
     { "source": "/testing-is-fun", "destination": "https://github.com/harys722/" }
   ]
 }
