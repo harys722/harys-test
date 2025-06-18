@@ -19,7 +19,17 @@
     { "source": "/vercel.json", "destination": "/404.html" },
     { "source": "/api/(.*)", "destination": "/api/[...handler]" },
     { "source": "/", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/404.html" },
-    { "source": "(.*)", "destination": "/404.html" }
+    { "source": "/(.*)", "destination": "/404.html" }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
   ]
 }
