@@ -1,6 +1,9 @@
 {
-  "root": "root",
   "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/root/index.html" },
+    { "source": "/:slug", "destination": "/root/:slug.html" }
+  ],
   "headers": [
     {
       "source": "/assets/(css|js)/(.*)",
@@ -22,28 +25,13 @@
     { "source": "/the-community/invite", "destination": "https://discord.gg/CPN5eYPABx", "permanent": true },
     {
       "source": "/assets/css/:path*",
-      "missing": [
-        {
-          "type": "header",
-          "key": "referer"
-        }
-      ],
-      "destination": "/404.html",
-      "permanent": false
+      "missing": [{ "type": "header", "key": "referer" }],
+      "destination": "/404.html"
     },
     {
       "source": "/assets/js/:path*",
-      "missing": [
-        {
-          "type": "header",
-          "key": "referer"
-        }
-      ],
-      "destination": "/404.html",
-      "permanent": false
+      "missing": [{ "type": "header", "key": "referer" }],
+      "destination": "/404.html"
     }
-  ],
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" }
   ]
 }
