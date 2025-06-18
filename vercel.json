@@ -1,5 +1,10 @@
 {
   "cleanUrls": true,
+  "functions": {
+    "api/assets.js": {
+      "maxDuration": 10
+    }
+  },
   "redirects": [
     { "source": "/github", "destination": "https://github.com/harys722/", "permanent": true },
     { "source": "/bluesky", "destination": "https://harys722.bsky.social/", "permanent": true },
@@ -9,10 +14,12 @@
     { "source": "/the-community/invite", "destination": "https://discord.gg/CPN5eYPABx", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/assets/css/(.*)", "destination": "/api/assets?file=css/$1" },
+    { "source": "/assets/js/(.*)", "destination": "/api/assets?file=js/$1" },
+    { "source": "/vercel.json", "destination": "/404.html" },
     { "source": "/api/(.*)", "destination": "/api/[...handler]" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/404.html" },
-    { "source": "(.*)", "destination": "/404.html" },
-    { "source": "/testing-is-fun", "destination": "https://github.com/harys722/" }
+    { "source": "(.*)", "destination": "/404.html" }
   ]
 }
