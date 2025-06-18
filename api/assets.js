@@ -46,7 +46,7 @@ export default function handler(req, res) {
   
   // Security: Allow common web asset files
   const allowedExtensions = [
-    '.css', '.js', '.json', '.txt', '.md', 
+    '.json', '.txt', '.md', 
     '.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.ico',
     '.woff', '.woff2', '.ttf', '.eot',
     '.mp3', '.mp4', '.webm', '.ogg',
