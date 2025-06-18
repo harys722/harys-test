@@ -45,6 +45,6 @@
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
     { "source": "/:slug*", "destination": "/pages/:slug.html" },
-    { "source": "/:path*", "destination": "/404.html" }
+    { "source": "/api*", "destination": "/404.html" }
   ]
 }
