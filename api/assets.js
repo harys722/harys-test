@@ -6,19 +6,19 @@ export default function handler(req, res) {
   const referer = req.headers.referer;
   const userAgent = req.headers['user-agent'] || '';
   
-  // Security checks
+  // Security checks - redirect to 404 instead of showing error
   if (!referer || 
       !referer.includes('harys.is-a.dev') || 
       userAgent.includes('curl') || 
       userAgent.includes('wget') ||
       userAgent.includes('python') ||
       userAgent.includes('bot')) {
-    return res.status(403).json({ error: 'Access denied' });
+    return res.redirect(302, '/404.html');
   }
   
   // Validate file parameter
   if (!file || typeof file !== 'string') {
-    return res.status(400).json({ error: 'Invalid file parameter' });
+    return res.redirect(302, '/404.html');
   }
   
   // Security: Only allow CSS and JS files
@@ -26,12 +26,12 @@ export default function handler(req, res) {
   const fileExtension = path.extname(file).toLowerCase();
   
   if (!allowedExtensions.includes(fileExtension)) {
-    return res.status(403).json({ error: 'File type not allowed' });
+    return res.redirect(302, '/404.html');
   }
   
   // Security: Prevent directory traversal
   if (file.includes('..') || file.includes('\\') || file.startsWith('/')) {
-    return res.status(403).json({ error: 'Invalid file path' });
+    return res.redirect(302, '/404.html');
   }
   
   // Build file path
@@ -39,7 +39,7 @@ export default function handler(req, res) {
   
   // Check if file exists
   if (!fs.existsSync(filePath)) {
-    return res.status(404).json({ error: 'File not found' });
+    return res.redirect(302, '/404.html');
   }
   
   try {
@@ -61,6 +61,6 @@ export default function handler(req, res) {
     
   } catch (error) {
     console.error('Error reading file:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.redirect(302, '/404.html');
   }
 }
