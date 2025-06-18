@@ -43,7 +43,6 @@
   ],
   "rewrites": [
     { "source": "/vercel.json", "destination": "/404.html" },
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/404.html" }
+    { "source": "/", "destination": "/index.html" }
   ]
 }
