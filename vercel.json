@@ -16,7 +16,6 @@
   "rewrites": [
     { "source": "/assets/(.*)", "destination": "/api/assets?file=$1" },
     { "source": "/vercel.json", "destination": "/404.html" },
-    { "source": "/api/(.*)", "destination": "/api/[...handler]" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/404.html" }
   ],
