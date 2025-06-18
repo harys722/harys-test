@@ -24,7 +24,6 @@
   ],
   "rewrites": [
     { "source": "/", "destination": "/root/index.html" },
-    { "source": "/:slug*", "destination": "/root/:slug.html" },
-    { "source": "/api(.*)", "destination": "/404.html" }
+    { "source": "/:slug", "destination": "/root/:slug.html" }
   ]
 }
