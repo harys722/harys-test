@@ -4,15 +4,15 @@
 RewriteEngine On
 
 # Block direct access to CSS files
-RewriteCond %{HTTP_REFERER} !^https?://yourdomain\.com [NC]
+RewriteCond %{HTTP_REFERER} !^https?://harys\.is-a\.dev [NC]
 RewriteRule ^css/.*\.css$ /404.php [R=404,L]
 
 # Block direct access to JS files  
-RewriteCond %{HTTP_REFERER} !^https?://yourdomain\.com [NC]
+RewriteCond %{HTTP_REFERER} !^https?://harys\.is-a\.dev [NC]
 RewriteRule ^js/.*\.js$ /404.php [R=404,L]
 
 # Alternative method - Block all direct access and allow only from your domain
-# RewriteCond %{HTTP_REFERER} !^https?://(www\.)?yourdomain\.com [NC]
+# RewriteCond %{HTTP_REFERER} !^https?://(www\.)?harys\.is-a\.dev [NC]
 # RewriteRule ^(css|js)/.*\.(css|js)$ /404.php [R=404,L]
 
 # Deny access if no referer (direct typing in browser)
