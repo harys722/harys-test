@@ -63,8 +63,8 @@ export default function handler(req, res) {
     return res.redirect(302, '/404.html');
   }
   
-  // Build file path
-  const filePath = path.join(process.cwd(), 'assets', file);
+  // Build file path - READ FROM PRIVATE FOLDER
+  const filePath = path.join(process.cwd(), 'private-assets', file);
   
   // Check if file exists
   if (!fs.existsSync(filePath)) {
@@ -83,6 +83,13 @@ export default function handler(req, res) {
       '.json': 'application/json',
       '.txt': 'text/plain',
       '.md': 'text/markdown',
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.png': 'image/png',
+      '.gif': 'image/gif',
+      '.svg': 'image/svg+xml',
+      '.webp': 'image/webp',
+      '.ico': 'image/x-icon',
       '.woff': 'font/woff',
       '.woff2': 'font/woff2',
       '.ttf': 'font/ttf',
