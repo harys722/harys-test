@@ -1,13 +1,37 @@
+// api/assets.js - DEBUG VERSION
 import fs from 'fs';
 import path from 'path';
 
 export default function handler(req, res) {
+  // DEBUG: Log everything
+  console.log('=== ASSETS API CALLED ===');
+  console.log('Query:', req.query);
+  console.log('Headers:', {
+    referer: req.headers.referer,
+    userAgent: req.headers['user-agent'],
+    accept: req.headers.accept
+  });
+  
   const { file } = req.query;
   const referer = req.headers.referer;
   const userAgent = req.headers['user-agent'] || '';
   const acceptHeader = req.headers.accept || '';
   
-  // Block direct browser access (when someone types URL directly)
+  // ALWAYS BLOCK EVERYTHING FOR NOW - TESTING
+  console.log('BLOCKING ALL ACCESS FOR TESTING');
+  return res.status(403).json({ 
+    error: 'API IS WORKING - ALL ACCESS BLOCKED FOR TESTING',
+    debug: {
+      file,
+      referer,
+      userAgent: userAgent.substring(0, 50),
+      accept: acceptHeader.substring(0, 50)
+    }
+  });
+  
+  // Original code commented out for testing
+  /*
+  // Block direct browser access
   if (!referer && acceptHeader.includes('text/html')) {
     return res.redirect(302, '/404.html');
   }
@@ -30,12 +54,12 @@ export default function handler(req, res) {
     return res.redirect(302, '/404.html');
   }
   
-  // Additional strict check: If no referer and not from a browser request for assets
+  // Additional strict check
   if (!referer && !acceptHeader.includes('text/css') && 
       !acceptHeader.includes('application/javascript') &&
       !acceptHeader.includes('image/') &&
       !acceptHeader.includes('font/') &&
-      !acceptHeader.includes('*/*')) {
+      !acceptHeader.includes('*\/*')) {
     return res.redirect(302, '/404.html');
   }
   
@@ -46,7 +70,7 @@ export default function handler(req, res) {
   
   // Security: Allow common web asset files
   const allowedExtensions = [
-    '.json', '.txt', '.md', 
+    '.css', '.js', '.json', '.txt', '.md', 
     '.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp', '.ico',
     '.woff', '.woff2', '.ttf', '.eot',
     '.mp3', '.mp4', '.webm', '.ogg',
@@ -113,4 +137,5 @@ export default function handler(req, res) {
     console.error('Error reading file:', error);
     res.redirect(302, '/404.html');
   }
+  */
 }
