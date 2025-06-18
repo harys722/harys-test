@@ -1,38 +1,18 @@
-// api/assets.js - DEBUG VERSION
+// api/assets.js - WORKING VERSION
 import fs from 'fs';
 import path from 'path';
 
 export default function handler(req, res) {
-  // DEBUG: Log everything
-  console.log('=== ASSETS API CALLED ===');
-  console.log('Query:', req.query);
-  console.log('Headers:', {
-    referer: req.headers.referer,
-    userAgent: req.headers['user-agent'],
-    accept: req.headers.accept
-  });
-  
   const { file } = req.query;
   const referer = req.headers.referer;
   const userAgent = req.headers['user-agent'] || '';
   const acceptHeader = req.headers.accept || '';
   
-  // ALWAYS BLOCK EVERYTHING FOR NOW - TESTING
-  console.log('BLOCKING ALL ACCESS FOR TESTING');
-  return res.status(403).json({ 
-    error: 'API IS WORKING - ALL ACCESS BLOCKED FOR TESTING',
-    debug: {
-      file,
-      referer,
-      userAgent: userAgent.substring(0, 50),
-      accept: acceptHeader.substring(0, 50)
-    }
-  });
+  console.log('Assets API called:', { file, referer, userAgent: userAgent.substring(0, 50) });
   
-  // Original code commented out for testing
-  /*
-  // Block direct browser access
+  // Block direct browser access (when someone types URL directly)
   if (!referer && acceptHeader.includes('text/html')) {
+    console.log('Blocked: Direct browser access');
     return res.redirect(302, '/404.html');
   }
   
@@ -44,6 +24,7 @@ export default function handler(req, res) {
       userAgent.includes('spider') ||
       userAgent.includes('crawler') ||
       userAgent.includes('postman')) {
+    console.log('Blocked: Bot/tool detected');
     return res.redirect(302, '/404.html');
   }
   
@@ -51,20 +32,13 @@ export default function handler(req, res) {
   if (referer && !referer.includes('harys.is-a.dev') && 
       !referer.includes('localhost') && 
       !referer.includes('127.0.0.1')) {
-    return res.redirect(302, '/404.html');
-  }
-  
-  // Additional strict check
-  if (!referer && !acceptHeader.includes('text/css') && 
-      !acceptHeader.includes('application/javascript') &&
-      !acceptHeader.includes('image/') &&
-      !acceptHeader.includes('font/') &&
-      !acceptHeader.includes('*\/*')) {
+    console.log('Blocked: Invalid referer');
     return res.redirect(302, '/404.html');
   }
   
   // Validate file parameter
   if (!file || typeof file !== 'string') {
+    console.log('Blocked: Invalid file parameter');
     return res.redirect(302, '/404.html');
   }
   
@@ -79,19 +53,23 @@ export default function handler(req, res) {
   const fileExtension = path.extname(file).toLowerCase();
   
   if (!allowedExtensions.includes(fileExtension)) {
+    console.log('Blocked: File type not allowed');
     return res.redirect(302, '/404.html');
   }
   
   // Security: Prevent directory traversal
   if (file.includes('..') || file.includes('\\') || file.startsWith('/')) {
+    console.log('Blocked: Directory traversal attempt');
     return res.redirect(302, '/404.html');
   }
   
   // Build file path - READ FROM PRIVATE FOLDER
   const filePath = path.join(process.cwd(), 'private-assets', file);
+  console.log('Looking for file:', filePath);
   
   // Check if file exists
   if (!fs.existsSync(filePath)) {
+    console.log('File not found:', filePath);
     return res.redirect(302, '/404.html');
   }
   
@@ -130,6 +108,7 @@ export default function handler(req, res) {
     res.setHeader('Cache-Control', 'private, max-age=3600');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     
+    console.log('File served successfully:', file);
     // Send the file content
     res.status(200).send(fileContent);
     
@@ -137,5 +116,4 @@ export default function handler(req, res) {
     console.error('Error reading file:', error);
     res.redirect(302, '/404.html');
   }
-  */
 }
