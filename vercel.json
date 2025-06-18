@@ -14,8 +14,7 @@
     { "source": "/the-community/invite", "destination": "https://discord.gg/CPN5eYPABx", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/assets/css/(.*)", "destination": "/api/assets?file=css/$1" },
-    { "source": "/assets/js/(.*)", "destination": "/api/assets?file=js/$1" },
+    { "source": "/assets/(.*)", "destination": "/api/assets?file=$1" },
     { "source": "/vercel.json", "destination": "/404.html" },
     { "source": "/api/(.*)", "destination": "/api/[...handler]" },
     { "source": "/", "destination": "/index.html" },
