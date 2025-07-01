@@ -1,17 +1,3 @@
 {
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/api", "destination": "/404.html" }
-  ],
-  "headers": [
-    {
-      "source": "/assets/(css|js)/(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
-        }
-      ]
-    }
-  ]
+  "cleanUrls": true
 }
