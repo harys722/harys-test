@@ -1,9 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/root/index.html" },
-    { "source": "/:slug", "destination": "/root/:slug.html" },
-    { "source": "/api(.*)/(.*)", "destination": "/404.html" }
+    { "source": "/api", "destination": "/404.html" }
   ],
   "headers": [
     {
@@ -14,25 +12,6 @@
           "value": "noindex"
         }
       ]
-    }
-  ],
-  "redirects": [
-    { "source": "/vercel.json", "destination": "/404.html", "permanent": false },
-    { "source": "/github", "destination": "https://github.com/harys722/", "permanent": true },
-    { "source": "/bluesky", "destination": "https://harys722.bsky.social/", "permanent": true },
-    { "source": "/discord", "destination": "https://discord.com/users/1203357768610746385/", "permanent": true },
-    { "source": "/reddit", "destination": "https://www.reddit.com/u/harys722", "permanent": true },
-    { "source": "/fun-guild/invite", "destination": "https://discord.gg/dz4f9bTcqe", "permanent": true },
-    { "source": "/the-community/invite", "destination": "https://discord.gg/CPN5eYPABx", "permanent": true },
-    {
-      "source": "/assets/css/:path*",
-      "missing": [{ "type": "header", "key": "referer" }],
-      "destination": "/404.html"
-    },
-    {
-      "source": "/assets/js/:path*",
-      "missing": [{ "type": "header", "key": "referer" }],
-      "destination": "/404.html"
     }
   ]
 }
