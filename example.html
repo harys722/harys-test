@@ -1,575 +1,1570 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <!-- HTML Meta Tags -->
-    <title>Preparing Your Journey...</title>
-    <meta name="description" content="A nice and wonderful redirect to my main website (harys.is-a.dev) with prefetching.">
-    <link rel="icon" href="https://cdn.harys.is-a.dev/avatars/main.png" type="image/x-icon">
+    <title>Free Domains - Curated Collection</title>
+    <meta name="description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
 
     <!-- Google / Search Engine Tags -->
-    <meta itemprop="name" content="harys722">
-    <meta itemprop="description" content="A nice and wonderful redirect to my main website (harys.is-a.dev) with prefetching.">
-    <meta itemprop="image" content="https://cdn.harys.is-a.dev/avatars/main.png">
-    
+    <meta itemprop="name" content="Free Domains - Curated Collection">
+    <meta itemprop="description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
+    <meta itemprop="image" content="https://free-domains.harys.is-a.dev/images/banner.png">
+
     <!-- Discord Meta Tags -->
-    <meta name="theme-color" content="#FFD700" />
-    <meta property="og:title" content="Preparing Your Journey..." />
-    <meta property="og:description" content="A nice and wonderful redirect to my main website (harys.is-a.dev) with prefetching." />
-    <meta property="og:image" content="https://cdn.harys.is-a.dev/avatars/main.png" />
+    <meta name="theme-color" content="#ADD8E6" />
+    <meta property="og:title" content="Free Domains - Curated Collection" />
+    <meta property="og:description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures." />
+    <meta property="og:image" content="https://free-domains.harys.is-a.dev/images/banner.png" />
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://harys.is-a.dev">
+    <meta property="og:url" content="https://free-domains.harys.is-a.dev/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Preparing Your Journey...">
-    <meta property="og:description" content="A nice and wonderful redirect to my main website (harys.is-a.dev) with prefetching.">
-    <meta property="og:image" content="https://cdn.harys.is-a.dev/avatars/main.png">
+    <meta property="og:title" content="Free Domains - Curated Collection">
+    <meta property="og:description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
+    <meta property="og:image" content="https://free-domains.harys.is-a.dev/images/banner.png">
 
-    <!-- Twitter Meta Tags -->
+    <!-- Twitter / X Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Preparing Your Journey...">
-    <meta name="twitter:description" content="A nice and wonderful redirect to my main website (harys.is-a.dev) with prefetching.">
-    <meta name="twitter:image" content="https://cdn.harys.is-a.dev/avatars/main.png">
+    <meta name="twitter:title" content="Free Domains - Curated Collection">
+    <meta name="twitter:description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
+    <meta name="twitter:image" content="https://free-domains.harys.is-a.dev/images/banner.png">
 
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-    overflow: hidden;
-    position: relative;
-    background: radial-gradient(ellipse at center, #2d1b0e 0%, #1a0f07 70%, #0f0603 100%);
-  }
-
-  /* Animated starfield background */
-  .starfield {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -3;
-  }
-
-  .star {
-    position: absolute;
-    background: linear-gradient(45deg, #ffd700, #ffaa00);
-    border-radius: 50%;
-    animation: twinkle 3s infinite ease-in-out;
-  }
-
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.3); }
-  }
-
-  /* Floating particles */
-  .particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    pointer-events: none;
-  }
-
-  .particle {
-    position: absolute;
-    background: linear-gradient(45deg, #ffd700, #ff8c00, #ffaa00);
-    border-radius: 50%;
-    animation: float 15s infinite linear;
-    filter: blur(1px);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-  }
-
-  @keyframes float {
-    0% {
-      transform: translateY(100vh) rotate(0deg);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-100vh) rotate(360deg);
-      opacity: 0;
-    }
-  }
-
-  /* Main container with glassmorphism */
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 60px 40px;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
-    animation: containerGlow 4s ease-in-out infinite alternate;
-  }
-
-  @keyframes containerGlow {
-    0% { box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), 0 0 0 rgba(255, 215, 0, 0); }
-    100% { box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), 0 0 60px rgba(255, 215, 0, 0.3); }
-  }
-
-  /* Advanced loader with multiple orbits */
-  .loader {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    margin-bottom: 40px;
-  }
-
-  /* Central energy core */
-  .energy-core {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, #ffd700 0%, #ff8c00 50%, #cc6600 100%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: energyPulse 2s infinite ease-in-out;
-    box-shadow: 
-      0 0 30px rgba(255, 215, 0, 0.9),
-      0 0 60px rgba(255, 140, 0, 0.5),
-      inset 0 0 20px rgba(255, 255, 255, 0.3);
-  }
-
-  .energy-core::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, transparent 40%, rgba(255, 215, 0, 0.15) 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: energyRing 3s infinite ease-in-out;
-  }
-
-  @keyframes energyPulse {
-    0%, 100% { 
-      transform: translate(-50%, -50%) scale(1);
-      box-shadow: 
-        0 0 30px rgba(255, 215, 0, 0.9),
-        0 0 60px rgba(255, 140, 0, 0.5),
-        inset 0 0 20px rgba(255, 255, 255, 0.3);
-    }
-    50% { 
-      transform: translate(-50%, -50%) scale(1.1);
-      box-shadow: 
-        0 0 50px rgba(255, 215, 0, 1),
-        0 0 100px rgba(255, 140, 0, 0.7),
-        inset 0 0 30px rgba(255, 255, 255, 0.4);
-    }
-  }
-
-  @keyframes energyRing {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; }
-  }
-
-  /* Multiple orbital rings */
-  .orbit-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    background: linear-gradient(45deg, rgba(255, 215, 0, 0.4), rgba(255, 140, 0, 0.4)) border-box;
-    background-clip: padding-box;
-    animation: rotateRing linear infinite;
-  }
-
-  .orbit-ring-1 {
-    width: 180px;
-    height: 180px;
-    margin: -90px 0 0 -90px;
-    animation-duration: 8s;
-    border-image: linear-gradient(45deg, rgba(255, 215, 0, 0.6), rgba(255, 140, 0, 0.6)) 1;
-  }
-
-  .orbit-ring-2 {
-    width: 220px;
-    height: 220px;
-    margin: -110px 0 0 -110px;
-    animation-duration: 12s;
-    animation-direction: reverse;
-    border-image: linear-gradient(45deg, rgba(255, 140, 0, 0.5), rgba(255, 165, 0, 0.5)) 1;
-  }
-
-  .orbit-ring-3 {
-    width: 260px;
-    height: 260px;
-    margin: -130px 0 0 -130px;
-    animation-duration: 16s;
-    border-image: linear-gradient(45deg, rgba(255, 165, 0, 0.4), rgba(255, 193, 7, 0.4)) 1;
-  }
-
-  @keyframes rotateRing {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  /* Orbiting energy nodes */
-  .orbit-node {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    box-shadow: 0 0 15px currentColor;
-  }
-
-  .node-1 {
-    top: 50%;
-    left: 50%;
-    color: #ffd700;
-    background: #ffd700;
-    transform: translateX(90px) translateY(-50%);
-    animation: orbitNode 8s linear infinite;
-  }
-
-  .node-2 {
-    top: 50%;
-    left: 50%;
-    color: #ff8c00;
-    background: #ff8c00;
-    transform: translateX(110px) translateY(-50%);
-    animation: orbitNode 12s linear infinite reverse;
-  }
-
-  .node-3 {
-    top: 50%;
-    left: 50%;
-    color: #ffaa00;
-    background: #ffaa00;
-    transform: translateX(130px) translateY(-50%);
-    animation: orbitNode 16s linear infinite;
-  }
-
-  @keyframes orbitNode {
-    from { transform: translateX(var(--radius, 90px)) translateY(-50%) rotate(0deg); }
-    to { transform: translateX(var(--radius, 90px)) translateY(-50%) rotate(360deg); }
-  }
-
-  /* Holographic text effects */
-  .message {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-align: center;
-    margin-bottom: 30px;
-    background: linear-gradient(45deg, #ffd700, #ff8c00, #ffaa00, #ffc107);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: holographicShimmer 4s ease-in-out infinite;
-    text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-    position: relative;
-  }
-
-  .message::before {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: linear-gradient(45deg, #ffd700, #ff8c00, #ffaa00, #ffc107);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: holographicShimmer 4s ease-in-out infinite 0.1s;
-    filter: blur(2px);
-    opacity: 0.7;
-    z-index: -1;
-  }
-
-  @keyframes holographicShimmer {
-    0%, 100% { background-position: 0% 50%; }
-    25% { background-position: 100% 50%; }
-    50% { background-position: 50% 100%; }
-    75% { background-position: 100% 0%; }
-  }
-
-  /* Futuristic info panel */
-  .info-panel {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 140, 0, 0.15));
-    border: 1px solid rgba(255, 215, 0, 0.4);
-    border-radius: 20px;
-    padding: 25px 35px;
-    backdrop-filter: blur(10px);
-    color: #ffffff;
-    font-size: 16px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-    animation: infoPanelGlow 3s ease-in-out infinite alternate;
-  }
-
-  @keyframes infoPanelGlow {
-    0% { 
-      border-color: rgba(255, 215, 0, 0.4);
-      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-    }
-    100% { 
-      border-color: rgba(255, 140, 0, 0.5);
-      box-shadow: 0 10px 30px rgba(255, 140, 0, 0.4);
-    }
-  }
-
-  .info-item {
-    margin: 8px 0;
-    font-weight: 500;
-    opacity: 0.9;
-  }
-
-  .info-item strong {
-    color: #00d4ff;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
-  }
-
-  .timezone-info {
-    font-size: 14px;
-    opacity: 0.7;
-    margin-top: 10px;
-  }
-
-  /* Progress bar */
-  .progress-container {
-    width: 300px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    margin: 30px 0 20px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #fff8e1, #f57f17);
-    border-radius: 10px;
-    width: 0%;
-    animation: progressFill 7s ease-out forwards;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-  }
-
-  @keyframes progressFill {
-    to { width: 100%; }
-  }
-
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .container {
-      padding: 40px 25px;
-      margin: 20px;
-    }
-    
-    .loader {
-      width: 250px;
-      height: 250px;
-    }
-    
-    .energy-core {
-      width: 60px;
-      height: 60px;
-    }
-    
-    .orbit-ring-1 { width: 150px; height: 150px; margin: -75px 0 0 -75px; }
-    .orbit-ring-2 { width: 180px; height: 180px; margin: -90px 0 0 -90px; }
-    .orbit-ring-3 { width: 210px; height: 210px; margin: -105px 0 0 -105px; }
-    
-    .message {
-      font-size: 22px;
-      letter-spacing: 1px;
-    }
-    
-    .progress-container {
-      width: 250px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .container {
-      padding: 30px 20px;
-    }
-    
-    .loader {
-      width: 200px;
-      height: 200px;
-    }
-    
-    .message {
-      font-size: 18px;
-    }
-    
-    .info-panel {
-      padding: 20px 25px;
-      font-size: 14px;
-    }
-  }
-</style>
+    <!-- Links -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+            --border-color: #e2e8f0;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --border-color: #334155;
+            --accent-color: #60a5fa;
+            --accent-hover: #3b82f6;
+            --success-color: #34d399;
+            --danger-color: #f87171;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* Prevent text selection */
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: default;
+        }
+        /* Custom Cursor for PCs */
+        body {
+            cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%23${encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim().slice(1))}' stroke-width='2'/%3E%3C/svg%3E") 12 12, auto;
+        }
+        a, button, .domain-card:hover, .filter-btn, .btn, .repo-link, .theme-toggle, .scroll-top, .clear-search {
+            cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23${encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--accent-hover').trim().slice(1))}' fill-opacity='0.3' stroke='%23${encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim().slice(1))}' stroke-width='2'/%3E%3C/svg%3E") 16 16, pointer;
+        }
+        /* Prevent dragging */
+        img, a, button, .domain-card, .filter-btn, .btn, .repo-link, .theme-toggle, .scroll-top, .clear-search {
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--accent-color);
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+        .loading-text {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Custom Context Menu */
+        .custom-context-menu {
+            position: fixed;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0;
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            min-width: 180px;
+        }
+        .context-menu-item {
+            padding: 0.5rem 1rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+        .context-menu-item:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+        /* Link Confirmation Dialog */
+        .link-confirm-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+        }
+        .link-confirm-dialog h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .link-confirm-dialog p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        .link-confirm-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .link-confirm-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .link-confirm-btn.confirm {
+            background: var(--accent-color);
+            color: white;
+        }
+        .link-confirm-btn.cancel {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        .link-confirm-btn:hover {
+            transform: translateY(-2px);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-hover);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(10px);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        .logo img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+        .theme-toggle, .scroll-top {
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            position: fixed;
+            z-index: 1000;
+        }
+        .theme-toggle {
+            top: 1rem;
+            right: 1rem;
+        }
+        .theme-toggle.scrolled {
+            top: auto;
+            bottom: 6rem;
+            right: 2rem;
+            box-shadow: var(--shadow-md);
+            background-color: var(--bg-secondary);
+        }
+        .scroll-top {
+            bottom: 2rem;
+            right: 2rem;
+            box-shadow: var(--shadow-md);
+            background-color: var(--bg-secondary);
+            opacity: 0;
+            visibility: hidden;
+        }
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .theme-toggle:hover, .scroll-top:hover {
+            border-color: var(--accent-color);
+            background-color: var(--bg-tertiary);
+            transform: scale(1.1);
+        }
+        /* Hero Section with Animated Emojis */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding: 4rem 0;
+            background: linear-gradient(180deg, var(--bg-secondary), transparent);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: float 15s infinite ease-in-out;
+            pointer-events: none;
+        }
+        .emoji:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .emoji:nth-child(2) { top: 20%; left: 75%; animation-delay: 2s; }
+        .emoji:nth-child(3) { top: 60%; left: 25%; animation-delay: 4s; }
+        .emoji:nth-child(4) { top: 40%; left: 85%; animation-delay: 6s; }
+        .emoji:nth-child(5) { top: 80%; left: 35%; animation-delay: 8s; }
+        .emoji:nth-child(6) { top: 30%; left: 55%; animation-delay: 10s; }
+        .emoji:nth-child(7) { top: 70%; left: 65%; animation-delay: 12s; }
+        .emoji:nth-child(8) { top: 50%; left: 45%; animation-delay: 14s; }
+        @keyframes float {
+            0% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
+            10% { opacity: 0.3; }
+            50% { opacity: 0.5; transform: translateY(-50px) translateX(20px) rotate(10deg); }
+            90% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--accent-hover), var(--accent-color));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .stats {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat-badge {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+        .stat-badge:hover {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        /* Search Section */
+        .search-section {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+        }
+        .search-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .search-header h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .search-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+            font-style: italic;
+        }
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            font-size: 1.2rem;
+        }
+        .clear-search {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .clear-search.visible {
+            opacity: 1;
+        }
+        .clear-search:hover {
+            color: var(--text-primary);
+        }
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 2rem;
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        .filter-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: white;
+        }
+        .search-results-info {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .no-results p {
+            margin-bottom: 1rem;
+        }
+        .highlight {
+            background-color: #fbbf24;
+            color: #92400e;
+            padding: 0.1rem 0.2rem;
+            border-radius: 0.25rem;
+        }
+        [data-theme="dark"] .highlight {
+            background-color: #f59e0b;
+            color: #451a03;
+        }
+        /* Domains List */
+        .domains-section {
+            margin-top: 4rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: lightblue;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .domains-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 1.5rem;
+        }
+        .domain-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .domain-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-color);
+        }
+        .domain-card.hidden {
+            display: none;
+        }
+        .domain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .domain-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .domain-name:hover {
+            color: var(--accent-hover);
+        }
+        .availability-badge {
+            padding: 0.5rem 1.25rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            align-self: flex-start;
+            min-width: 100px;
+            text-align: center;
+        }
+        .available {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        [data-theme="dark"] .available {
+            background-color: #14532d;
+            color: #bbf7d0;
+        }
+        .unavailable {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        [data-theme="dark"] .unavailable {
+            background-color: #7f1d1d;
+            color: #fecaca;
+        }
+        .domain-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        .domain-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .repo-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
+        }
+        .repo-link:hover {
+            color: var(--accent-color);
+        }
+        .github-icon {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        .github-stats {
+            display: flex;
+            gap: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--text-tertiary);
+            flex-wrap: wrap;
+        }
+        .github-stat img {
+            height: 20px;
+            vertical-align: middle;
+        }
+        /* Footer */
+        .footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+        .footer-content {
+            color: var(--text-secondary);
+        }
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .stats {
+                flex-direction: column;
+                align-items: center;
+            }
+            .domain-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            .domain-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-container {
+                max-width: 100%;
+            }
+            .filter-options {
+                gap: 0.5rem;
+            }
+            .filter-btn {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .domains-grid {
+                grid-template-columns: 1fr;
+            }
+            .theme-toggle.scrolled {
+                bottom: 5rem;
+                right: 1rem;
+            }
+            .scroll-top {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            .emoji {
+                font-size: 1.2rem;
+            }
+        }
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">Loading Free Domains...</div>
+    </div>
 
-<!-- Animated starfield -->
-<div class="starfield" id="starfield"></div>
+    <!-- Custom Context Menu -->
+    <div class="custom-context-menu" id="customContextMenu" style="display: none;">
+        <div class="context-menu-item" data-action="copy">Copy to clipboard</div>
+        <div class="context-menu-item" data-action="new-tab">Open link in new tab</div>
+        <div class="context-menu-item" data-action="private-tab">Open link in private tab</div>
+    </div>
 
-<!-- Floating particles -->
-<div class="particles" id="particles"></div>
+    <!-- Link Confirmation Dialog -->
+    <div class="link-confirm-dialog" id="linkConfirmDialog" style="display: none;">
+        <h3>Leaving Free Domains</h3>
+        <p>You are about to visit an external website: <span id="confirmLinkUrl"></span></p>
+        <div class="link-confirm-buttons">
+            <button class="link-confirm-btn cancel" id="cancelLink">Cancel</button>
+            <button class="link-confirm-btn confirm" id="confirmLink">Continue</button>
+        </div>
+    </div>
 
-<div class="container">
-  <div class="loader">
-    <!-- Energy core -->
-    <div class="energy-core"></div>
-    
-    <!-- Orbital rings -->
-    <div class="orbit-ring orbit-ring-1"></div>
-    <div class="orbit-ring orbit-ring-2"></div>
-    <div class="orbit-ring orbit-ring-3"></div>
-    
-    <!-- Orbiting nodes -->
-    <div class="orbit-node node-1"></div>
-    <div class="orbit-node node-2"></div>
-    <div class="orbit-node node-3"></div>
-  </div>
-  
-  <div class="message" data-text="Initializing Quantum Experience...">
-    Initializing Quantum Experience...
-  </div>
-  
-  <div class="progress-container">
-    <div class="progress-bar"></div>
-  </div>
-  
-  <div class="info-panel">
-    <div class="info-item" id="current-time"></div>
-    <div class="info-item" id="visit-count"></div>
-    <div class="timezone-info" id="timezone-info"></div>
-  </div>
-</div>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://domains.is-a.shop/favicon.ico" alt="Free Domains Logo">
+                    Free Domains
+                </a>
+            </div>
+        </div>
+    </header>
 
-<script>
-  // Create animated starfield
-  function createStarfield() {
-    const starfield = document.getElementById('starfield');
-    const starCount = 100;
-    
-    for (let i = 0; i < starCount; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.top = Math.random() * 100 + '%';
-      star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
-      star.style.animationDelay = Math.random() * 3 + 's';
-      starfield.appendChild(star);
-    }
-  }
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">🌙</span>
+    </button>
+    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+        <span>⬆️</span>
+    </button>
 
-  // Create floating particles
-  function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = 20;
-    
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
-      particle.style.animationDelay = Math.random() * 15 + 's';
-      particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-      particlesContainer.appendChild(particle);
-    }
-  }
+    <main class="main">
+        <div class="container">
+            <section class="hero fade-in" id="startup">
+                <span class="emoji">🌐</span>
+                <span class="emoji">🌀</span>
+                <span class="emoji">✨</span>
+                <span class="emoji">🚀</span>
+                <span class="emoji">💻</span>
+                <span class="emoji">🌍</span>
+                <span class="emoji">🔗</span>
+                <span class="emoji">⚡️</span>
+                <h1>Discover Free Domains</h1>
+                <p>Explore our curated collection of free subdomains perfect for personal websites, open-source projects, portfolios, and innovative online ventures.</p>
+                
+                <div class="hero-actions">
+                    <a href="https://github.com/harys722/free-domains" target="_blank" class="btn btn-primary external-link">
+                        <svg class="github-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        Star on GitHub
+                    </a>
+                    <a href="#domains" class="btn btn-secondary">
+                        Browse Domains
+                    </a>
+                </div>
 
-  // Visit counter with memory storage
-  const visitsKey = 'quantumVisitorCount';
-  let count = JSON.parse(localStorage.getItem(visitsKey) || '0') + 1;
-  localStorage.setItem(visitsKey, JSON.stringify(count));
+                <div class="stats">
+                    <div class="stat-badge">📊 15+ Free Domain Services</div>
+                    <div class="stat-badge">✅ Regularly Updated</div>
+                    <div class="stat-badge">🚀 Open Source</div>
+                </div>
+            </section>
 
-  // Get timezone information
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const date = new Date();
-  const offsetMinutes = date.getTimezoneOffset();
-  const offsetSign = offsetMinutes <= 0 ? '+' : '-';
-  const absOffsetMinutes = Math.abs(offsetMinutes);
-  const offsetHours = String(Math.floor(absOffsetMinutes / 60)).padStart(2, '0');
-  const offsetMins = String(absOffsetMinutes % 60).padStart(2, '0');
-  const offsetFormatted = `${offsetSign}${offsetHours}:${offsetMins}`;
+            <!-- Search Section -->
+            <section class="search-section fade-in">
+                <div class="search-header">
+                    <h2>🔍 Find Your Perfect Domain</h2>
+                    <p>Search our catalog by name or description, or filter to discover the ideal domain for your project.</p>
+                </div>
+                
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Discover your ideal domain..."
+                        autocomplete="off"
+                    >
+                    <button class="clear-search" id="clearSearch" title="Clear search">✕</button>
+                </div>
 
-  // Update display information
-  function updateInfo() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString([], { 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      second: '2-digit',
-      hour12: false
-    });
-    
-    document.getElementById('current-time').innerHTML = 
-      `🕐 Local Time: <strong>${timeString}</strong>`;
-    document.getElementById('visit-count').innerHTML = 
-      `👁️ Quantum Visits: <strong>${count}</strong>`;
-    document.getElementById('timezone-info').innerHTML = 
-      `🌍 ${timeZone} (UTC${offsetFormatted})`;
-  }
+                <div class="filter-options">
+                    <button class="filter-btn active" data-filter="all">📋 All Domains</button>
+                    <button class="filter-btn" data-filter="available">✅ Available</button>
+                    <button class="filter-btn" data-filter="unavailable">❌ Unavailable</button>
+                    <button class="filter-btn" data-filter="github">📂 Has GitHub</button>
+                </div>
 
-  // Initialize everything
-  createStarfield();
-  createParticles();
-  updateInfo();
-  
-  // Update time every second
-  setInterval(updateInfo, 1000);
+                <div class="search-results-info" id="searchResults">
+                    Showing all domains
+                </div>
+            </section>
 
-  // Redirect after animation completes
-  setTimeout(() => {
-    // Add fade out effect before redirect
-    document.body.style.transition = 'opacity 0.5s ease-out';
-    document.body.style.opacity = '0';
-    
-    setTimeout(() => {
-      window.location.href = "https://harys.is-a.dev/";
-    }, 500);
-  }, 7000);
+            <section class="domains-section" id="domains">
+                <h2 class="section-title">📋 Explore Our Domain Collection</h2>
+                <div class="domains-grid" id="domainsGrid">
+                    <!-- Domains will be populated by JavaScript -->
+                </div>
+                <div class="no-results" id="noResults" style="display: none;">
+                    <h3>🔍 No domains found</h3>
+                    <p>Try adjusting your search terms or filters</p>
+                    <button class="btn btn-secondary" onclick="clearAllFilters()">Clear All Filters</button>
+                </div>
+            </section>
+        </div>
+    </main>
 
-  // Add mouse interaction effects
-  document.addEventListener('mousemove', (e) => {
-    const container = document.querySelector('.container');
-    const rect = container.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    
-    container.style.transform = `perspective(1000px) rotateY(${x * 0.05}deg) rotateX(${-y * 0.05}deg)`;
-  });
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2025 Project by <a href="https://harys.is-a.dev/" target="_blank" class="external-link" style="color: var(--accent-color);">harys722</a>. | All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  document.addEventListener('mouseleave', () => {
-    const container = document.querySelector('.container');
-    container.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
-  });
-</script>
+    <!-- Scripts -->
+    <script>
+        // Domains data for Free Domains website
+        const domainsData = [
+            {
+                name: "is-a.dev",
+                url: "https://www.is-a.dev/",
+                description: "Grab your own sweet-looking '.is-a.dev' subdomain.",
+                repo: "is-a-dev/register",
+                available: true
+            },
+            {
+                name: "js.org",
+                url: "https://js.org/",
+                description: "Dedicated to JavaScript and its awesome community since 2015",
+                repo: "js-org/js.org",
+                available: true
+            },
+            {
+                name: "Open Domains",
+                url: "https://open-domains.net",
+                description: "Free subdomains for personal sites, open-source projects, and more. Offers is-cool.dev, is-a-fullstack.dev, is-local.org, is-not-a.dev, and localplayer.dev.",
+                repo: "open-domains/register",
+                available: true
+            },
+            {
+                name: "Domains Project",
+                url: "https://getyourfree.space/",
+                description: "Free developer subdomains under owns.it.com, with more domains coming soon.",
+                repo: "domainsproject/register",
+                available: true
+            },
+            {
+                name: "DigitalPlat FreeDomain",
+                url: "https://domain.digitalplat.org/",
+                description: "DigitalPlat FreeDomain: Free Domain For Everyone. We offers .DPDNS.ORG, .US.KG, .QZZ.IO and .XX.KG domain extensions.",
+                repo: "DigitalPlatDev/FreeDomain",
+                available: true
+            },
+            {
+                name: "Open Host",
+                url: "https://registry.openhost.uk/",
+                description: "A free subdomain service offering subdomains on prvcy.page, 16-b.it, 32-b.it, 64-b.it, pride.moe and pride.ngo.",
+                repo: null,
+                available: true
+            },
+            {
+                name: "SubFree Project",
+                url: "https://now-is.online/",
+                description: "SubFree is a free and simple subdomain service inspired by is-a.dev designed for developers, creators, and builders who want custom subdomains.",
+                repo: "rubahilang/SubFree-Project",
+                available: true
+            },
+            {
+                name: "foo.ng",
+                url: "https://foo.ng/",
+                description: "Free foo.ng subdomains for everyone.",
+                repo: "Pokymon/foo.ng",
+                available: true
+            },
+            {
+                name: "Is-Cool-Me",
+                url: "https://is.epic.me",
+                description: "Free subdomains for personal sites, open-source projects, and more, offering subdomains on is-epic.me and is-awsm.tech.",
+                repo: "is-cool-me/register",
+                available: true
+            },
+            {
+                name: "is-a-good.dev",
+                url: "https://is-a-good.dev/",
+                description: "Register for your is-a-good.dev domain!",
+                repo: "is-a-good-dev/register",
+                available: true
+            },
+            {
+                name: "is-truly-a.pro",
+                url: "https://is-truly-a.pro/",
+                description: "Free is-truly-a.pro subdomains, available for everyone!",
+                repo: "is-truly-a-pro/register",
+                available: true
+            },
+            {
+                name: "is-not.cool",
+                url: "https://is-not.cool/",
+                description: "Get your own 'is-not.cool' subdomain!",
+                repo: "is-not-cool/registration",
+                available: true
+            },
+            {
+                name: "is-a.shop",
+                url: "https://is-a.shop/",
+                description: "Get is-a.shop subdomain for your shop.",
+                repo: "is-a-shop/register",
+                available: true
+            },
+            {
+                name: "is-cod.in",
+                url: "https://is-cod.in/",
+                description: "Get your website a professional touch with a free is-cod.in domain!",
+                repo: "is-cod-in/register",
+                available: true
+            },
+            {
+                name: "thedev.id",
+                url: "https://thedev.id/",
+                description: "An identity for developers on the web.",
+                repo: "thedev-id/thedev.id",
+                available: true
+            },
+            {
+                name: "thedev.me",
+                url: "https://thedev.me/",
+                description: "Get your free '{name}.thedev.me' domain.",
+                repo: "thedev-me/register",
+                available: true
+            },
+            {
+                name: "cluster.ws & wip.la",
+                url: "https://cluster.ws/",
+                description: "Get a cluster.ws & wip.la domain for free and instantly",
+                repo: "Olivr/free-domain",
+                available: true
+            },
+            {
+                name: "js.cool",
+                url: "https://js.cool/",
+                description: "Provide free subdomains for Chinese open source projects (since August 2020), now support Vercel!",
+                repo: "willin/domain",
+                available: true
+            },
+            {
+                name: "ngo.us",
+                url: "https://nic.ngo.us/",
+                description: "Free subdomains exclusively for nonprofits, nongovernmental organizations (NGOs) and initiatives.",
+                repo: "ngo-us/registry",
+                available: true
+            },
+            {
+                name: "pp.ua",
+                url: "https://pp.ua/",
+                description: "Free pp.ua subdomains.",
+                repo: null,
+                available: true
+            },
+            {
+                name: "part-of.my.id",
+                url: "https://part-of.my.id/",
+                description: "Your own personal id for your website.",
+                repo: "partofmyid/register",
+                available: true
+            },
+            {
+                name: "lgbt.sh",
+                url: "https://lgbt.sh/",
+                description: "Free lgbt.sh sub-domain registration service.",
+                repo: "lgbt-sh/lgbt-sh",
+                available: true
+            },
+            {
+                name: "zone.id",
+                url: "https://zone.id/",
+                description: "Zone.ID is a premium subdomain provider as an alternative to the traditional .id TLD.",
+                repo: null,
+                available: true
+            },
+            {
+                name: "nyc.mn",
+                url: "https://dot.nyc.mn/",
+                description: "Stand out in the digital world with a .NYC.mn domain, crafted to showcase your unique connection to New York City.",
+                repo: null,
+                available: false
+            },
+            {
+                name: "is-an.app",
+                url: "https://is-an.app/",
+                description: "🌐 DNS configuration for some of my domains. (Not available anymore)",
+                repo: "tarampampam/free-domains",
+                available: false
+            },
+            {
+                name: "possibly-is.gay",
+                url: "https://possibly-is.gay/",
+                description: "Self-service possibly-is.gay subdomain registration.",
+                repo: "possibly-is-gay/possibly-is-gay",
+                available: false
+            },
+            {
+                name: "is-a.co",
+                url: "https://is-a.co/",
+                description: "🌐 Grab your own subdomain for free Follow the steps listed below to get your own subdomain!",
+                repo: "PythonicBoat/is-a.co",
+                available: false
+            },
+            {
+                name: "withcoding.me",
+                url: "http://withcoding.me/",
+                description: "Free subdomain for everyone.",
+                repo: "JastinXyz/withcoding.me",
+                available: false
+            },
+            {
+                name: "is-amaz.ing",
+                url: "https://is-amaz.ing",
+                description: "Register your is-amaz.ing project domain here!",
+                repo: "is-amazing/register",
+                available: false
+            },
+            {
+                name: "tilde.tk",
+                url: "https://tilde.tk/",
+                description: "In need of a cool subdomain? And want it to be your own UNIX home directory? Then tilde.tk (~.tk) is right for you",
+                repo: "youngchief-btw/tilde.tk",
+                available: false
+            },
+            {
+                name: "merahputih.moe",
+                url: "https://Merahputih.moe/",
+                description: "Are you weeb developer looking for free webspace to host your project? Get free subdomain merahputih.moe UwU",
+                repo: "ScathachGrip/merahputih.moe",
+                available: false
+            }
+        ];
 
+        // Export for use in homepage
+        if (typeof module !== 'undefined' && module.exports) {
+            module.exports = domainsData;
+        }
+
+        // Global variables
+        let filteredDomains = [...domainsData];
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+        let currentLink = null;
+
+        // Language to icon mapping
+        const languageIcons = {
+            'JavaScript': { icon: '📜', color: '#f7df1e' },
+            'Python': { icon: '🐍', color: '#3776ab' },
+            'HTML': { icon: '📄', color: '#e34f26' },
+            'CSS': { icon: '🎨', color: '#264de4' },
+            'TypeScript': { icon: '🔷', color: '#3178c6' },
+            'Ruby': { icon: '💎', color: '#cc342d' },
+            'Java': { icon: '☕', color: '#b07219' },
+            'PHP': { icon: '🐘', color: '#777bb4' },
+            'Go': { icon: '🐹', color: '#00add8' },
+            'C++': { icon: '🛠️', color: '#00599c' },
+            'C#': { icon: '♯', color: '#239120' },
+            'Rust': { icon: '🦀', color: '#dea584' },
+            'default': { icon: '💻', color: 'var(--text-tertiary)' }
+        };
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearch');
+        const domainsGrid = document.getElementById('domainsGrid');
+        const searchResults = document.getElementById('searchResults');
+        const noResults = document.getElementById('noResults');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const scrollTop = document.getElementById('scrollTop');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const customContextMenu = document.getElementById('customContextMenu');
+        const linkConfirmDialog = document.getElementById('linkConfirmDialog');
+        const confirmLinkUrl = document.getElementById('confirmLinkUrl');
+        const confirmLinkBtn = document.getElementById('confirmLink');
+        const cancelLinkBtn = document.getElementById('cancelLink');
+
+        // Theme Management
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Scroll Handlers
+        function handleScroll() {
+            const scrollPosition = window.scrollY;
+            if (scrollPosition > 100) {
+                themeToggle.classList.add('scrolled');
+                scrollTop.classList.add('visible');
+            } else {
+                themeToggle.classList.remove('scrolled');
+                scrollTop.classList.remove('visible');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Loading Screen
+        function hideLoadingScreen() {
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 5000); // 5 seconds
+        }
+
+        // Custom Context Menu
+        function showContextMenu(event, linkElement) {
+            event.preventDefault();
+            customContextMenu.style.display = 'block';
+            const x = event.clientX;
+            const y = event.clientY;
+            customContextMenu.style.left = `${x}px`;
+            customContextMenu.style.top = `${y}px`;
+            currentLink = linkElement;
+        }
+
+        function hideContextMenu() {
+            customContextMenu.style.display = 'none';
+            currentLink = null;
+        }
+
+        function handleContextMenuAction(action) {
+            if (!currentLink) return;
+            const url = currentLink.getAttribute('href');
+            switch (action) {
+                case 'copy':
+                    navigator.clipboard.writeText(url);
+                    alert('Link copied to clipboard!');
+                    break;
+                case 'new-tab':
+                    window.open(url, '_blank');
+                    break;
+                case 'private-tab':
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                    break;
+            }
+            hideContextMenu();
+        }
+
+        // Link Confirmation
+        function showLinkConfirmation(url) {
+            confirmLinkUrl.textContent = url;
+            linkConfirmDialog.style.display = 'block';
+            currentLink = url;
+        }
+
+        function hideLinkConfirmation() {
+            linkConfirmDialog.style.display = 'none';
+            currentLink = null;
+        }
+
+        // Event Listeners
+        function initializeEventListeners() {
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+            // Scroll to top
+            scrollTop.addEventListener('click', scrollToTop);
+            window.addEventListener('scroll', handleScroll);
+            
+            // Search functionality
+            searchInput.addEventListener('input', debouncedSearch);
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                }
+            });
+            
+            // Clear search
+            clearSearchBtn.addEventListener('click', clearSearch);
+            
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    setFilter(filter);
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // External link confirmation
+            document.querySelectorAll('.external-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const url = this.getAttribute('href');
+                    showLinkConfirmation(url);
+                });
+            });
+
+            // Context menu for links
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('dblclick', function(e) {
+                    if (this.classList.contains('external-link') || this.classList.contains('domain-name') || this.classList.contains('repo-link')) {
+                        showContextMenu(e, this);
+                    }
+                });
+            });
+
+            // Context menu actions
+            customContextMenu.addEventListener('click', function(e) {
+                const action = e.target.getAttribute('data-action');
+                if (action) {
+                    handleContextMenuAction(action);
+                }
+            });
+
+            // Prevent default context menu
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            // Hide context menu on click outside
+            document.addEventListener('click', function(e) {
+                if (!customContextMenu.contains(e.target)) {
+                    hideContextMenu();
+                }
+            });
+
+            // Link confirmation buttons
+            confirmLinkBtn.addEventListener('click', function() {
+                if (currentLink) {
+                    window.open(currentLink, '_blank');
+                }
+                hideLinkConfirmation();
+            });
+
+            cancelLinkBtn.addEventListener('click', hideLinkConfirmation);
+
+            // Prevent dragstart
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl/Cmd + K or / to focus search
+                if (((e.ctrlKey || e.metaKey) && e.key === 'k') || e.key === '/') {
+                    e.preventDefault();
+                    searchInput.focus();
+                    searchInput.select();
+                }
+                
+                // Escape to clear search or close dialogs
+                if (e.key === 'Escape') {
+                    if (document.activeElement === searchInput) {
+                        clearSearch();
+                    }
+                    hideContextMenu();
+                    hideLinkConfirmation();
+                }
+            });
+
+            // Search placeholder
+            searchInput.addEventListener('focus', function() {
+                if (!this.value) {
+                    this.placeholder = 'Discover domains... (Press Esc to clear)';
+                }
+            });
+
+            searchInput.addEventListener('blur', function() {
+                this.placeholder = 'Discover your ideal domain...';
+            });
+        }
+
+        // Search functionality
+        function handleSearch(e) {
+            currentSearchTerm = e.target.value.toLowerCase().trim();
+            clearSearchBtn.classList.toggle('visible', currentSearchTerm.length > 0);
+            applyFilters();
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            currentSearchTerm = '';
+            clearSearchBtn.classList.remove('visible');
+            applyFilters();
+            searchInput.focus();
+        }
+
+        // Filter functionality
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
+            });
+            applyFilters();
+        }
+
+        function applyFilters() {
+            filteredDomains = domainsData.filter(domain => {
+                const matchesSearch = !currentSearchTerm || 
+                    domain.name.toLowerCase().includes(currentSearchTerm) ||
+                    domain.description.toLowerCase().includes(currentSearchTerm);
+                
+                let matchesFilter = true;
+                switch (currentFilter) {
+                    case 'available':
+                        matchesFilter = domain.available;
+                        break;
+                    case 'unavailable':
+                        matchesFilter = !domain.available;
+                        break;
+                    case 'github':
+                        matchesFilter = domain.repo !== null;
+                        break;
+                    case 'all':
+                    default:
+                        matchesFilter = true;
+                }
+                
+                return matchesSearch && matchesFilter;
+            });
+            
+            updateSearchResults();
+            renderDomains();
+        }
+
+        function updateSearchResults() {
+            const total = domainsData.length;
+            const filtered = filteredDomains.length;
+            
+            let message = '';
+            if (currentSearchTerm && currentFilter !== 'all') {
+                message = `Found ${filtered} domain${filtered !== 1 ? 's' : ''} matching "${currentSearchTerm}" in ${getFilterLabel(currentFilter)}`;
+            } else if (currentSearchTerm) {
+                message = `Found ${filtered} domain${filtered !== 1 ? 's' : ''} matching "${currentSearchTerm}"`;
+            } else if (currentFilter !== 'all') {
+                message = `Showing ${filtered} ${getFilterLabel(currentFilter)} domain${filtered !== 1 ? 's' : ''}`;
+            } else {
+                message = `Showing all ${total} domains`;
+            }
+            
+            searchResults.textContent = message;
+        }
+
+        function getFilterLabel(filter) {
+            const labels = {
+                'available': 'available',
+                'unavailable': 'unavailable',
+                'github': 'GitHub-linked',
+                'all': 'all'
+            };
+            return labels[filter] || 'all';
+        }
+
+        function clearAllFilters() {
+            searchInput.value = '';
+            currentSearchTerm = '';
+            currentFilter = 'all';
+            clearSearchBtn.classList.remove('visible');
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-filter') === 'all');
+            });
+            applyFilters();
+            searchInput.focus();
+        }
+
+        // Domain rendering
+        function renderDomains() {
+            if (filteredDomains.length === 0) {
+                domainsGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            domainsGrid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            const domainsHTML = filteredDomains.map(domain => createDomainCard(domain)).join('');
+            domainsGrid.innerHTML = domainsHTML;
+            
+            // Add fade-in animation
+            setTimeout(() => {
+                document.querySelectorAll('.domain-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('fade-in');
+                    }, index * 50);
+                });
+            }, 10);
+        }
+
+        function createDomainCard(domain) {
+            const highlightedName = highlightText(domain.name, currentSearchTerm);
+            const highlightedDescription = highlightText(domain.description, currentSearchTerm);
+            
+            return `
+                <div class="domain-card">
+                    <div class="domain-header">
+                        <a href="${domain.url}" target="_blank" class="domain-name external-link">
+                            ${highlightedName}
+                            <span style="font-size: 0.8em;">🔗</span>
+                        </a>
+                        <span class="availability-badge ${domain.available ? 'available' : 'unavailable'}">
+                            ${domain.available ? '✅ Available' : '❌ Unavailable'}
+                        </span>
+                    </div>
+                    <p class="domain-description">${highlightedDescription}</p>
+                    <div class="domain-footer">
+                        ${domain.repo ? `
+                            <a href="https://github.com/${domain.repo}" target="_blank" class="repo-link external-link">
+                                <svg class="github-icon" viewBox="0 0 24 24">
+                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                                </svg>
+                                ${domain.repo}
+                            </a>
+                            <div class="github-stats" id="stats-${domain.repo.replace('/', '-')}">
+                                <div class="github-stat">
+                                    <img src="https://img.shields.io/github/stars/${domain.repo}?style=flat-square&color=var(--accent-color)" alt="Stars">
+                                </div>
+                                <div class="github-stat">
+                                    <img src="https://img.shields.io/github/forks/${domain.repo}?style=flat-square&color=var(--accent-color)" alt="Forks">
+                                </div>
+                            </div>
+                        ` : `
+                            <span class="repo-link" style="color: var(--text-tertiary);">
+                                📝 No GitHub repository
+                            </span>
+                            <div></div>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        function highlightText(text, searchTerm) {
+            if (!searchTerm) return text;
+            const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, 'gi');
+            return text.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Utility functions
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Performance optimization
+        const debouncedSearch = debounce(handleSearch, 300);
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            renderDomains();
+            initializeEventListeners();
+            hideLoadingScreen();
+        });
+
+        // Error handling for failed network requests
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error);
+        });
+    </script>
 </body>
 </html>
