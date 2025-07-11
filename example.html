@@ -807,7 +807,7 @@
   </head>
 
   <body>
-    <div class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">📋</div>
+    <div class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">➝</div>
     
     <div class="controls">
       <div class="control-toggle theme-toggle" onclick="toggleTheme()" title="Toggle Theme"></div>
@@ -815,7 +815,7 @@
 
     <div class="app">
       <aside class="sidebar" id="sidebar">
-        <button class="sidebar-hide-btn" onclick="toggleSidebar()" title="Hide Sidebar">←</button>
+        <button class="sidebar-hide-btn" onclick="toggleSidebar()" title="Hide Sidebar">⤶</button>
         
         <div class="app-name-link">
           <h1 class="app-name">
@@ -867,6 +867,30 @@
         headerIds: true,
         headerPrefix: ''
       });
+
+      // Debounce function to limit scroll events
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Check if URL is external
+      function isExternalLink(url) {
+        try {
+          const link = new URL(url, window.location.origin);
+          return link.hostname !== window.location.hostname;
+        } catch (e) {
+          // If URL parsing fails, assume it's an internal link
+          return false;
+        }
+      }
 
       // Initialize the application
       document.addEventListener('DOMContentLoaded', function() {
@@ -1032,6 +1056,7 @@
       function processContent() {
         const content = document.getElementById('markdown-content');
         
+        // Add IDs to headings
         const headings = content.querySelectorAll('h1, h2, h3');
         headings.forEach(heading => {
           if (!heading.id) {
@@ -1039,6 +1064,7 @@
           }
         });
         
+        // Add click handlers to images
         const images = content.querySelectorAll('img');
         images.forEach(img => {
           img.style.maxWidth = '100%';
@@ -1047,16 +1073,24 @@
           img.addEventListener('click', () => openImageModal(img.src));
         });
         
-        const links = content.querySelectorAll('a[href^="http"], a[href^="#"]');
+        // Process all links to handle external links
+        const links = content.querySelectorAll('a');
         links.forEach(link => {
-          if (link.href.startsWith('http')) {
-            link.target = '_blank';
-            link.rel = 'noopener noreferrer';
-          } else if (link.href.startsWith('#')) {
-            link.onclick = function(e) {
-              e.preventDefault();
-              scrollToHeading(link.href.substring(1));
-            };
+          const href = link.getAttribute('href');
+          if (href) {
+            // Handle internal hash links
+            if (href.startsWith('#')) {
+              link.onclick = function(e) {
+                e.preventDefault();
+                const id = href.substring(1);
+                scrollToHeading(id);
+              };
+            }
+            // Handle external links
+            else if (isExternalLink(href)) {
+              link.setAttribute('target', '_blank');
+              link.setAttribute('rel', 'noopener noreferrer');
+            }
           }
         });
       }
@@ -1122,7 +1156,9 @@
 
       // Scroll to heading
       function scrollToHeading(id) {
-        const element = document.getElementById(id);
+        // Decode the ID to handle special characters
+        const decodedId = decodeURIComponent(id);
+        const element = document.getElementById(decodedId);
         if (element) {
           const offset = 80;
           const elementPosition = element.offsetTop;
@@ -1137,23 +1173,16 @@
             updateActiveTOCItem();
           }, 100);
           
-          history.pushState(null, null, `#${id}`);
+          history.pushState(null, null, `#${decodedId}`);
+        } else {
+          console.warn(`Element with ID "${decodedId}" not found`);
         }
       }
 
       // Setup scroll listener for TOC
       function setupScrollListener() {
-        let ticking = false;
-        
-        window.addEventListener('scroll', function() {
-          if (!ticking) {
-            requestAnimationFrame(function() {
-              updateActiveTOCItem();
-              ticking = false;
-            });
-            ticking = true;
-          }
-        });
+        const debouncedUpdate = debounce(updateActiveTOCItem, 100);
+        window.addEventListener('scroll', debouncedUpdate);
       }
 
       // Update active TOC item
@@ -1277,17 +1306,53 @@
         }
       });
 
-      // Smooth scrolling for anchor links
-      document.addEventListener('click', function(e) {
-        if (e.target.tagName === 'A' && e.target.getAttribute('href')) {
-          const href = e.target.getAttribute('href');
-          if (href.startsWith('#') && href.length > 1) {
-            e.preventDefault();
-            const id = href.substring(1);
-            scrollToHeading(id);
-          }
-        }
-      });
+        // Generate Table of Contents
+function generateTOC() {
+  const tocList = document.getElementById('toc-list');
+  const headings = document.querySelectorAll('#markdown-content h1, #markdown-content h2, #markdown-content h3, #markdown-content h4, #markdown-content h5, #markdown-content h6');
+  
+  tocList.innerHTML = '';
+  
+  headings.forEach((heading, index) => {
+    const level = parseInt(heading.tagName.charAt(1));
+    const text = heading.textContent.trim();
+    const id = `heading-${index}`;
+    
+    // Add ID to heading for linking
+    heading.id = id;
+    
+    // Create TOC item
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `#${id}`;
+    a.textContent = text;
+    a.className = `toc-h${level}`;
+    
+    // Add click handler for smooth scrolling
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      heading.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+}
+
+// Update active navigation
+function updateActiveNav() {
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+  });
+  
+  // Add active class to current page (this is a simple implementation)
+  const currentPath = window.location.hash || '#/';
+  const activeLink = document.querySelector(`a[href="${currentPath}"]`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
+}
 
       // Utility functions
       window.githubGuides = {
