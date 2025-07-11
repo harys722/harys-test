@@ -1,1570 +1,1301 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- HTML Meta Tags -->
-    <title>Free Domains - Curated Collection</title>
-    <meta name="description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
+    <title>GitHub Guides</title>
+    <meta name="description" content="Learn more about GitHub & GitHub pages as a developer.">
 
     <!-- Google / Search Engine Tags -->
-    <meta itemprop="name" content="Free Domains - Curated Collection">
-    <meta itemprop="description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
-    <meta itemprop="image" content="https://free-domains.harys.is-a.dev/images/banner.png">
-
-    <!-- Discord Meta Tags -->
-    <meta name="theme-color" content="#ADD8E6" />
-    <meta property="og:title" content="Free Domains - Curated Collection" />
-    <meta property="og:description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures." />
-    <meta property="og:image" content="https://free-domains.harys.is-a.dev/images/banner.png" />
+    <meta itemprop="name" content="GitHub Guides">
+    <meta itemprop="description" content="Learn more about GitHub & GitHub pages as a developer.">
+    <meta itemprop="image" content="https://harys722.github.io/github-guides/src/media/logo.png">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://free-domains.harys.is-a.dev/">
+    <meta property="og:url" content="https://harys722.github.io/github-guides/">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Free Domains - Curated Collection">
-    <meta property="og:description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
-    <meta property="og:image" content="https://free-domains.harys.is-a.dev/images/banner.png">
+    <meta property="og:title" content="GitHub Guides">
+    <meta property="og:description" content="Learn more about GitHub & GitHub pages as a developer.">
+    <meta property="og:image" content="https://harys722.github.io/github-guides/src/media/logo.png">
 
-    <!-- Twitter / X Meta Tags -->
+    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Free Domains - Curated Collection">
-    <meta name="twitter:description" content="A curated collection of free subdomains ideal for personal websites, open-source projects, portfolio showcases, and innovative online ventures.">
-    <meta name="twitter:image" content="https://free-domains.harys.is-a.dev/images/banner.png">
+    <meta name="twitter:title" content="GitHub Guides">
+    <meta name="twitter:description" content="Learn more about GitHub & GitHub pages as a developer.">
+    <meta name="twitter:image" content="https://harys722.github.io/github-guides/src/media/logo.png">
 
-    <!-- Links -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    
     <style>
-        :root { 
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-tertiary: #f1f5f9;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-tertiary: #94a3b8;
-            --border-color: #e2e8f0;
-            --accent-color: #3b82f6;
-            --accent-hover: #2563eb;
-            --success-color: #10b981;
-            --danger-color: #ef4444;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-        [data-theme="dark"] {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-tertiary: #334155;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-tertiary: #94a3b8;
-            --border-color: #334155;
-            --accent-color: #60a5fa;
-            --accent-hover: #3b82f6;
-            --success-color: #34d399;
-            --danger-color: #f87171;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none; /* Prevent text selection */
-        }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: default;
-        }
-        /* Custom Cursor for PCs */
-        body {
-            cursor: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%23${encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim().slice(1))}' stroke-width='2'/%3E%3C/svg%3E") 12 12, auto;
-        }
-        a, button, .domain-card:hover, .filter-btn, .btn, .repo-link, .theme-toggle, .scroll-top, .clear-search {
-            cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23${encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--accent-hover').trim().slice(1))}' fill-opacity='0.3' stroke='%23${encodeURIComponent(getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim().slice(1))}' stroke-width='2'/%3E%3C/svg%3E") 16 16, pointer;
-        }
-        /* Prevent dragging */
-        img, a, button, .domain-card, .filter-btn, .btn, .repo-link, .theme-toggle, .scroll-top, .clear-search {
-            -webkit-user-drag: none;
-            user-drag: none;
-        }
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease;
-        }
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        .loader {
-            width: 50px;
-            height: 50px;
-            border: 5px solid var(--accent-color);
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
-        .loading-text {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        /* Custom Context Menu */
-        .custom-context-menu {
-            position: fixed;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 0.5rem 0;
-            box-shadow: var(--shadow-md);
-            z-index: 1000;
-            min-width: 180px;
-        }
-        .context-menu-item {
-            padding: 0.5rem 1rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.2s ease;
-        }
-        .context-menu-item:hover {
-            background: var(--accent-color);
-            color: white;
-        }
-        /* Link Confirmation Dialog */
-        .link-confirm-dialog {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-lg);
-            z-index: 1000;
-            max-width: 400px;
-            width: 90%;
-        }
-        .link-confirm-dialog h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        .link-confirm-dialog p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        .link-confirm-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-        .link-confirm-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .link-confirm-btn.confirm {
-            background: var(--accent-color);
-            color: white;
-        }
-        .link-confirm-btn.cancel {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
-        .link-confirm-btn:hover {
-            transform: translateY(-2px);
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-tertiary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
-            border-radius: 5px;
-            transition: background 0.3s ease;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-hover);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-            border-bottom: 1px solid var(--border-color);
-            padding: 1.5rem 0;
-            z-index: 100;
-            box-shadow: var(--shadow-sm);
-            backdrop-filter: blur(10px);
-        }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-        .logo img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-        }
-        .theme-toggle, .scroll-top {
-            background: none;
-            border: 2px solid var(--border-color);
-            border-radius: 50px;
-            padding: 0.5rem;
-            cursor: pointer;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            position: fixed;
-            z-index: 1000;
-        }
-        .theme-toggle {
-            top: 1rem;
-            right: 1rem;
-        }
-        .theme-toggle.scrolled {
-            top: auto;
-            bottom: 6rem;
-            right: 2rem;
-            box-shadow: var(--shadow-md);
-            background-color: var(--bg-secondary);
-        }
-        .scroll-top {
-            bottom: 2rem;
-            right: 2rem;
-            box-shadow: var(--shadow-md);
-            background-color: var(--bg-secondary);
-            opacity: 0;
-            visibility: hidden;
-        }
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .theme-toggle:hover, .scroll-top:hover {
-            border-color: var(--accent-color);
-            background-color: var(--bg-tertiary);
-            transform: scale(1.1);
-        }
-        /* Hero Section with Animated Emojis */
-        .hero {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            padding: 4rem 0;
-            background: linear-gradient(180deg, var(--bg-secondary), transparent);
-            border-radius: 1rem;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-        .emoji {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: float 15s infinite ease-in-out;
-            pointer-events: none;
-        }
-        .emoji:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
-        .emoji:nth-child(2) { top: 20%; left: 75%; animation-delay: 2s; }
-        .emoji:nth-child(3) { top: 60%; left: 25%; animation-delay: 4s; }
-        .emoji:nth-child(4) { top: 40%; left: 85%; animation-delay: 6s; }
-        .emoji:nth-child(5) { top: 80%; left: 35%; animation-delay: 8s; }
-        .emoji:nth-child(6) { top: 30%; left: 55%; animation-delay: 10s; }
-        .emoji:nth-child(7) { top: 70%; left: 65%; animation-delay: 12s; }
-        .emoji:nth-child(8) { top: 50%; left: 45%; animation-delay: 14s; }
-        @keyframes float {
-            0% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
-            10% { opacity: 0.3; }
-            50% { opacity: 0.5; transform: translateY(-50px) translateX(20px) rotate(10deg); }
-            90% { opacity: 0.3; }
-            100% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
-            color: white;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--accent-hover), var(--accent-color));
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        .btn-secondary {
-            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        .stats {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        .stat-badge {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-        }
-        .stat-badge:hover {
-            background-color: var(--accent-color);
-            color: white;
-            border-color: var(--accent-color);
-            transform: scale(1.05);
-        }
-        /* Search Section */
-        .search-section {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            box-shadow: var(--shadow-md);
-        }
-        .search-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .search-header h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        .search-header p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-        .search-container {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto 1.5rem;
-        }
-        .search-input {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            border: 2px solid var(--border-color);
-            border-radius: 0.75rem;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-        .search-input::placeholder {
-            color: var(--text-tertiary);
-            font-style: italic;
-        }
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-tertiary);
-            font-size: 1.2rem;
-        }
-        .clear-search {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-tertiary);
-            cursor: pointer;
-            font-size: 1.2rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .clear-search.visible {
-            opacity: 1;
-        }
-        .clear-search:hover {
-            color: var(--text-primary);
-        }
-        .filter-options {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 2rem;
-            background-color: var(--bg-primary);
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
-        }
-        .filter-btn:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            transform: scale(1.05);
-        }
-        .filter-btn.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: white;
-        }
-        .search-results-info {
-            text-align: center;
-            margin: 1.5rem 0;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        .no-results {
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
-        }
-        .no-results h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .no-results p {
-            margin-bottom: 1rem;
-        }
-        .highlight {
-            background-color: #fbbf24;
-            color: #92400e;
-            padding: 0.1rem 0.2rem;
-            border-radius: 0.25rem;
-        }
-        [data-theme="dark"] .highlight {
-            background-color: #f59e0b;
-            color: #451a03;
-        }
-        /* Domains List */
-        .domains-section {
-            margin-top: 4rem;
-        }
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: lightblue;
-            margin-bottom: 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, var(--accent-color), #8b5cf6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .domains-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            padding: 1.5rem;
-        }
-        .domain-card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 1.5rem;
-            padding: 1.75rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .domain-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-color);
-        }
-        .domain-card.hidden {
-            display: none;
-        }
-        .domain-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .domain-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s ease;
-        }
-        .domain-name:hover {
-            color: var(--accent-hover);
-        }
-        .availability-badge {
-            padding: 0.5rem 1.25rem;
-            border-radius: 1rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            align-self: flex-start;
-            min-width: 100px;
-            text-align: center;
-        }
-        .available {
-            background-color: #dcfce7;
-            color: #166534;
-        }
-        [data-theme="dark"] .available {
-            background-color: #14532d;
-            color: #bbf7d0;
-        }
-        .unavailable {
-            background-color: #fee2e2;
-            color: #991b1b;
-        }
-        [data-theme="dark"] .unavailable {
-            background-color: #7f1d1d;
-            color: #fecaca;
-        }
-        .domain-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-        .domain-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .repo-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.3s ease;
-        }
-        .repo-link:hover {
-            color: var(--accent-color);
-        }
-        .github-icon {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-        .github-stats {
-            display: flex;
-            gap: 0.75rem;
-            font-size: 0.75rem;
-            color: var(--text-tertiary);
-            flex-wrap: wrap;
-        }
-        .github-stat img {
-            height: 20px;
-            vertical-align: middle;
-        }
-        /* Footer */
-        .footer {
-            background-color: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 2rem 0;
-            margin-top: 4rem;
-            text-align: center;
-        }
-        .footer-content {
-            color: var(--text-secondary);
-        }
-        .footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            .stats {
-                flex-direction: column;
-                align-items: center;
-            }
-            .domain-header {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: flex-start;
-            }
-            .domain-footer {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .search-container {
-                max-width: 100%;
-            }
-            .filter-options {
-                gap: 0.5rem;
-            }
-            .filter-btn {
-                font-size: 0.8rem;
-                padding: 0.4rem 0.8rem;
-            }
-            .domains-grid {
-                grid-template-columns: 1fr;
-            }
-            .theme-toggle.scrolled {
-                bottom: 5rem;
-                right: 1rem;
-            }
-            .scroll-top {
-                bottom: 1rem;
-                right: 1rem;
-            }
-            .emoji {
-                font-size: 1.2rem;
-            }
-        }
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      :root {
+        /* Light theme (Golden sunrise) */
+        --base-color: #B8860B;
+        --base-bg: #FFFBF0;
+        --primary: #FFD700;
+        --success: #ADFF2F;
+        --danger: #FF1493;
+        --warning: #FF6347;
+        --royal: #8A2BE2;
+        --accent: #FFA500;
+        --sidebar-bg: #FFFBF0;
+        --sidebar-border: rgba(184, 134, 11, 0.1);
+        --text-color: #333333;
+        --sidebar-text-color: #B8860B;
+        --text-light: rgba(51, 51, 51, 0.7);
+        --blockquote-bg: rgba(255, 215, 0, 0.15);
+        --blockquote-border: #FFD700;
+        --code-bg: rgba(255, 215, 0, 0.1);
+        --code-color: #B8860B;
+        --pre-bg: #FFFBF0;
+        --pre-border: rgba(255, 215, 0, 0.2);
+        --scrollbar-track: #F5F5DC;
+        --scrollbar-thumb: #FFD700;
+        --scrollbar-thumb-hover: #FFA500;
+        --logo-url: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23B8860B"><path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>');
+        --button-bg: rgba(255, 215, 0, 0.9);
+        --button-text: #8B4513;
+        --button-hover: rgba(255, 165, 0, 0.95);
+      }
+
+      [data-theme="dark"] {
+        /* Dark theme (Midnight gold) */
+        --base-color: #FFD700;
+        --base-bg: #0A0A0A;
+        --primary: #FFFF00;
+        --success: #00FF7F;
+        --danger: #FF0080;
+        --warning: #FF4500;
+        --royal: #9370DB;
+        --accent: #FFA500;
+        --sidebar-bg: #111111;
+        --sidebar-border: rgba(255, 215, 0, 0.2);
+        --text-color: #FFFFFF;
+        --sidebar-text-color: #FFD700;
+        --text-light: rgba(255, 255, 255, 0.7);
+        --blockquote-bg: rgba(255, 255, 0, 0.1);
+        --blockquote-border: #FFFF00;
+        --code-bg: rgba(255, 255, 0, 0.1);
+        --code-color: #FFD700;
+        --pre-bg: #1a1a1a;
+        --pre-border: rgba(255, 255, 0, 0.3);
+        --scrollbar-track: #1a1a1a;
+        --scrollbar-thumb: #FFD700;
+        --scrollbar-thumb-hover: #FFFF00;
+        --logo-url: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>');
+        --button-bg: rgba(255, 215, 0, 0.9);
+        --button-text: #000000;
+        --button-hover: rgba(255, 255, 0, 0.95);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+        font-size: 15px;
+        color: var(--text-color);
+        background-color: var(--base-bg);
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        transition: all 0.25s ease;
+      }
+
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 300px;
+        background-color: var(--sidebar-bg);
+        border-right: 1px solid var(--sidebar-border);
+        overflow-y: auto;
+        z-index: 20;
+        transition: all 0.25s ease;
+        padding: 0;
+      }
+
+      .sidebar.hidden {
+        transform: translateX(-300px);
+      }
+
+      .sidebar-nav {
+        padding: 40px 0 40px 25px;
+        margin: 0;
+      }
+
+      .sidebar-nav > ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .sidebar-nav li {
+        margin: 0;
+        position: relative;
+      }
+
+      .sidebar-nav a {
+        border-bottom: none;
+        color: var(--sidebar-text-color);
+        display: block;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 25px 10px 0;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+        transition: all 0.25s ease;
+      }
+
+      .sidebar-nav a:hover {
+        color: var(--primary);
+        text-decoration: underline;
+      }
+
+      .sidebar-nav a.active {
+        color: var(--primary);
+        font-weight: 600;
+        border-right: 2px solid var(--primary);
+      }
+
+      .toc-title {
+        font-weight: 600;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--sidebar-text-color);
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .toc-h1 {
+        margin-left: 0;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 1.4;
+        margin-top: 12px;
+        margin-bottom: 8px;
+      }
+
+      .toc-h2 {
+        margin-left: 20px;
+        font-size: 12px;
+        line-height: 1.3;
+        margin-top: 6px;
+        margin-bottom: 4px;
+      }
+
+      .toc-h3 {
+        margin-left: 40px;
+        font-size: 11px;
+        line-height: 1.3;
+        margin-top: 4px;
+        margin-bottom: 2px;
+      }
+
+      .app-name {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin: 0 0 10px 0;
+        color: var(--sidebar-text-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .app-name a {
+        color: var(--sidebar-text-color);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .app-name-link {
+        display: block;
+        padding: 40px 25px 10px 25px;
+        border-bottom: 1px solid var(--sidebar-border);
+        margin-bottom: 40px;
+      }
+
+      .logo {
+        width: 32px;
+        height: 32px;
+        background-image: var(--logo-url);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        flex-shrink: 0;
+      }
+
+      .content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 300px;
+        overflow-y: auto;
+        transition: left 0.25s ease;
+      }
+
+      .content.expanded {
+        left: 0;
+      }
+
+      .markdown-section {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 30px 15px 40px 15px;
+        position: relative;
+      }
+
+      .controls {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .control-toggle {
+        width: 40px;
+        height: 40px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+        font-weight: 600;
+      }
+
+      .theme-toggle::after {
+        content: '☀️';
+      }
+
+      [data-theme="dark"] .theme-toggle::after {
+        content: '🌙';
+      }
+
+      .control-toggle:hover {
+        background: var(--button-hover);
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      .control-toggle:active {
+        transform: scale(0.95);
+      }
+
+      .sidebar-toggle {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1000;
+        width: 40px;
+        height: 40px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        font-weight: 600;
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.8);
+      }
+
+      .sidebar-toggle.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+      }
+
+      .sidebar-toggle:hover {
+        background: var(--button-hover);
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      .sidebar-toggle:active {
+        transform: scale(0.95);
+      }
+
+      .sidebar-hide-btn {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        font-weight: 600;
+        z-index: 25;
+      }
+
+      .sidebar-hide-btn:hover {
+        background: var(--button-hover);
+        transform: scale(1.1);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .sidebar-hide-btn:active {
+        transform: scale(0.9);
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        color: var(--text-color);
+        font-weight: 600;
+        line-height: 1.25;
+        margin: 0 0 1rem 0;
+        scroll-margin-top: 70px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin: 0 0 1rem 0;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 1px solid var(--sidebar-border);
+        margin: 2rem 0 1rem 0;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem 0;
+      }
+
+      h4 {
+        font-size: 1.25rem;
+      }
+
+      h5 {
+        font-size: 1rem;
+      }
+
+      h6 {
+        font-size: 0.875rem;
+        color: var(--text-light);
+      }
+
+      p {
+        margin-bottom: 1rem;
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1rem auto;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: zoom-in;
+      }
+
+      .markdown-section img {
+        max-height: 400px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .markdown-section img[src*="screenshot"],
+      .markdown-section img[src*="banner"],
+      .markdown-section img[width],
+      .markdown-section img[height] {
+        max-height: 300px;
+        max-width: 80%;
+      }
+
+      .image-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .image-modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .image-modal img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .image-modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .image-modal-close:hover {
+        background: var(--button-hover);
+        transform: scale(1.1);
+      }
+
+      a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+
+      a:hover {
+        color: var(--accent);
+        text-decoration: underline;
+      }
+
+      code {
+        background-color: var(--code-bg);
+        border-radius: 3px;
+        color: var(--code-color);
+        font-family: "Roboto Mono", Monaco, courier, monospace;
+        font-size: 0.85rem;
+        margin: 0 2px;
+        padding: 3px 6px;
+        white-space: pre-wrap;
+        font-weight: 500;
+      }
+
+      pre {
+        background-color: var(--pre-bg);
+        border: 1px solid var(--pre-border);
+        border-radius: 6px;
+        font-family: "Roboto Mono", Monaco, courier, monospace;
+        line-height: 1.5rem;
+        margin: 1.2em 0;
+        overflow: auto;
+        padding: 0;
+        word-wrap: normal;
+        position: relative;
+      }
+
+      pre > code {
+        background-color: transparent;
+        border-radius: 0;
+        color: var(--code-color);
+        font-size: 0.85rem;
+        margin: 0;
+        padding: 1.2rem 1.4rem;
+        white-space: pre;
+        display: block;
+        font-weight: 500;
+      }
+
+      .code-container {
+        position: relative;
+        margin: 1.2em 0;
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: var(--primary);
+        color: var(--base-bg);
+        border: none;
+        border-radius: 4px;
+        padding: 4px 8px;
+        font-size: 12px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        font-family: inherit;
+        font-weight: 500;
+      }
+
+      .code-container:hover .copy-button {
+        opacity: 1;
+      }
+
+      .copy-button:hover {
+        background: var(--accent);
+      }
+
+      .copy-button.copied {
+        background: var(--success);
+      }
+
+      blockquote {
+        border-left: 4px solid var(--blockquote-border);
+        color: var(--text-color);
+        margin: 1.5rem 0;
+        padding: 0 1rem;
+        background-color: var(--blockquote-bg);
+        border-radius: 0 4px 4px 0;
+      }
+
+      blockquote p {
+        font-weight: 600;
+        margin-left: 0;
+        color: var(--text-color);
+      }
+
+      blockquote:first-of-type {
+        background-color: rgba(255, 215, 0, 0.2);
+        border-left-color: var(--accent);
+      }
+
+      [data-theme="dark"] blockquote:first-of-type {
+        background-color: rgba(255, 255, 0, 0.15);
+        border-left-color: var(--warning);
+      }
+
+      ul, ol {
+        line-height: 1.6rem;
+        padding-left: 1.5rem;
+        margin: 1rem 0;
+      }
+
+      li {
+        margin: 0.25rem 0;
+        color: var(--text-color);
+      }
+
+      li p {
+        margin: 0.5rem 0;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: block;
+        margin-bottom: 1rem;
+        overflow: auto;
+        width: 100%;
+      }
+
+      table th {
+        background-color: var(--code-bg);
+        border: 1px solid var(--pre-border);
+        font-weight: 600;
+        padding: 6px 13px;
+        color: var(--text-color);
+      }
+
+      table td {
+        border: 1px solid var(--pre-border);
+        padding: 6px 13px;
+        color: var(--text-color);
+      }
+
+      table tr {
+        background-color: var(--base-bg);
+        border-top: 1px solid var(--pre-border);
+      }
+
+      table tr:nth-child(2n) {
+        background-color: var(--code-bg);
+      }
+
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        font-size: 16px;
+        color: var(--text-light);
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--scrollbar-track);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbar-thumb-hover);
+      }
+
+      @media screen and (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-300px);
+        }
+
+        .sidebar.open {
+          transform: translateX(0);
+        }
+
+        .content {
+          left: 0;
+        }
+
+        .markdown-section {
+          padding: 80px 15px 40px 15px;
+        }
+
+        .controls {
+          top: 75px;
+          right: 15px;
+        }
+
+        .control-toggle {
+          width: 35px;
+          height: 35px;
+          font-size: 16px;
+        }
+
+        .sidebar-toggle {
+          width: 35px;
+          height: 35px;
+          font-size: 16px;
+        }
+
+        .sidebar-hide-btn {
+          display: none;
+        }
+
+        .markdown-section img {
+          max-height: 250px;
+        }
+      }
+
+      @media screen and (min-width: 769px) {
+        .sidebar.hidden + .content {
+          left: 0;
+        }
+
+        .sidebar.hidden ~ .sidebar-toggle {
+          opacity: 1;
+          pointer-events: auto;
+          transform: scale(1);
+        }
+      }
+
+      .repo-link {
+        color: var(--text-light);
+        font-size: 12px;
+        text-decoration: none;
+        display: block;
+        margin-top: 10px;
+      }
+
+      .repo-link:hover {
+        color: var(--primary);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      #toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #toc-list li {
+        margin: 0;
+        padding: 0;
+      }
+
+      #toc-list a {
+        display: block;
+        padding: 5px 0;
+        color: var(--sidebar-text-color);
+        text-decoration: none;
+        border-bottom: none;
+        line-height: 1.4;
+        transition: color 0.25s ease;
+      }
+
+      #toc-list a:hover {
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      #toc-list a.active {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      #toc-list .toc-h1 a {
+        font-size: 13px;
+        font-weight: 600;
+        padding: 8px 0;
+      }
+
+      #toc-list .toc-h2 a {
+        font-size: 12px;
+        font-weight: 400;
+        padding: 6px 0;
+      }
+
+      #toc-list .toc-h3 a {
+        font-size: 11px;
+        font-weight: 400;
+        padding: 4px 0;
+      }
     </style>
-</head>
-<body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader"></div>
-        <div class="loading-text">Loading Free Domains...</div>
+  </head>
+
+  <body>
+    <div class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">📋</div>
+    
+    <div class="controls">
+      <div class="control-toggle theme-toggle" onclick="toggleTheme()" title="Toggle Theme"></div>
     </div>
 
-    <!-- Custom Context Menu -->
-    <div class="custom-context-menu" id="customContextMenu" style="display: none;">
-        <div class="context-menu-item" data-action="copy">Copy to clipboard</div>
-        <div class="context-menu-item" data-action="new-tab">Open link in new tab</div>
-        <div class="context-menu-item" data-action="private-tab">Open link in private tab</div>
+    <div class="app">
+      <aside class="sidebar" id="sidebar">
+        <button class="sidebar-hide-btn" onclick="toggleSidebar()" title="Hide Sidebar">←</button>
+        
+        <div class="app-name-link">
+          <h1 class="app-name">
+            <a href="#/" onclick="loadMarkdown('https://raw.githubusercontent.com/harys722/github-guides/main/README.md')">
+              <div class="logo"></div>
+              GitHub Guides
+            </a>
+          </h1>
+          <a href="https://github.com/harys722/github-guides" class="repo-link" target="_blank">
+            📚 harys722/github-guides
+          </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+          <ul>
+            <li><a href="#/" class="active" onclick="loadMarkdown('https://raw.githubusercontent.com/harys722/github-guides/main/README.md')">📖 Home</a></li>
+          </ul>
+          
+          <div id="toc-container">
+            <div class="toc-title">Table of Contents</div>
+            <ul id="toc-list"></ul>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="content" id="content">
+        <div class="markdown-section" id="main">
+          <div class="loading" id="loading">Loading...</div>
+          <div id="markdown-content"></div>
+        </div>
+      </main>
     </div>
 
-    <!-- Link Confirmation Dialog -->
-    <div class="link-confirm-dialog" id="linkConfirmDialog" style="display: none;">
-        <h3>Leaving Free Domains</h3>
-        <p>You are about to visit an external website: <span id="confirmLinkUrl"></span></p>
-        <div class="link-confirm-buttons">
-            <button class="link-confirm-btn cancel" id="cancelLink">Cancel</button>
-            <button class="link-confirm-btn confirm" id="confirmLink">Continue</button>
-        </div>
+    <div class="image-modal" id="imageModal">
+      <button class="image-modal-close" onclick="closeImageModal()">✕</button>
+      <img id="modalImage" src="" alt="Zoomed image">
     </div>
 
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <img src="https://domains.is-a.shop/favicon.ico" alt="Free Domains Logo">
-                    Free Domains
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <span id="themeIcon">🌙</span>
-    </button>
-    <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
-        <span>⬆️</span>
-    </button>
-
-    <main class="main">
-        <div class="container">
-            <section class="hero fade-in" id="startup">
-                <span class="emoji">🌐</span>
-                <span class="emoji">🌀</span>
-                <span class="emoji">✨</span>
-                <span class="emoji">🚀</span>
-                <span class="emoji">💻</span>
-                <span class="emoji">🌍</span>
-                <span class="emoji">🔗</span>
-                <span class="emoji">⚡️</span>
-                <h1>Discover Free Domains</h1>
-                <p>Explore our curated collection of free subdomains perfect for personal websites, open-source projects, portfolios, and innovative online ventures.</p>
-                
-                <div class="hero-actions">
-                    <a href="https://github.com/harys722/free-domains" target="_blank" class="btn btn-primary external-link">
-                        <svg class="github-icon" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                        Star on GitHub
-                    </a>
-                    <a href="#domains" class="btn btn-secondary">
-                        Browse Domains
-                    </a>
-                </div>
-
-                <div class="stats">
-                    <div class="stat-badge">📊 15+ Free Domain Services</div>
-                    <div class="stat-badge">✅ Regularly Updated</div>
-                    <div class="stat-badge">🚀 Open Source</div>
-                </div>
-            </section>
-
-            <!-- Search Section -->
-            <section class="search-section fade-in">
-                <div class="search-header">
-                    <h2>🔍 Find Your Perfect Domain</h2>
-                    <p>Search our catalog by name or description, or filter to discover the ideal domain for your project.</p>
-                </div>
-                
-                <div class="search-container">
-                    <span class="search-icon">🔍</span>
-                    <input 
-                        type="text" 
-                        class="search-input" 
-                        id="searchInput" 
-                        placeholder="Discover your ideal domain..."
-                        autocomplete="off"
-                    >
-                    <button class="clear-search" id="clearSearch" title="Clear search">✕</button>
-                </div>
-
-                <div class="filter-options">
-                    <button class="filter-btn active" data-filter="all">📋 All Domains</button>
-                    <button class="filter-btn" data-filter="available">✅ Available</button>
-                    <button class="filter-btn" data-filter="unavailable">❌ Unavailable</button>
-                    <button class="filter-btn" data-filter="github">📂 Has GitHub</button>
-                </div>
-
-                <div class="search-results-info" id="searchResults">
-                    Showing all domains
-                </div>
-            </section>
-
-            <section class="domains-section" id="domains">
-                <h2 class="section-title">📋 Explore Our Domain Collection</h2>
-                <div class="domains-grid" id="domainsGrid">
-                    <!-- Domains will be populated by JavaScript -->
-                </div>
-                <div class="no-results" id="noResults" style="display: none;">
-                    <h3>🔍 No domains found</h3>
-                    <p>Try adjusting your search terms or filters</p>
-                    <button class="btn btn-secondary" onclick="clearAllFilters()">Clear All Filters</button>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>© 2025 Project by <a href="https://harys.is-a.dev/" target="_blank" class="external-link" style="color: var(--accent-color);">harys722</a>. | All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
     <script>
-        // Domains data for Free Domains website
-        const domainsData = [
-            {
-                name: "is-a.dev",
-                url: "https://www.is-a.dev/",
-                description: "Grab your own sweet-looking '.is-a.dev' subdomain.",
-                repo: "is-a-dev/register",
-                available: true
-            },
-            {
-                name: "js.org",
-                url: "https://js.org/",
-                description: "Dedicated to JavaScript and its awesome community since 2015",
-                repo: "js-org/js.org",
-                available: true
-            },
-            {
-                name: "Open Domains",
-                url: "https://open-domains.net",
-                description: "Free subdomains for personal sites, open-source projects, and more. Offers is-cool.dev, is-a-fullstack.dev, is-local.org, is-not-a.dev, and localplayer.dev.",
-                repo: "open-domains/register",
-                available: true
-            },
-            {
-                name: "Domains Project",
-                url: "https://getyourfree.space/",
-                description: "Free developer subdomains under owns.it.com, with more domains coming soon.",
-                repo: "domainsproject/register",
-                available: true
-            },
-            {
-                name: "DigitalPlat FreeDomain",
-                url: "https://domain.digitalplat.org/",
-                description: "DigitalPlat FreeDomain: Free Domain For Everyone. We offers .DPDNS.ORG, .US.KG, .QZZ.IO and .XX.KG domain extensions.",
-                repo: "DigitalPlatDev/FreeDomain",
-                available: true
-            },
-            {
-                name: "Open Host",
-                url: "https://registry.openhost.uk/",
-                description: "A free subdomain service offering subdomains on prvcy.page, 16-b.it, 32-b.it, 64-b.it, pride.moe and pride.ngo.",
-                repo: null,
-                available: true
-            },
-            {
-                name: "SubFree Project",
-                url: "https://now-is.online/",
-                description: "SubFree is a free and simple subdomain service inspired by is-a.dev designed for developers, creators, and builders who want custom subdomains.",
-                repo: "rubahilang/SubFree-Project",
-                available: true
-            },
-            {
-                name: "foo.ng",
-                url: "https://foo.ng/",
-                description: "Free foo.ng subdomains for everyone.",
-                repo: "Pokymon/foo.ng",
-                available: true
-            },
-            {
-                name: "Is-Cool-Me",
-                url: "https://is.epic.me",
-                description: "Free subdomains for personal sites, open-source projects, and more, offering subdomains on is-epic.me and is-awsm.tech.",
-                repo: "is-cool-me/register",
-                available: true
-            },
-            {
-                name: "is-a-good.dev",
-                url: "https://is-a-good.dev/",
-                description: "Register for your is-a-good.dev domain!",
-                repo: "is-a-good-dev/register",
-                available: true
-            },
-            {
-                name: "is-truly-a.pro",
-                url: "https://is-truly-a.pro/",
-                description: "Free is-truly-a.pro subdomains, available for everyone!",
-                repo: "is-truly-a-pro/register",
-                available: true
-            },
-            {
-                name: "is-not.cool",
-                url: "https://is-not.cool/",
-                description: "Get your own 'is-not.cool' subdomain!",
-                repo: "is-not-cool/registration",
-                available: true
-            },
-            {
-                name: "is-a.shop",
-                url: "https://is-a.shop/",
-                description: "Get is-a.shop subdomain for your shop.",
-                repo: "is-a-shop/register",
-                available: true
-            },
-            {
-                name: "is-cod.in",
-                url: "https://is-cod.in/",
-                description: "Get your website a professional touch with a free is-cod.in domain!",
-                repo: "is-cod-in/register",
-                available: true
-            },
-            {
-                name: "thedev.id",
-                url: "https://thedev.id/",
-                description: "An identity for developers on the web.",
-                repo: "thedev-id/thedev.id",
-                available: true
-            },
-            {
-                name: "thedev.me",
-                url: "https://thedev.me/",
-                description: "Get your free '{name}.thedev.me' domain.",
-                repo: "thedev-me/register",
-                available: true
-            },
-            {
-                name: "cluster.ws & wip.la",
-                url: "https://cluster.ws/",
-                description: "Get a cluster.ws & wip.la domain for free and instantly",
-                repo: "Olivr/free-domain",
-                available: true
-            },
-            {
-                name: "js.cool",
-                url: "https://js.cool/",
-                description: "Provide free subdomains for Chinese open source projects (since August 2020), now support Vercel!",
-                repo: "willin/domain",
-                available: true
-            },
-            {
-                name: "ngo.us",
-                url: "https://nic.ngo.us/",
-                description: "Free subdomains exclusively for nonprofits, nongovernmental organizations (NGOs) and initiatives.",
-                repo: "ngo-us/registry",
-                available: true
-            },
-            {
-                name: "pp.ua",
-                url: "https://pp.ua/",
-                description: "Free pp.ua subdomains.",
-                repo: null,
-                available: true
-            },
-            {
-                name: "part-of.my.id",
-                url: "https://part-of.my.id/",
-                description: "Your own personal id for your website.",
-                repo: "partofmyid/register",
-                available: true
-            },
-            {
-                name: "lgbt.sh",
-                url: "https://lgbt.sh/",
-                description: "Free lgbt.sh sub-domain registration service.",
-                repo: "lgbt-sh/lgbt-sh",
-                available: true
-            },
-            {
-                name: "zone.id",
-                url: "https://zone.id/",
-                description: "Zone.ID is a premium subdomain provider as an alternative to the traditional .id TLD.",
-                repo: null,
-                available: true
-            },
-            {
-                name: "nyc.mn",
-                url: "https://dot.nyc.mn/",
-                description: "Stand out in the digital world with a .NYC.mn domain, crafted to showcase your unique connection to New York City.",
-                repo: null,
-                available: false
-            },
-            {
-                name: "is-an.app",
-                url: "https://is-an.app/",
-                description: "🌐 DNS configuration for some of my domains. (Not available anymore)",
-                repo: "tarampampam/free-domains",
-                available: false
-            },
-            {
-                name: "possibly-is.gay",
-                url: "https://possibly-is.gay/",
-                description: "Self-service possibly-is.gay subdomain registration.",
-                repo: "possibly-is-gay/possibly-is-gay",
-                available: false
-            },
-            {
-                name: "is-a.co",
-                url: "https://is-a.co/",
-                description: "🌐 Grab your own subdomain for free Follow the steps listed below to get your own subdomain!",
-                repo: "PythonicBoat/is-a.co",
-                available: false
-            },
-            {
-                name: "withcoding.me",
-                url: "http://withcoding.me/",
-                description: "Free subdomain for everyone.",
-                repo: "JastinXyz/withcoding.me",
-                available: false
-            },
-            {
-                name: "is-amaz.ing",
-                url: "https://is-amaz.ing",
-                description: "Register your is-amaz.ing project domain here!",
-                repo: "is-amazing/register",
-                available: false
-            },
-            {
-                name: "tilde.tk",
-                url: "https://tilde.tk/",
-                description: "In need of a cool subdomain? And want it to be your own UNIX home directory? Then tilde.tk (~.tk) is right for you",
-                repo: "youngchief-btw/tilde.tk",
-                available: false
-            },
-            {
-                name: "merahputih.moe",
-                url: "https://Merahputih.moe/",
-                description: "Are you weeb developer looking for free webspace to host your project? Get free subdomain merahputih.moe UwU",
-                repo: "ScathachGrip/merahputih.moe",
-                available: false
-            }
-        ];
+      // Global variables
+      let currentMarkdown = '';
+      let tocItems = [];
+      let isDesktop = window.innerWidth > 768;
 
-        // Export for use in homepage
-        if (typeof module !== 'undefined' && module.exports) {
-            module.exports = domainsData;
+      // Initialize marked.js with GFM support
+      marked.setOptions({
+        gfm: true,
+        breaks: true,
+        headerIds: true,
+        headerPrefix: ''
+      });
+
+      // Initialize the application
+      document.addEventListener('DOMContentLoaded', function() {
+        loadTheme();
+        initializeSidebar();
+        loadDefaultContent();
+        setupScrollListener();
+        setupResizeListener();
+        updateSidebarToggleVisibility();
+      });
+
+      // Load saved theme
+      function loadTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        updateLogo(savedTheme);
+      }
+
+      // Update logo based on theme
+      function updateLogo(theme) {
+        const root = document.documentElement;
+        if (theme === 'dark') {
+          root.style.setProperty('--logo-url', 'url("data:image/svg+xml;charset=utf-8,<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 24 24\\" fill=\\"%23FFFFFF\\"><path d=\\"M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z\\"/></svg>")');
+        } else {
+          root.style.setProperty('--logo-url', 'url("data:image/svg+xml;charset=utf-8,<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 24 24\\" fill=\\"%23B8860B\\"><path d=\\"M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z\\"/></svg>")');
         }
+      }
 
-        // Global variables
-        let filteredDomains = [...domainsData];
-        let currentFilter = 'all';
-        let currentSearchTerm = '';
-        let currentLink = null;
+      // Toggle theme
+      function toggleTheme() {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateLogo(newTheme);
+      }
 
-        // Language to icon mapping
-        const languageIcons = {
-            'JavaScript': { icon: '📜', color: '#f7df1e' },
-            'Python': { icon: '🐍', color: '#3776ab' },
-            'HTML': { icon: '📄', color: '#e34f26' },
-            'CSS': { icon: '🎨', color: '#264de4' },
-            'TypeScript': { icon: '🔷', color: '#3178c6' },
-            'Ruby': { icon: '💎', color: '#cc342d' },
-            'Java': { icon: '☕', color: '#b07219' },
-            'PHP': { icon: '🐘', color: '#777bb4' },
-            'Go': { icon: '🐹', color: '#00add8' },
-            'C++': { icon: '🛠️', color: '#00599c' },
-            'C#': { icon: '♯', color: '#239120' },
-            'Rust': { icon: '🦀', color: '#dea584' },
-            'default': { icon: '💻', color: 'var(--text-tertiary)' }
-        };
-
-        // DOM elements
-        const searchInput = document.getElementById('searchInput');
-        const clearSearchBtn = document.getElementById('clearSearch');
-        const domainsGrid = document.getElementById('domainsGrid');
-        const searchResults = document.getElementById('searchResults');
-        const noResults = document.getElementById('noResults');
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const scrollTop = document.getElementById('scrollTop');
-        const loadingScreen = document.getElementById('loadingScreen');
-        const customContextMenu = document.getElementById('customContextMenu');
-        const linkConfirmDialog = document.getElementById('linkConfirmDialog');
-        const confirmLinkUrl = document.getElementById('confirmLinkUrl');
-        const confirmLinkBtn = document.getElementById('confirmLink');
-        const cancelLinkBtn = document.getElementById('cancelLink');
-
-        // Theme Management
-        function initializeTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            updateThemeIcon(savedTheme);
+      // Initialize sidebar state
+      function initializeSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const savedSidebarState = localStorage.getItem('sidebarHidden');
+        
+        if (isDesktop && savedSidebarState === 'true') {
+          sidebar.classList.add('hidden');
+          document.getElementById('content').classList.add('expanded');
         }
+        
+        updateSidebarToggleVisibility();
+      }
 
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateThemeIcon(newTheme);
+      // Toggle sidebar visibility
+      function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('content');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        
+        if (isDesktop) {
+          sidebar.classList.toggle('hidden');
+          content.classList.toggle('expanded');
+          
+          const isHidden = sidebar.classList.contains('hidden');
+          localStorage.setItem('sidebarHidden', isHidden);
+          
+          if (isHidden) {
+            sidebarToggle.classList.add('visible');
+          } else {
+            sidebarToggle.classList.remove('visible');
+          }
+        } else {
+          sidebar.classList.toggle('open');
         }
+      }
 
-        function updateThemeIcon(theme) {
-            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      // Update sidebar toggle visibility
+      function updateSidebarToggleVisibility() {
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        
+        if (isDesktop) {
+          if (sidebar.classList.contains('hidden')) {
+            sidebarToggle.classList.add('visible');
+          } else {
+            sidebarToggle.classList.remove('visible');
+          }
+        } else {
+          sidebarToggle.classList.add('visible');
         }
+      }
 
-        // Scroll Handlers
-        function handleScroll() {
-            const scrollPosition = window.scrollY;
-            if (scrollPosition > 100) {
-                themeToggle.classList.add('scrolled');
-                scrollTop.classList.add('visible');
+      // Setup resize listener
+      function setupResizeListener() {
+        window.addEventListener('resize', function() {
+          const wasDesktop = isDesktop;
+          isDesktop = window.innerWidth > 768;
+          
+          if (wasDesktop !== isDesktop) {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            
+            if (isDesktop) {
+              sidebar.classList.remove('open');
+              const savedSidebarState = localStorage.getItem('sidebarHidden');
+              if (savedSidebarState === 'true') {
+                sidebar.classList.add('hidden');
+                content.classList.add('expanded');
+              }
             } else {
-                themeToggle.classList.remove('scrolled');
-                scrollTop.classList.remove('visible');
-            }
-        }
-
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Loading Screen
-        function hideLoadingScreen() {
-            setTimeout(() => {
-                loadingScreen.classList.add('hidden');
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }, 5000); // 5 seconds
-        }
-
-        // Custom Context Menu
-        function showContextMenu(event, linkElement) {
-            event.preventDefault();
-            customContextMenu.style.display = 'block';
-            const x = event.clientX;
-            const y = event.clientY;
-            customContextMenu.style.left = `${x}px`;
-            customContextMenu.style.top = `${y}px`;
-            currentLink = linkElement;
-        }
-
-        function hideContextMenu() {
-            customContextMenu.style.display = 'none';
-            currentLink = null;
-        }
-
-        function handleContextMenuAction(action) {
-            if (!currentLink) return;
-            const url = currentLink.getAttribute('href');
-            switch (action) {
-                case 'copy':
-                    navigator.clipboard.writeText(url);
-                    alert('Link copied to clipboard!');
-                    break;
-                case 'new-tab':
-                    window.open(url, '_blank');
-                    break;
-                case 'private-tab':
-                    window.open(url, '_blank', 'noopener,noreferrer');
-                    break;
-            }
-            hideContextMenu();
-        }
-
-        // Link Confirmation
-        function showLinkConfirmation(url) {
-            confirmLinkUrl.textContent = url;
-            linkConfirmDialog.style.display = 'block';
-            currentLink = url;
-        }
-
-        function hideLinkConfirmation() {
-            linkConfirmDialog.style.display = 'none';
-            currentLink = null;
-        }
-
-        // Event Listeners
-        function initializeEventListeners() {
-            // Theme toggle
-            themeToggle.addEventListener('click', toggleTheme);
-            // Scroll to top
-            scrollTop.addEventListener('click', scrollToTop);
-            window.addEventListener('scroll', handleScroll);
-            
-            // Search functionality
-            searchInput.addEventListener('input', debouncedSearch);
-            searchInput.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                }
-            });
-            
-            // Clear search
-            clearSearchBtn.addEventListener('click', clearSearch);
-            
-            // Filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const filter = this.getAttribute('data-filter');
-                    setFilter(filter);
-                });
-            });
-            
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // External link confirmation
-            document.querySelectorAll('.external-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const url = this.getAttribute('href');
-                    showLinkConfirmation(url);
-                });
-            });
-
-            // Context menu for links
-            document.querySelectorAll('a').forEach(link => {
-                link.addEventListener('dblclick', function(e) {
-                    if (this.classList.contains('external-link') || this.classList.contains('domain-name') || this.classList.contains('repo-link')) {
-                        showContextMenu(e, this);
-                    }
-                });
-            });
-
-            // Context menu actions
-            customContextMenu.addEventListener('click', function(e) {
-                const action = e.target.getAttribute('data-action');
-                if (action) {
-                    handleContextMenuAction(action);
-                }
-            });
-
-            // Prevent default context menu
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
-
-            // Hide context menu on click outside
-            document.addEventListener('click', function(e) {
-                if (!customContextMenu.contains(e.target)) {
-                    hideContextMenu();
-                }
-            });
-
-            // Link confirmation buttons
-            confirmLinkBtn.addEventListener('click', function() {
-                if (currentLink) {
-                    window.open(currentLink, '_blank');
-                }
-                hideLinkConfirmation();
-            });
-
-            cancelLinkBtn.addEventListener('click', hideLinkConfirmation);
-
-            // Prevent dragstart
-            document.addEventListener('dragstart', function(e) {
-                e.preventDefault();
-            });
-
-            // Keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                // Ctrl/Cmd + K or / to focus search
-                if (((e.ctrlKey || e.metaKey) && e.key === 'k') || e.key === '/') {
-                    e.preventDefault();
-                    searchInput.focus();
-                    searchInput.select();
-                }
-                
-                // Escape to clear search or close dialogs
-                if (e.key === 'Escape') {
-                    if (document.activeElement === searchInput) {
-                        clearSearch();
-                    }
-                    hideContextMenu();
-                    hideLinkConfirmation();
-                }
-            });
-
-            // Search placeholder
-            searchInput.addEventListener('focus', function() {
-                if (!this.value) {
-                    this.placeholder = 'Discover domains... (Press Esc to clear)';
-                }
-            });
-
-            searchInput.addEventListener('blur', function() {
-                this.placeholder = 'Discover your ideal domain...';
-            });
-        }
-
-        // Search functionality
-        function handleSearch(e) {
-            currentSearchTerm = e.target.value.toLowerCase().trim();
-            clearSearchBtn.classList.toggle('visible', currentSearchTerm.length > 0);
-            applyFilters();
-        }
-
-        function clearSearch() {
-            searchInput.value = '';
-            currentSearchTerm = '';
-            clearSearchBtn.classList.remove('visible');
-            applyFilters();
-            searchInput.focus();
-        }
-
-        // Filter functionality
-        function setFilter(filter) {
-            currentFilter = filter;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
-            });
-            applyFilters();
-        }
-
-        function applyFilters() {
-            filteredDomains = domainsData.filter(domain => {
-                const matchesSearch = !currentSearchTerm || 
-                    domain.name.toLowerCase().includes(currentSearchTerm) ||
-                    domain.description.toLowerCase().includes(currentSearchTerm);
-                
-                let matchesFilter = true;
-                switch (currentFilter) {
-                    case 'available':
-                        matchesFilter = domain.available;
-                        break;
-                    case 'unavailable':
-                        matchesFilter = !domain.available;
-                        break;
-                    case 'github':
-                        matchesFilter = domain.repo !== null;
-                        break;
-                    case 'all':
-                    default:
-                        matchesFilter = true;
-                }
-                
-                return matchesSearch && matchesFilter;
-            });
-            
-            updateSearchResults();
-            renderDomains();
-        }
-
-        function updateSearchResults() {
-            const total = domainsData.length;
-            const filtered = filteredDomains.length;
-            
-            let message = '';
-            if (currentSearchTerm && currentFilter !== 'all') {
-                message = `Found ${filtered} domain${filtered !== 1 ? 's' : ''} matching "${currentSearchTerm}" in ${getFilterLabel(currentFilter)}`;
-            } else if (currentSearchTerm) {
-                message = `Found ${filtered} domain${filtered !== 1 ? 's' : ''} matching "${currentSearchTerm}"`;
-            } else if (currentFilter !== 'all') {
-                message = `Showing ${filtered} ${getFilterLabel(currentFilter)} domain${filtered !== 1 ? 's' : ''}`;
-            } else {
-                message = `Showing all ${total} domains`;
+              sidebar.classList.remove('hidden');
+              content.classList.remove('expanded');
             }
             
-            searchResults.textContent = message;
-        }
-
-        function getFilterLabel(filter) {
-            const labels = {
-                'available': 'available',
-                'unavailable': 'unavailable',
-                'github': 'GitHub-linked',
-                'all': 'all'
-            };
-            return labels[filter] || 'all';
-        }
-
-        function clearAllFilters() {
-            searchInput.value = '';
-            currentSearchTerm = '';
-            currentFilter = 'all';
-            clearSearchBtn.classList.remove('visible');
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-filter') === 'all');
-            });
-            applyFilters();
-            searchInput.focus();
-        }
-
-        // Domain rendering
-        function renderDomains() {
-            if (filteredDomains.length === 0) {
-                domainsGrid.style.display = 'none';
-                noResults.style.display = 'block';
-                return;
-            }
-            
-            domainsGrid.style.display = 'grid';
-            noResults.style.display = 'none';
-            
-            const domainsHTML = filteredDomains.map(domain => createDomainCard(domain)).join('');
-            domainsGrid.innerHTML = domainsHTML;
-            
-            // Add fade-in animation
-            setTimeout(() => {
-                document.querySelectorAll('.domain-card').forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add('fade-in');
-                    }, index * 50);
-                });
-            }, 10);
-        }
-
-        function createDomainCard(domain) {
-            const highlightedName = highlightText(domain.name, currentSearchTerm);
-            const highlightedDescription = highlightText(domain.description, currentSearchTerm);
-            
-            return `
-                <div class="domain-card">
-                    <div class="domain-header">
-                        <a href="${domain.url}" target="_blank" class="domain-name external-link">
-                            ${highlightedName}
-                            <span style="font-size: 0.8em;">🔗</span>
-                        </a>
-                        <span class="availability-badge ${domain.available ? 'available' : 'unavailable'}">
-                            ${domain.available ? '✅ Available' : '❌ Unavailable'}
-                        </span>
-                    </div>
-                    <p class="domain-description">${highlightedDescription}</p>
-                    <div class="domain-footer">
-                        ${domain.repo ? `
-                            <a href="https://github.com/${domain.repo}" target="_blank" class="repo-link external-link">
-                                <svg class="github-icon" viewBox="0 0 24 24">
-                                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                                </svg>
-                                ${domain.repo}
-                            </a>
-                            <div class="github-stats" id="stats-${domain.repo.replace('/', '-')}">
-                                <div class="github-stat">
-                                    <img src="https://img.shields.io/github/stars/${domain.repo}?style=flat-square&color=var(--accent-color)" alt="Stars">
-                                </div>
-                                <div class="github-stat">
-                                    <img src="https://img.shields.io/github/forks/${domain.repo}?style=flat-square&color=var(--accent-color)" alt="Forks">
-                                </div>
-                            </div>
-                        ` : `
-                            <span class="repo-link" style="color: var(--text-tertiary);">
-                                📝 No GitHub repository
-                            </span>
-                            <div></div>
-                        `}
-                    </div>
-                </div>
-            `;
-        }
-
-        function highlightText(text, searchTerm) {
-            if (!searchTerm) return text;
-            const regex = new RegExp(`(${escapeRegExp(searchTerm)})`, 'gi');
-            return text.replace(regex, '<span class="highlight">$1</span>');
-        }
-
-        function escapeRegExp(string) {
-            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        }
-
-        // Utility functions
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        // Performance optimization
-        const debouncedSearch = debounce(handleSearch, 300);
-
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeTheme();
-            renderDomains();
-            initializeEventListeners();
-            hideLoadingScreen();
+            updateSidebarToggleVisibility();
+          }
         });
+      }
 
-        // Error handling for failed network requests
-        window.addEventListener('error', function(e) {
-            console.error('Global error:', e.error);
+      // Load default content
+      function loadDefaultContent() {
+        loadMarkdown('https://raw.githubusercontent.com/harys722/github-guides/main/README.md');
+      }
+
+      // Load markdown content
+      async function loadMarkdown(url) {
+        const loadingEl = document.getElementById('loading');
+        const contentEl = document.getElementById('markdown-content');
+        
+        loadingEl.style.display = 'flex';
+        contentEl.innerHTML = '';
+        
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const markdown = await response.text();
+          currentMarkdown = markdown;
+          
+          const html = marked.parse(markdown);
+          
+          loadingEl.style.display = 'none';
+          contentEl.innerHTML = html;
+          
+          processContent();
+          generateTOC();
+          addCopyButtons();
+          updateActiveNavItem(url);
+          
+        } catch (error) {
+          console.error('Error loading markdown:', error);
+          loadingEl.style.display = 'none';
+          contentEl.innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+              <h2>Error Loading Content</h2>
+              <p>Could not load the markdown file. Please check the URL and try again.</p>
+              <p style="color: var(--text-light); font-size: 14px;">Error: ${error.message}</p>
+            </div>
+          `;
+        }
+      }
+
+      // Process content after loading
+      function processContent() {
+        const content = document.getElementById('markdown-content');
+        
+        const headings = content.querySelectorAll('h1, h2, h3');
+        headings.forEach(heading => {
+          if (!heading.id) {
+            heading.id = generateId(heading.textContent);
+          }
         });
+        
+        const images = content.querySelectorAll('img');
+        images.forEach(img => {
+          img.style.maxWidth = '100%';
+          img.style.height = 'auto';
+          img.style.cursor = 'zoom-in';
+          img.addEventListener('click', () => openImageModal(img.src));
+        });
+        
+        const links = content.querySelectorAll('a[href^="http"], a[href^="#"]');
+        links.forEach(link => {
+          if (link.href.startsWith('http')) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+          } else if (link.href.startsWith('#')) {
+            link.onclick = function(e) {
+              e.preventDefault();
+              scrollToHeading(link.href.substring(1));
+            };
+          }
+        });
+      }
+
+      // Generate ID from text
+      function generateId(text) {
+        return text
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/--+/g, '-')
+          .trim();
+      }
+
+      // Generate Table of Contents
+      function generateTOC() {
+        const content = document.getElementById('markdown-content');
+        const tocList = document.getElementById('toc-list');
+        const headings = content.querySelectorAll('h1, h2, h3');
+        
+        tocItems = [];
+        tocList.innerHTML = '';
+        
+        if (headings.length === 0) {
+          return;
+        }
+        
+        headings.forEach((heading, index) => {
+          const level = parseInt(heading.tagName.charAt(1));
+          const text = heading.textContent.trim();
+          const id = heading.id || generateId(text);
+          
+          if (!heading.id) {
+            heading.id = id;
+          }
+          
+          const tocItem = {
+            id: id,
+            text: text,
+            level: level,
+            element: heading
+          };
+          
+          tocItems.push(tocItem);
+          
+          const li = document.createElement('li');
+          li.className = `toc-h${level}`;
+          
+          const a = document.createElement('a');
+          a.href = `#${id}`;
+          a.textContent = text;
+          a.onclick = function(e) {
+            e.preventDefault();
+            scrollToHeading(id);
+          };
+          
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
+        
+        updateActiveTOCItem();
+      }
+
+      // Scroll to heading
+      function scrollToHeading(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.offsetTop;
+          const offsetPosition = elementPosition - offset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          
+          setTimeout(() => {
+            updateActiveTOCItem();
+          }, 100);
+          
+          history.pushState(null, null, `#${id}`);
+        }
+      }
+
+      // Setup scroll listener for TOC
+      function setupScrollListener() {
+        let ticking = false;
+        
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(function() {
+              updateActiveTOCItem();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+      }
+
+      // Update active TOC item
+      function updateActiveTOCItem() {
+        if (tocItems.length === 0) return;
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const offset = 100;
+        
+        let activeItem = null;
+        
+        for (let i = tocItems.length - 1; i >= 0; i--) {
+          const item = tocItems[i];
+          const element = item.element;
+          if (element && element.offsetTop <= scrollTop + offset) {
+            activeItem = item;
+            break;
+          }
+        }
+        
+        if (!activeItem && tocItems.length > 0) {
+          activeItem = tocItems[0];
+        }
+        
+        const tocLinks = document.querySelectorAll('#toc-list a');
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+          if (activeItem && link.getAttribute('href') === `#${activeItem.id}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Add copy buttons to code blocks
+      function addCopyButtons() {
+        const codeBlocks = document.querySelectorAll('pre');
+        
+        codeBlocks.forEach(block => {
+          const container = document.createElement('div');
+          container.className = 'code-container';
+          
+          block.parentNode.insertBefore(container, block);
+          container.appendChild(block);
+          
+          const button = document.createElement('button');
+          button.className = 'copy-button';
+          button.textContent = 'Copy';
+          button.onclick = function() {
+            copyToClipboard(block.textContent, button);
+          };
+          
+          container.appendChild(button);
+        });
+      }
+
+      // Copy text to clipboard
+      function copyToClipboard(text, button) {
+        navigator.clipboard.writeText(text).then(function() {
+          button.textContent = 'Copied!';
+          button.classList.add('copied');
+          
+          setTimeout(function() {
+            button.textContent = 'Copy';
+            button.classList.remove('copied');
+          }, 2000);
+        }).catch(function(err) {
+          console.error('Could not copy text: ', err);
+          button.textContent = 'Error';
+          
+          setTimeout(function() {
+            button.textContent = 'Copy';
+          }, 2000);
+        });
+      }
+
+      // Update active navigation item
+      function updateActiveNavItem(url) {
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+        });
+        
+        const currentLink = document.querySelector('.sidebar-nav a[href="#/"]');
+        if (currentLink) {
+          currentLink.classList.add('active');
+        }
+      }
+
+      // Image modal functions
+      function openImageModal(src) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modalImage.src = src;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeImageModal() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
+      // Handle hash changes
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#') && hash.length > 1) {
+          const id = hash.substring(1);
+          scrollToHeading(id);
+        }
+      });
+
+      // Handle initial hash
+      window.addEventListener('load', function() {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#') && hash.length > 1) {
+          setTimeout(() => {
+            const id = hash.substring(1);
+            scrollToHeading(id);
+          }, 500);
+        }
+      });
+
+      // Smooth scrolling for anchor links
+      document.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' && e.target.getAttribute('href')) {
+          const href = e.target.getAttribute('href');
+          if (href.startsWith('#') && href.length > 1) {
+            e.preventDefault();
+            const id = href.substring(1);
+            scrollToHeading(id);
+          }
+        }
+      });
+
+      // Utility functions
+      window.githubGuides = {
+        loadMarkdown: loadMarkdown,
+        toggleTheme: toggleTheme,
+        toggleSidebar: toggleSidebar,
+        scrollToHeading: scrollToHeading
+      };
     </script>
-</body>
+  </body>
 </html>
